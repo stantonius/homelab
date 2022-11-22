@@ -1,0 +1,19 @@
+# Terraform
+*.tfvars
+.terraform/
+*.tfstate
+*.tfstate.*
+*.lock.hcl
+
+# Ansible
+secrets.yaml
+secrets.yml
+vars.yaml
+vars.yml
+inventory.cfg
+vault.yml
+vault.yaml
+
+# General
+.DS_Store
+setup.sh

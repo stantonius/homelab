@@ -1,0 +1,10 @@
+---
+- name: Create an LXC container in Proxmox
+  hosts: "{{node_name}}"
+  gather_facts: yes
+
+  vars_files:
+    - ../../vault.yaml
+
+  roles:
+    - pm_create_lxc

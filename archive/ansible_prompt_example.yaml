@@ -1,0 +1,84 @@
+---
+- name: Create an LXC container in Proxmox
+  hosts: bigprox
+  gather_facts: yes
+
+  vars_files:
+    - ../vault.yaml
+
+  vars_prompt:
+    - name: "machine_name"
+      prompt: "What is the name of the machine?"
+      private: no
+      set_fact: machine_name
+
+    - name: "machine_password"
+      prompt: "What is the password for the machine?"
+      private: yes
+
+    - name: "machine_ip"
+      prompt: "What is the IP address for the machine in CIDR format?"
+      private: no
+
+    - name: "machine_id"
+      prompt: "What is the ID for the machine?"
+      private: no
+
+    - name: "machine_cpus"
+      prompt: "How many CPUs should the machine have?"
+      default: 2
+      private: no
+
+    - name: "machine_cores"
+      prompt: "How many cores should the machine have?"
+      default: 2
+      private: no
+
+    - name: "machine_ram"
+      prompt: "How much RAM should the machine have?"
+      default: 2048
+      private: no
+
+    - name: "machine_disk"
+      prompt: "How much disk space should the machine have?"
+      default: 15
+      private: no
+
+    - name: "ssh_port"
+      prompt: "What is the SSH port for the machine?"
+      default: 22
+      private: no
+
+    - name: "machine_ssh_key"
+      prompt: "What is the path to the SSH key?"
+      default: "~/.ssh/proxmox.pub"
+      private: no
+
+    - name: "machine_type"
+      prompt: |
+        What is the type of the machine you want to create? 
+        Enter one of the following in lowercase:
+        - ubuntu
+        - debian
+        - alpine
+      private: no
+      default: "ubuntu"
+
+  pre_tasks:
+    - name: Get the true image name from the image selector
+      ansible.builtin.command: "python ../image_selector.py -f ../images.ini -s container -i {{machine_type}}"
+      register: image_selected
+
+    - name: Assert that the image selected is valid
+      ansible.builtin.assert:
+        that:
+          - image_selected is succeeded
+          - image_selected.stdout is defined
+          - image_selected.stdout != ""
+
+    - name: Rename the image selected
+      ansible.builtin.set_fact:
+        machine_image: "{{image_selected.stdout}}"
+
+  roles:
+    - pm_create_lxc

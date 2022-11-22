@@ -1,0 +1,78 @@
+---
+# Not enough of a host config setup to warrant a separate file
+- name: Install proxmoxer on main host
+  ansible.builtin.pip:
+    name: proxmoxer
+
+- name: Print the ssh key and store it to a variable
+  delegate_to: localhost
+  ansible.builtin.shell: "cat {{ machine_ssh_key }}"
+  register: ssh_key
+
+# Create and start the container
+- name: Create LXC
+  community.general.proxmox:
+    vmid: "{{ machine_id }}"
+    node: bigprox
+    api_user: "{{root_user}}"
+    api_password: "{{root_password}}"
+    api_host: "{{host_ip}}"
+    hostname: "{{machine_name}}"
+    password: "{{machine_password}}"
+    ostemplate: "local:vztmpl/{{machine_image}}"
+    storage: local-lvm
+    unprivileged: 1
+    features:
+      - nesting=1
+      - keyctl=1
+      - fuse=1
+    # hookscript: "local:snippets/enable_lxc_ssh_hook.sh"
+    netif: "{'net0':'name=enp6s0,gw=192.168.1.1,ip={{machine_ip}},bridge=vmbr0'}"
+    pubkey: "{{ssh_key.stdout}}" # needs to be in format "ssh-rsa ..."
+    cores: "{{machine_cores}}"
+    cpus: "{{machine_cpus}}"
+    memory: "{{machine_ram}}"
+    disk: "{{machine_disk}}"
+
+- name: Start container
+  community.general.proxmox:
+    vmid: "{{ machine_id }}"
+    api_user: root@pam
+    api_password: "{{root_password}}"
+    api_host: "{{host_ip}}"
+    state: started
+
+- name: Add new container to inventory
+  ansible.builtin.add_host:
+    name: "{{machine_ip | regex_replace('/.*', '')}}"
+    # ansible_user: root
+    groups: proxmox_nodes
+
+- name: Wait for port 22 to become open on the host
+  ansible.builtin.wait_for:
+    host: "{{machine_ip | regex_replace('/.*', '')}}"
+    port: 22
+    timeout: 300
+
+- name: Allow release-info to change for APT repositories
+  command: apt-get update -y --allow-releaseinfo-change
+  delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+
+- name: Run the equivalent of "apt-get update"
+  delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+  ansible.builtin.apt:
+    update_cache: yes
+    force_apt_get: yes
+
+- name: Update all packages to their latest version
+  delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
+
+- name: add rsa public key to remote host
+  delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+  ansible.posix.authorized_key:
+    user: root
+    state: present
+    key: "{{ lookup('file', rsa_key_path) }}"

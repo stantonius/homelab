@@ -1,0 +1,6 @@
+machine_ssh_key: "~/.ssh/proxmox.pub"
+machine_cores: 1
+machine_cpus: 1
+machine_ram: 1024
+machine_disk: 10
+machine_image: "ubuntu-20.04-standard_20.04-1_amd64.tar.gz"
