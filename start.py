@@ -238,7 +238,8 @@ def main():
             os.system(f'ansible-playbook ansible/playbooks/pm_create_lxc.yaml --extra-vars "@{outfile.name}"')
         elif machine_config['machine_type'] == 'vm':
             # call ansible playbook for proxmox vm
-            os.system(f'ansible-playbook ansible/playbooks/pm_create_vm.yaml --extra-vars "@{outfile.name}"')
+            # os.system(f'ansible-playbook ansible/playbooks/pm_create_vm.yaml --extra-vars "@{outfile.name}"')
+            os.system(f'ansible-playbook ansible/playbooks/pm_create_vm_cloud_init.yaml --extra-vars "@{outfile.name}"')
 
 
 if __name__ == '__main__':
