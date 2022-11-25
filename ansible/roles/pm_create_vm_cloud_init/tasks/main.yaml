@@ -1,18 +1,30 @@
 ---
-- name: Check that the machine_image has the extension .img
-  ansible.builtin.assert:
-    that: machine_image.endswith('.img')
-    msg: "The machine_image variable must have the extension '.img'"
+# - name: Check that the machine_image has the extension .img
+#   ansible.builtin.assert:
+#     that: machine_image.endswith('.img')
+#     msg: "The machine_image variable must have the extension '.img'"
 
 - name: Install proxmoxer on main host
   ansible.builtin.pip:
     name: proxmoxer
     state: present
 
-- name: Ensure libguestfs-tools is installed
-  ansible.builtin.apt:
-    name: libguestfs-tools
+- name: Ensure pycdlib is installed
+  ansible.builtin.pip:
+    name: pycdlib
     state: present
+
+# - name: Generate and install the user-data file
+#   template:
+#     src: user-data.j2
+#     dest: "{{ target_dir }}/iso/nocloud/user-data"
+
+# - name: Create an empty meta-data file
+#   file:
+#     path: "{{ target_dir }}/iso/nocloud/meta-data"
+#     state: touch
+#     modification_time: preserve
+#     access_time: preserve
 
 - name: Print the ssh key and store it to a variable
   delegate_to: localhost
@@ -34,11 +46,7 @@
     vmid: "{{machine_id}}"
     sshkeys: "{{ssh_key.stdout}}"
     cicustom: "user=local:snippets/user-data,meta=local:snippets/meta-data"
-    citype: nocloud
-    ciuser: default
-    cipassword: test123
-    # ipconfig:
-    #   ipconfig0: "gw=192.168.1.1,ip={{machine_ip}}"
+    citype: "nocloud"
     net:
       net0: "model=virtio,bridge=vmbr0,firewall=1"
     scsi:
