@@ -2,6 +2,12 @@ import configparser
 import re
 import os
 import json
+from proxmoxer import ProxmoxAPI
+from paramiko.client import SSHClient
+
+def proxmox_connect():
+    proxmox = ProxmoxAPI('192.168.1.99', user='root', private_key_file="~/.ssh/proxmox", backend="ssh_paramiko")
+    return proxmox
 
 def task_type():
     tasks = ['proxmox', 'other']
@@ -156,7 +162,7 @@ def machine_image(machine_type: str):
     # Borrowed from https://bobbyhadz.com/blog/python-select-option-input
 
     config = configparser.ConfigParser(allow_no_value=True)
-    config.read("images.ini")
+    config.read("../images.ini")
     images = [im for im in config[machine_type]]
 
     user_input = ''
@@ -212,7 +218,8 @@ def config():
     machine['machine_name'] = machine_name()
     machine['machine_password'] = machine_password()
     machine['machine_id'] = machine_id()
-    machine['machine_ip'] = machine_ip()
+    if machine["machine_type"] != "vm":
+        machine['machine_ip'] = machine_ip()
     machine['machine_cpus'] = machine_cpus()
     machine['machine_cores'] = machine_cores()
     machine['machine_ram'] = machine_ram()
@@ -235,12 +242,13 @@ def main():
     if machine_config['task_type'] == 'proxmox':
         if machine_config['machine_type'] == 'container':
             # call ansible playbook for proxmox container
-            os.system(f'ansible-playbook ansible/playbooks/pm_create_lxc.yaml --extra-vars "@{outfile.name}"')
+            os.system(f'ansible-playbook ../ansible/playbooks/pm_create_lxc.yaml --extra-vars "@{outfile.name}"')
         elif machine_config['machine_type'] == 'vm':
             # call ansible playbook for proxmox vm
-            os.system(f'ansible-playbook ansible/playbooks/pm_create_vm.yaml --extra-vars "@{outfile.name}"')
-            # os.system(f'ansible-playbook ansible/playbooks/pm_create_vm_cloud_init.yaml --extra-vars "@{outfile.name}"')
+            # os.system(f'ansible-playbook ../ansible/playbooks/pm_create_vm.yaml --extra-vars "@{outfile.name}"')
+            os.system(f'ansible-playbook ../ansible/playbooks/pm_create_vm_cloud_init.yaml --extra-vars "@{outfile.name}"')
 
 
 if __name__ == '__main__':
     main()
+    # proxmox_connect()

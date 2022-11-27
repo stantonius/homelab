@@ -1,17 +1,11 @@
 #cloud-config
-
 autoinstall:
   version: 1
-  network:
-    version: 1
-    config:
-      - type: physical
-        name: interface0
-        subnets:
-          - type: static
-            address: 192.168.1.210
-            netmask: 255.255.255.0
-            gateway: 192.168.1.1
+    network:
+    version: 2
+    ethernets:
+      enp6s0:
+        dhcp4: true
   locale: en_US.UTF-8
   keyboard:
     layout: us
@@ -23,7 +17,7 @@ autoinstall:
     allow-pw: false
     install-server: true
     authorized_keys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFPsnf+jir942UpHZFPaQ8C7Gfoo0jmLtdA7wbgnpkw9 craig@MBP.lan
+      - {{ ssh_key.stdout }}
   storage:
     layout:
       name: lvm

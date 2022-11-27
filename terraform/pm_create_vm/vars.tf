@@ -21,23 +21,23 @@ variable "proxmox_user_pw" {
 
 # vars for each lxc
 
-variable "container_name" {
-  type = string
-}
+# variable "container_name" {
+#   type = string
+# }
 
-variable "container_password" {
-  type      = string
-  sensitive = true
-}
+# variable "container_password" {
+#   type      = string
+#   sensitive = true
+# }
 
-variable "target_node" {
-  type = string
-}
+# variable "target_node" {
+#   type = string
+# }
 
-variable "container_ip" {
-  type = string
-}
+# variable "container_ip" {
+#   type = string
+# }
 
-variable "vmid" {
-  type = number
-}
+# variable "vmid" {
+#   type = number
+# }

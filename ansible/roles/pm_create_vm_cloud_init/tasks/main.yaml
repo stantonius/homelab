@@ -14,22 +14,40 @@
     name: pycdlib
     state: present
 
-# - name: Generate and install the user-data file
-#   template:
-#     src: user-data.j2
-#     dest: "{{ target_dir }}/iso/nocloud/user-data"
-
-# - name: Create an empty meta-data file
-#   file:
-#     path: "{{ target_dir }}/iso/nocloud/meta-data"
-#     state: touch
-#     modification_time: preserve
-#     access_time: preserve
-
 - name: Print the ssh key and store it to a variable
   delegate_to: localhost
   ansible.builtin.shell: "cat {{ machine_ssh_key }}"
   register: ssh_key
+
+# user-data needs to come first but after printing ssh key
+- name: Generate and install the user-data file
+  template:
+    src: user-data.j2
+    dest: /var/lib/vz/snippets/user-data
+
+- name: Create an empty meta-data file
+  file:
+    path: /var/lib/vz/snippets/meta-data
+    state: touch
+    modification_time: preserve
+    access_time: preserve
+
+- name: Copy the image to /tmp
+  ansible.builtin.copy:
+    src: "/var/lib/vz/template/iso/{{ machine_image }}"
+    remote_src: yes
+    dest: /tmp/
+
+- name: Run the ubuntu_autoinstall.py python script
+  script: "../../../scripts/ubuntu_autoinstall.py /tmp/{{ machine_image }} /tmp/test.iso"
+  args:
+    executable: /usr/bin/python3
+
+- name: Move the ISO to the correct location
+  ansible.builtin.copy:
+    src: "/tmp/test.iso"
+    dest: "/var/lib/vz/template/iso/"
+    remote_src: yes
 
 - name: Create VM
   community.general.proxmox_kvm:
@@ -45,22 +63,26 @@
     onboot: no
     vmid: "{{machine_id}}"
     sshkeys: "{{ssh_key.stdout}}"
-    cicustom: "user=local:snippets/user-data,meta=local:snippets/meta-data"
-    citype: "nocloud"
+    # cicustom: "user=local:snippets/user-data,meta=local:snippets/meta-data"
+    # citype: "nocloud"
     net:
       net0: "model=virtio,bridge=vmbr0,firewall=1"
     scsi:
       scsi0: "local-lvm:{{machine_disk}}"
     scsihw: virtio-scsi-pci
     ide:
-      ide0: "local:iso/{{machine_image}},media=cdrom"
+      # ide0: "local:iso/{{machine_image}},media=cdrom"
+      ide0: "local:iso/test.iso,media=cdrom"
       ide2: "zfs1ssd-data:cloudinit,format=qcow2"
+# - name: Sleep for 5 seconds to wait for cluster to recognize VM
+#   ansible.builtin.wait_for:
+#     timeout: 5
 
-- name: Start VM
-  community.general.proxmox_kvm:
-    node: bigprox
-    api_host: "{{host_ip}}"
-    api_user: "{{root_user}}"
-    api_password: "{{root_password}}"
-    name: "{{machine_name}}"
-    state: started
+# - name: Start VM
+#   community.general.proxmox_kvm:
+#     node: bigprox
+#     api_host: "{{host_ip}}"
+#     api_user: "{{root_user}}"
+#     api_password: "{{root_password}}"
+#     name: "{{machine_name}}"
+#     state: started

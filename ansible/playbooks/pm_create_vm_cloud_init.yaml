@@ -6,22 +6,22 @@
   vars_files:
     - ../../vault.yaml
 
-  pre_tasks:
-    - name: Copy the `user-data` cloud init file to the snippets directory
-      ansible.builtin.copy:
-        src: ../../cloud_init/user-data
-        dest: /var/lib/vz/snippets/
-        owner: root
-        group: root
-        mode: 0644
+  # pre_tasks:
+  #   - name: Copy the `user-data` cloud init file to the snippets directory
+  #     ansible.builtin.copy:
+  #       src: ../../cloud_init/user-data
+  #       dest: /var/lib/vz/snippets/
+  #       owner: root
+  #       group: root
+  #       mode: 0644
 
-    - name: Copy the `meta-data` cloud init file to the snippets directory
-      ansible.builtin.copy:
-        src: ../../cloud_init/meta-data
-        dest: /var/lib/vz/snippets/
-        owner: root
-        group: root
-        mode: 0644
+  #   - name: Copy the `meta-data` cloud init file to the snippets directory
+  #     ansible.builtin.copy:
+  #       src: ../../cloud_init/meta-data
+  #       dest: /var/lib/vz/snippets/
+  #       owner: root
+  #       group: root
+  #       mode: 0644
 
   roles:
     - pm_create_vm_cloud_init
