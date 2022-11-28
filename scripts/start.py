@@ -218,8 +218,7 @@ def config():
     machine['machine_name'] = machine_name()
     machine['machine_password'] = machine_password()
     machine['machine_id'] = machine_id()
-    if machine["machine_type"] != "vm":
-        machine['machine_ip'] = machine_ip()
+    machine['machine_ip'] = machine_ip()
     machine['machine_cpus'] = machine_cpus()
     machine['machine_cores'] = machine_cores()
     machine['machine_ram'] = machine_ram()

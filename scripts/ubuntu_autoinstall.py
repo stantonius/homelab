@@ -62,39 +62,14 @@ def ubuntu_autoinstall(source: str, target: str):
 
     iso.add_directory('/NOCLOUD', rr_name='nocloud')
 
-    # with open("/var/lib/vz/snippets/user-data", "rb") as f:
-    #     iso.add_fp(io.BytesIO(f.read()), len(f.read()), '/NOCLOUD/USER_DATA;1', rr_name='user-data')
+    with open("/var/lib/vz/snippets/user-data", "rb") as f:
+        user_data = f.read()
 
-    user_data = b"""
-#cloud-config
-autoinstall:
-  version: 1
-  network:
-    version: 2
-    ethernets:
-      ens18:
-        dhcp4: true
-  locale: en_US.UTF-8
-  keyboard:
-    layout: us
-  identity:
-    hostname: "ubuntu-server"
-    username: "ubuntu"
-    password: "$6$exDY1mhS4KUYCE/2$zmn9ToZwTKLhCw.b4/b.ZRTIZM30JZ4QrOQ2aOXJ8yk96xpcCof0kxKwuX1kqLG/ygbJ1f8wxED22bTL4F46P0"
-  ssh:
-    allow-pw: false
-    install-server: true
-    authorized_keys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFPsnf+jir942UpHZFPaQ8C7Gfoo0jmLtdA7wbgnpkw9 craig@MBP.lan
-  package_upgrade: true
-  refresh-installer:
-    update: yes
-  storage:
-    layout:
-      name: lvm
-    """
+    with open("/var/lib/vz/snippets/network-config", "rb") as f:
+        network_config = f.read()
 
     iso.add_fp(io.BytesIO(user_data), len(user_data), '/NOCLOUD/USER_DATA;1', rr_name='user-data')
+    iso.add_fp(io.BytesIO(network_config), len(network_config), '/NOCLOUD/NETWORK_CONFIG;1', rr_name='network-config')
     iso.add_fp(io.BytesIO(b''), len(b''), '/NOCLOUD/META_DATA;1', rr_name='meta-data')
     iso.write(new_iso)
     iso.close()

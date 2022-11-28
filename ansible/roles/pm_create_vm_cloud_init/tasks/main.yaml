@@ -25,6 +25,11 @@
     src: user-data.j2
     dest: /var/lib/vz/snippets/user-data
 
+- name: Generate and install the network-config file
+  template:
+    src: network-config.j2
+    dest: /var/lib/vz/snippets/network-config
+
 - name: Create an empty meta-data file
   file:
     path: /var/lib/vz/snippets/meta-data
