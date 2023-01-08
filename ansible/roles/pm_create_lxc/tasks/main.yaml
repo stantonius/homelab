@@ -4,6 +4,18 @@
   ansible.builtin.pip:
     name: proxmoxer
 
+# These two steps below are to enable ssh access to the LXC
+# - name: Create a directory to house the ssh keys to pass to a new LXC
+#   ansible.builtin.file:
+#     path: /var/lib/vz/snippets/
+#     state: directory
+#     mode: 0700
+# - name: Copy the bash script to snippets directory and make it executable
+#   ansible.builtin.copy:
+#     src: enable_lxc_ssh_hook.sh
+#     dest: /var/lib/vz/snippets
+#     mode: 0700
+
 - name: Print the ssh key and store it to a variable
   delegate_to: localhost
   ansible.builtin.shell: "cat {{ machine_ssh_key }}"
@@ -48,11 +60,13 @@
     # ansible_user: root
     groups: proxmox_nodes
 
-- name: Wait for port 22 to become open on the host
-  ansible.builtin.wait_for:
-    host: "{{machine_ip | regex_replace('/.*', '')}}"
-    port: 22
-    timeout: 300
+# - name: Wait for port 22 to become open on the host
+#   ansible.builtin.wait_for:
+#     host: "{{machine_ip | regex_replace('/.*', '')}}"
+#     port: 22
+#     state: started
+#     sleep: 5
+#     timeout: 300
 
 - name: Allow release-info to change for APT repositories
   command: apt-get update -y --allow-releaseinfo-change

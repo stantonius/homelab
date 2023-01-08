@@ -17,3 +17,10 @@ vault.yaml
 # General
 .DS_Store
 setup.sh
+
+# Textual
+__pycache__/
+*.pyc
+.env
+config.ini
+config.json

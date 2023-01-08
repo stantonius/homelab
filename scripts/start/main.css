@@ -1,0 +1,82 @@
+Screen {
+    /* align: center middle; */
+    layout: grid;
+    grid-size: 3 2;
+    grid-columns: 1fr;
+    grid-rows: 1fr;
+}
+
+ListView {
+    align: center middle;
+    width: 100%;
+    height: auto;
+    margin: 1 1;
+
+}
+
+/* Container {
+    align: center middle;
+    width: 100%;
+    height: 100%;
+    margin: 1 1;
+    background: red; 
+} */
+
+Input {
+    width: 70%;
+    height: 100%;
+    margin: 1 1;
+}
+
+.horizontal-group {
+    layout: horizontal;
+    align: center middle;
+    margin: 1 1;
+    padding: 1 1;
+    width: 100%;
+}
+
+.box {
+    height: 100%;
+    border: solid green;
+    align:center middle;
+}
+
+.subsection-grid {
+    layout: grid;
+    grid-size: 1 2;
+    grid-columns: 1fr;
+    grid-rows: 1fr;
+}
+
+#custom-design {
+    background: darkslategrey;
+}
+
+#custom-design > .checkbox--switch {
+    color: dodgerblue;
+    background: darkslateblue;
+}
+
+.no-padding {
+    padding: 0;
+    height: auto;
+}
+
+.selected {
+    background: dodgerblue;
+}
+
+
+/* Create a class called bkg that converts the background to white */
+/* .bkg {
+    background:white;
+} */
+
+Placeholder {
+    height: 100%;
+}
+
+Label {
+    align: center middle;
+}

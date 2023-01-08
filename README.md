@@ -10,8 +10,7 @@
 
 ## Design Decisions
 
-* Initially I tried to use a bash script as a "one stop shop" to start each task. However it soon became clear I was managing config in two places and since a) Ansible has prompt functionality and b) I can call Terraform from Ansible, I decided to just use Ansible for all user input.
-    * The bash script is in the `archive` directory for future reference.
+* Initially I tried to use a bash script as a "one stop shop" to start each task. However it soon became clear I was managing config in two places and since a) Ansible has prompt functionality and b) I can call Terraform from Ansible, I decided to just use Textual to capture the user input.
 
 ### Proxmox
 

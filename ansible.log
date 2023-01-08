@@ -1,0 +1,155 @@
+2022-12-31 21:39:11,029 p=57329 u=craig n=ansible | PLAY [Create an LXC container in Proxmox] *****************************************************************************************************************************
+2022-12-31 21:39:11,046 p=57329 u=craig n=ansible | TASK [Gathering Facts] ************************************************************************************************************************************************
+2022-12-31 21:39:13,395 p=57329 u=craig n=ansible | ok: [192.168.1.99]
+2022-12-31 21:39:13,410 p=57329 u=craig n=ansible | TASK [ansible.builtin.include_vars] ***********************************************************************************************************************************
+2022-12-31 21:39:13,422 p=57329 u=craig n=ansible | ok: [192.168.1.99]
+2022-12-31 21:39:13,452 p=57329 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] *****************************************************************************************************************
+2022-12-31 21:39:14,887 p=57329 u=craig n=ansible | ok: [192.168.1.99]
+2022-12-31 21:39:14,916 p=57329 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] ***************************************************************************************************
+2022-12-31 21:39:15,385 p=57329 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2022-12-31 21:39:15,400 p=57329 u=craig n=ansible | TASK [pm_create_lxc : Create LXC] *************************************************************************************************************************************
+2022-12-31 21:39:16,574 p=57329 u=craig n=ansible | fatal: [192.168.1.99]: FAILED! => {"changed": false, "msg": "ostemplate 'local:vztmpl/ubuntu-20.04-standard_20.04-1_amd64.tar.gz' not exists on node bigprox and storage local"}
+2022-12-31 21:39:16,575 p=57329 u=craig n=ansible | PLAY RECAP ************************************************************************************************************************************************************
+2022-12-31 21:39:16,575 p=57329 u=craig n=ansible | 192.168.1.99               : ok=4    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-01-01 10:45:29,374 p=62998 u=craig n=ansible | PLAY [Create an LXC container in Proxmox] ***********************************************************************************************************************************
+2023-01-01 10:45:29,385 p=62998 u=craig n=ansible | TASK [Gathering Facts] ******************************************************************************************************************************************************
+2023-01-01 10:45:31,544 p=62998 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-01 10:45:31,556 p=62998 u=craig n=ansible | TASK [ansible.builtin.include_vars] *****************************************************************************************************************************************
+2023-01-01 10:45:31,566 p=62998 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-01 10:45:31,592 p=62998 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] ***********************************************************************************************************************
+2023-01-01 10:45:32,964 p=62998 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-01 10:45:32,984 p=62998 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] *********************************************************************************************************
+2023-01-01 10:45:33,337 p=62998 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-01 10:45:33,348 p=62998 u=craig n=ansible | TASK [pm_create_lxc : Create LXC] *******************************************************************************************************************************************
+2023-01-01 10:45:34,440 p=62998 u=craig n=ansible | fatal: [192.168.1.99]: FAILED! => {"changed": false, "msg": "ostemplate 'local:vztmpl/ubuntu-20.04-standard_20.04-1_amd64.tar.gz' not exists on node bigprox and storage local"}
+2023-01-01 10:45:34,441 p=62998 u=craig n=ansible | PLAY RECAP ******************************************************************************************************************************************************************
+2023-01-01 10:45:34,441 p=62998 u=craig n=ansible | 192.168.1.99               : ok=4    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-01-01 10:49:18,225 p=63387 u=craig n=ansible | PLAY [Create an LXC container in Proxmox] ***********************************************************************************************************************************
+2023-01-01 10:49:18,238 p=63387 u=craig n=ansible | TASK [Gathering Facts] ******************************************************************************************************************************************************
+2023-01-01 10:49:20,401 p=63387 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-01 10:49:20,413 p=63387 u=craig n=ansible | TASK [ansible.builtin.include_vars] *****************************************************************************************************************************************
+2023-01-01 10:49:20,422 p=63387 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-01 10:49:20,440 p=63387 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] ***********************************************************************************************************************
+2023-01-01 10:49:22,179 p=63387 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-01 10:49:22,197 p=63387 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] *********************************************************************************************************
+2023-01-01 10:49:22,547 p=63387 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-01 10:49:22,556 p=63387 u=craig n=ansible | TASK [pm_create_lxc : Create LXC] *******************************************************************************************************************************************
+2023-01-01 10:49:23,734 p=63387 u=craig n=ansible | fatal: [192.168.1.99]: FAILED! => {"changed": false, "msg": "Creation of lxc VM 123 failed with exception: 400 Bad Request: Parameter verification failed. - {'net0': 'invalid format - missing key in comma-separated list property\\n'}"}
+2023-01-01 10:49:23,735 p=63387 u=craig n=ansible | PLAY RECAP ******************************************************************************************************************************************************************
+2023-01-01 10:49:23,735 p=63387 u=craig n=ansible | 192.168.1.99               : ok=4    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-01-05 20:51:07,380 p=18595 u=craig n=ansible | PLAY [Create an LXC container in Proxmox] ***********************************************************************************************************************************************
+2023-01-05 20:51:07,398 p=18595 u=craig n=ansible | TASK [Gathering Facts] ******************************************************************************************************************************************************************
+2023-01-05 20:51:10,911 p=18595 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-05 20:51:10,928 p=18595 u=craig n=ansible | TASK [ansible.builtin.include_vars] *****************************************************************************************************************************************************
+2023-01-05 20:51:10,943 p=18595 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-05 20:51:10,980 p=18595 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] ***********************************************************************************************************************************
+2023-01-05 20:51:12,473 p=18595 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-05 20:51:12,503 p=18595 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] *********************************************************************************************************************
+2023-01-05 20:51:12,967 p=18595 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-05 20:51:12,982 p=18595 u=craig n=ansible | TASK [pm_create_lxc : Create LXC] *******************************************************************************************************************************************************
+2023-01-05 20:51:14,279 p=18595 u=craig n=ansible | fatal: [192.168.1.99]: FAILED! => {"changed": false, "msg": "Creation of lxc VM 111 failed with exception: 400 Bad Request: Parameter verification failed. - {'net0': 'invalid format - format error\\nnet0.ip: invalid format - value does not look like a valid ipv4 network configuration\\n\\n'}"}
+2023-01-05 20:51:14,280 p=18595 u=craig n=ansible | PLAY RECAP ******************************************************************************************************************************************************************************
+2023-01-05 20:51:14,280 p=18595 u=craig n=ansible | 192.168.1.99               : ok=4    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-01-05 20:51:46,181 p=18711 u=craig n=ansible | PLAY [Create an LXC container in Proxmox] ***********************************************************************************************************************************************
+2023-01-05 20:51:46,197 p=18711 u=craig n=ansible | TASK [Gathering Facts] ******************************************************************************************************************************************************************
+2023-01-05 20:51:49,325 p=18711 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-05 20:51:49,340 p=18711 u=craig n=ansible | TASK [ansible.builtin.include_vars] *****************************************************************************************************************************************************
+2023-01-05 20:51:49,352 p=18711 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-05 20:51:49,381 p=18711 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] ***********************************************************************************************************************************
+2023-01-05 20:51:50,841 p=18711 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-05 20:51:50,869 p=18711 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] *********************************************************************************************************************
+2023-01-05 20:51:51,317 p=18711 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-05 20:51:51,332 p=18711 u=craig n=ansible | TASK [pm_create_lxc : Create LXC] *******************************************************************************************************************************************************
+2023-01-05 20:51:52,426 p=18711 u=craig n=ansible | fatal: [192.168.1.99]: FAILED! => {"changed": false, "msg": "Creation of lxc VM 111 failed with exception: 500 Internal Server Error: SSH public key validation error"}
+2023-01-05 20:51:52,427 p=18711 u=craig n=ansible | PLAY RECAP ******************************************************************************************************************************************************************************
+2023-01-05 20:51:52,427 p=18711 u=craig n=ansible | 192.168.1.99               : ok=4    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-01-05 20:56:58,196 p=19360 u=craig n=ansible | PLAY [Create an LXC container in Proxmox] ***********************************************************************************************************************************************
+2023-01-05 20:56:58,212 p=19360 u=craig n=ansible | TASK [Gathering Facts] ******************************************************************************************************************************************************************
+2023-01-05 20:57:01,028 p=19360 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-05 20:57:01,044 p=19360 u=craig n=ansible | TASK [ansible.builtin.include_vars] *****************************************************************************************************************************************************
+2023-01-05 20:57:01,056 p=19360 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-05 20:57:01,086 p=19360 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] ***********************************************************************************************************************************
+2023-01-05 20:57:02,856 p=19360 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-05 20:57:02,883 p=19360 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] *********************************************************************************************************************
+2023-01-05 20:57:03,336 p=19360 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-05 20:57:03,351 p=19360 u=craig n=ansible | TASK [pm_create_lxc : Create LXC] *******************************************************************************************************************************************************
+2023-01-05 20:57:06,132 p=19360 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-05 20:57:06,148 p=19360 u=craig n=ansible | TASK [pm_create_lxc : Start container] **************************************************************************************************************************************************
+2023-01-05 20:57:09,628 p=19360 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed from community.general
+ in version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-05 20:57:09,628 p=19360 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-05 20:57:09,647 p=19360 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] ***********************************************************************************************************************************
+2023-01-05 20:57:09,675 p=19360 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-05 20:57:09,690 p=19360 u=craig n=ansible | TASK [pm_create_lxc : Wait for port 22 to become open on the host] **********************************************************************************************************************
+2023-01-05 21:02:11,114 p=19360 u=craig n=ansible | fatal: [192.168.1.99]: FAILED! => {"changed": false, "elapsed": 300, "msg": "Timeout when waiting for 192.168.1.111:22"}
+2023-01-05 21:02:11,114 p=19360 u=craig n=ansible | PLAY RECAP ******************************************************************************************************************************************************************************
+2023-01-05 21:02:11,115 p=19360 u=craig n=ansible | 192.168.1.99               : ok=7    changed=4    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-01-07 21:00:43,932 p=72621 u=craig n=ansible | PLAY [Create an LXC container in Proxmox] *****************************************************************************************************************************************
+2023-01-07 21:00:43,950 p=72621 u=craig n=ansible | TASK [Gathering Facts] ************************************************************************************************************************************************************
+2023-01-07 21:00:47,028 p=72621 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-07 21:00:47,045 p=72621 u=craig n=ansible | TASK [ansible.builtin.include_vars] ***********************************************************************************************************************************************
+2023-01-07 21:00:47,056 p=72621 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-07 21:00:47,090 p=72621 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] *****************************************************************************************************************************
+2023-01-07 21:00:48,704 p=72621 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-07 21:00:48,733 p=72621 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] ***************************************************************************************************************
+2023-01-07 21:00:49,188 p=72621 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-07 21:00:49,203 p=72621 u=craig n=ansible | TASK [pm_create_lxc : Create LXC] *************************************************************************************************************************************************
+2023-01-07 21:00:50,528 p=72621 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-07 21:00:50,546 p=72621 u=craig n=ansible | TASK [pm_create_lxc : Start container] ********************************************************************************************************************************************
+2023-01-07 21:00:51,711 p=72621 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed from 
+community.general in version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-07 21:00:51,711 p=72621 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-07 21:00:51,729 p=72621 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] *****************************************************************************************************************************
+2023-01-07 21:00:51,755 p=72621 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-07 21:00:51,771 p=72621 u=craig n=ansible | TASK [pm_create_lxc : Wait for port 22 to become open on the host] ****************************************************************************************************************
+2023-01-07 21:05:53,164 p=72621 u=craig n=ansible | fatal: [192.168.1.99]: FAILED! => {"changed": false, "elapsed": 300, "msg": "Timeout when waiting for 192.168.1.111:22"}
+2023-01-07 21:05:53,166 p=72621 u=craig n=ansible | PLAY RECAP ************************************************************************************************************************************************************************
+2023-01-07 21:05:53,167 p=72621 u=craig n=ansible | 192.168.1.99               : ok=7    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2023-01-07 21:08:37,296 p=73368 u=craig n=ansible | PLAY [Create an LXC container in Proxmox] *****************************************************************************************************************************************
+2023-01-07 21:08:37,313 p=73368 u=craig n=ansible | TASK [Gathering Facts] ************************************************************************************************************************************************************
+2023-01-07 21:08:40,642 p=73368 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-07 21:08:40,658 p=73368 u=craig n=ansible | TASK [ansible.builtin.include_vars] ***********************************************************************************************************************************************
+2023-01-07 21:08:40,668 p=73368 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-07 21:08:40,697 p=73368 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] *****************************************************************************************************************************
+2023-01-07 21:08:41,897 p=73368 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-07 21:08:41,924 p=73368 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] ***************************************************************************************************************
+2023-01-07 21:08:42,385 p=73368 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-07 21:08:42,401 p=73368 u=craig n=ansible | TASK [pm_create_lxc : Create LXC] *************************************************************************************************************************************************
+2023-01-07 21:08:47,525 p=73368 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-07 21:08:47,542 p=73368 u=craig n=ansible | TASK [pm_create_lxc : Start container] ********************************************************************************************************************************************
+2023-01-07 21:08:50,378 p=73368 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed from 
+community.general in version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-07 21:08:50,378 p=73368 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-07 21:08:50,396 p=73368 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] *****************************************************************************************************************************
+2023-01-07 21:08:50,421 p=73368 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-07 21:08:50,455 p=73368 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] **********************************************************************************************************
+2023-01-07 21:09:00,497 p=73368 u=craig n=ansible | fatal: [192.168.1.99 -> 192.168.1.111]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 192.168.1.111 port 22: Operation timed out", "unreachable": true}
+2023-01-07 21:09:00,499 p=73368 u=craig n=ansible | PLAY RECAP ************************************************************************************************************************************************************************
+2023-01-07 21:09:00,499 p=73368 u=craig n=ansible | 192.168.1.99               : ok=7    changed=4    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-01-07 21:10:11,237 p=73584 u=craig n=ansible | PLAY [Create an LXC container in Proxmox] *****************************************************************************************************************************************
+2023-01-07 21:10:11,254 p=73584 u=craig n=ansible | TASK [Gathering Facts] ************************************************************************************************************************************************************
+2023-01-07 21:10:14,844 p=73584 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-07 21:10:14,861 p=73584 u=craig n=ansible | TASK [ansible.builtin.include_vars] ***********************************************************************************************************************************************
+2023-01-07 21:10:14,871 p=73584 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-07 21:10:14,900 p=73584 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] *****************************************************************************************************************************
+2023-01-07 21:10:17,220 p=73584 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-07 21:10:17,250 p=73584 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] ***************************************************************************************************************
+2023-01-07 21:10:17,707 p=73584 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-07 21:10:17,723 p=73584 u=craig n=ansible | TASK [pm_create_lxc : Create LXC] *************************************************************************************************************************************************
+2023-01-07 21:10:24,226 p=73584 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-07 21:10:24,243 p=73584 u=craig n=ansible | TASK [pm_create_lxc : Start container] ********************************************************************************************************************************************
+2023-01-07 21:10:27,843 p=73584 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed from 
+community.general in version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-07 21:10:27,844 p=73584 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-07 21:10:27,862 p=73584 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] *****************************************************************************************************************************
+2023-01-07 21:10:27,887 p=73584 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-07 21:10:27,922 p=73584 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] **********************************************************************************************************
+2023-01-07 21:10:35,143 p=73584 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.111]
+2023-01-07 21:10:35,171 p=73584 u=craig n=ansible | TASK [pm_create_lxc : Run the equivalent of "apt-get update"] *********************************************************************************************************************
+2023-01-07 21:10:36,611 p=73584 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.111]
+2023-01-07 21:10:36,640 p=73584 u=craig n=ansible | TASK [pm_create_lxc : Update all packages to their latest version] ****************************************************************************************************************
+2023-01-07 21:11:07,689 p=73584 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.111]
+2023-01-07 21:11:07,721 p=73584 u=craig n=ansible | TASK [pm_create_lxc : add rsa public key to remote host] **************************************************************************************************************************
+2023-01-07 21:11:07,739 p=73584 u=craig n=ansible | fatal: [192.168.1.99 -> {{machine_ip | regex_replace('/.*', '')}}]: FAILED! => {"msg": "The task includes an option with an undefined variable. The error was: 'rsa_key_path' is undefined\n\nThe error appears to be in '/Users/craig/Projects/automation2/ansible/roles/pm_create_lxc/tasks/main.yaml': line 75, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n- name: add rsa public key to remote host\n  ^ here\n"}
+2023-01-07 21:11:07,740 p=73584 u=craig n=ansible | PLAY RECAP ************************************************************************************************************************************************************************
+2023-01-07 21:11:07,740 p=73584 u=craig n=ansible | 192.168.1.99               : ok=10   changed=6    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
