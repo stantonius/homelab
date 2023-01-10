@@ -5,16 +5,18 @@
     name: proxmoxer
 
 # These two steps below are to enable ssh access to the LXC
-# - name: Create a directory to house the ssh keys to pass to a new LXC
-#   ansible.builtin.file:
-#     path: /var/lib/vz/snippets/
-#     state: directory
-#     mode: 0700
-# - name: Copy the bash script to snippets directory and make it executable
-#   ansible.builtin.copy:
-#     src: enable_lxc_ssh_hook.sh
-#     dest: /var/lib/vz/snippets
-#     mode: 0700
+- name: Create a directory to house the ssh keys to pass to a new LXC
+  ansible.builtin.file:
+    path: /var/lib/vz/snippets/
+    state: directory
+    mode: 0700
+  when: hookscript == True
+- name: Copy the bash script to snippets directory and make it executable
+  ansible.builtin.copy:
+    src: enable_lxc_ssh_hook.sh
+    dest: /var/lib/vz/snippets
+    mode: 0700
+  when: hookscript == True
 
 - name: Print the ssh key and store it to a variable
   delegate_to: localhost
@@ -22,7 +24,7 @@
   register: ssh_key
 
 # Create and start the container
-- name: Create LXC
+- name: Create LXC without hookscript
   community.general.proxmox:
     vmid: "{{ machine_id }}"
     node: bigprox
@@ -38,13 +40,38 @@
       - nesting=1
       - keyctl=1
       - fuse=1
-    # hookscript: "local:snippets/enable_lxc_ssh_hook.sh"
     netif: "{'net0':'name=enp6s0,gw=192.168.1.1,ip={{machine_ip}},bridge=vmbr0'}"
     pubkey: "{{ssh_key.stdout}}" # needs to be in format "ssh-rsa ..."
     cores: "{{machine_cores}}"
     cpus: "{{machine_cpus}}"
     memory: "{{machine_ram}}"
     disk: "{{machine_disk}}"
+  when: hookscript == False
+
+- name: Create LXC with hookscript
+  community.general.proxmox:
+    vmid: "{{ machine_id }}"
+    node: bigprox
+    api_user: "{{root_user}}"
+    api_password: "{{root_password}}"
+    api_host: "{{host_ip}}"
+    hostname: "{{machine_name}}"
+    password: "{{machine_password}}"
+    ostemplate: "local:vztmpl/{{machine_image}}"
+    storage: local-lvm
+    unprivileged: 1
+    features:
+      - nesting=1
+      - keyctl=1
+      - fuse=1
+    hookscript: "local:snippets/enable_lxc_ssh_hook.sh"
+    netif: "{'net0':'name=enp6s0,gw=192.168.1.1,ip={{machine_ip}},bridge=vmbr0'}"
+    pubkey: "{{ssh_key.stdout}}" # needs to be in format "ssh-rsa ..."
+    cores: "{{machine_cores}}"
+    cpus: "{{machine_cpus}}"
+    memory: "{{machine_ram}}"
+    disk: "{{machine_disk}}"
+  when: hookscript == True
 
 - name: Start container
   community.general.proxmox:

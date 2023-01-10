@@ -21,3 +21,4 @@ class Tasks(Widget):
             classes="horizontal-group",
             id="task_choice_container"
         )
+

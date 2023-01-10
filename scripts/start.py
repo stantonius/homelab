@@ -5,8 +5,8 @@ from textual.widgets import Button, Header, Footer, Static, Checkbox, ListView, 
 from start.Options import Options
 from start.Tasks import Tasks
 from start.Nodes import Nodes
-from start.VMImages import VMImages
-from start.MachineType import MachineType
+# from start.VMImages import VMImages
+# from start.MachineType import MachineType
 from start.MachineConfig import MachineConfig
 from start.MachineSettings import MachineSettings
 from textual import events, log
@@ -38,20 +38,30 @@ class Homelab(App):
         if "-task" in  event.button.id:
             option_selected = event.button.id.split("-")[0]
             self.query_one(Tasks).task = option_selected
-            # self.query_one("#task_choice_label", Static).update(self.query_one(Tasks).task)
+            # update the task button to add class selected
+            # self.query_one(Button, )
             self.query_one("#node_choice_container").styles.display = "block" if option_selected == 'proxmox' else "none"
         if "-node" in  event.button.id:
             option_selected = event.button.id.split("-")[0]
             self.query_one(Nodes).node = option_selected
         if "-machinetype" in  event.button.id:
             option_selected = event.button.id.split("-")[0]
-            self.query_one(MachineType).machine_type = option_selected
+            self.query_one(MachineConfig).machine_type = option_selected
+            self.query_one('#imagelist').clear()
+            for i in self.query_one(MachineConfig).image_options:
+                self.query_one('#imagelist').append(ListItem(Label(i), id=f"image-{i}")) 
+            self.query_one('#hookscript-container').styles.display = "block" if option_selected == 'lxc' else "none"
+        # finally, if the complete button is pressed, write the settings to a json file
         if event.button.id == "complete":
             self.action_complete()
 
     def on_list_view_selected(self, event: ListView.Selected) -> None:
         if event.sender.id == 'imagelist':
-            self.query_one(VMImages).vm_image = event.item.id.replace("image-", "")
+            self.query_one(MachineConfig).image = event.item.id.replace("image-", "")
+
+    def on_checkbox_changed(self, event: Checkbox.Changed) -> None:
+        if event.input.id == 'hookscript-checkbox':
+            self.query_one(MachineConfig).run_hookscript = event.value
 
     def on_input_changed(self, event: Input.Changed) -> None:
         # will need to specify which input changed if we ever add more
@@ -73,10 +83,10 @@ class Homelab(App):
     def action_complete(self) -> None:
         self.settings['task'] = self.query_one(Tasks).task
         self.settings['node'] = self.query_one(Nodes).node
-        self.settings['type'] = self.query_one(MachineType).machine_type
-        self.settings['machine_image'] = self.query_one(VMImages).vm_image
+        self.settings['type'] = self.query_one(MachineConfig).machine_type
+        self.settings['hookscript'] = self.query_one(MachineConfig).run_hookscript
+        self.settings['machine_image'] = self.query_one(MachineConfig).image
         self.settings.update(self.query_one(MachineSettings).settings)
-        print(self.settings)
         self.record()
         self.run_ansible()
 

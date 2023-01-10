@@ -20,3 +20,8 @@ class Nodes(Widget):
             classes="horizontal-group remove",
             id="node_choice_container"
         )
+
+    def watch_node(self, task: str) -> None:
+        for option in self.options:
+            self.query_one(f"#{option.lower()}-button-node").remove_class('selected')
+        self.query_one(f"#{self.node}-button-node").add_class('selected')
