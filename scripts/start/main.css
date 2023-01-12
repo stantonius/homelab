@@ -3,7 +3,15 @@ Screen {
     layout: grid;
     grid-size: 3 2;
     grid-columns: 1fr;
-    grid-rows: 1fr;
+    grid-gutter: 1 1;
+    height: auto;
+}
+
+#complete {
+    layout: horizontal;
+    column-span: 3;
+
+
 }
 
 ListView {

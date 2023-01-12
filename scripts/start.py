@@ -29,10 +29,11 @@ class Homelab(App):
     def compose(self) -> ComposeResult:
         yield Header()
         yield Footer()
+        yield Button("Complete", id="complete", classes="button")
         yield Options()
         yield MachineConfig()
         yield MachineSettings()
-        yield Button("Complete", id="complete", classes="button")
+        
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if "-task" in  event.button.id:
