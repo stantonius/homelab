@@ -87,13 +87,13 @@
     # ansible_user: root
     groups: proxmox_nodes
 
-# - name: Wait for port 22 to become open on the host
-#   ansible.builtin.wait_for:
-#     host: "{{machine_ip | regex_replace('/.*', '')}}"
-#     port: 22
-#     state: started
-#     sleep: 5
-#     timeout: 300
+- name: Wait for port 22 to become open on the host
+  ansible.builtin.wait_for:
+    host: "{{machine_ip | regex_replace('/.*', '')}}"
+    port: 22
+    state: started
+    sleep: 5
+    timeout: 300
 
 - name: Allow release-info to change for APT repositories
   command: apt-get update -y --allow-releaseinfo-change
@@ -116,4 +116,17 @@
   ansible.posix.authorized_key:
     user: root
     state: present
-    key: "{{ lookup('file', rsa_key_path) }}"
+    key: "{{ lookup('file', machine_ssh_key) }}"
+
+
+- name: Install the latest version of python
+  delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+  ansible.builtin.apt:
+    name: python3
+    state: latest
+
+- name: Install or update to latest version of pip
+  delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+  ansible.builtin.apt:
+    name: python3-pip
+    state: latest

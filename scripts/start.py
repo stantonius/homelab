@@ -13,7 +13,7 @@ from textual import events, log
 import json, os
 
 # initialize the Ansible env vars
-os.environ["ANSIBLE_CONFIG"]="~/Projects/automation2/ansible.cfg"
+os.environ["ANSIBLE_CONFIG"]="~/Projects/homelab/ansible.cfg"
 os.environ["ANSIBLE_VAULT_PASSWORD_FILE"]="~/ansiblepass.txt"
 
 class Homelab(App):

@@ -1,0 +1,32 @@
+---
+- name: Verify that the target is online/contactable
+  ansible.builtin.ping:
+  become: yes
+  delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+- name: Install Docker
+  ansible.builtin.package:
+    name: docker.io
+    state: present
+  become: yes
+  delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+- name: Enable Docker
+  ansible.builtin.service:
+    name: docker
+    enabled: yes
+  become: yes
+  delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+- name: Start Docker
+  ansible.builtin.service:
+    name: docker
+    state: started
+  become: yes
+  delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+- name: Make sure the required Python packages are installed
+  ansible.builtin.pip:
+    name: "{{item}}"
+    state: present
+    executable: pip3
+  become: yes
+  delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+  loop:
+    - requests

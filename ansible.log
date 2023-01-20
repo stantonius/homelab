@@ -301,3 +301,1447 @@ community.general in version 7.0.0. Deprecation warnings can be disabled by sett
 2023-01-09 22:21:57,982 p=5114 u=craig n=ansible | fatal: [192.168.1.99 -> {{machine_ip | regex_replace('/.*', '')}}]: FAILED! => {"msg": "The task includes an option with an undefined variable. The error was: 'rsa_key_path' is undefined\n\nThe error appears to be in '/Users/craig/Projects/automation2/ansible/roles/pm_create_lxc/tasks/main.yaml': line 114, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n- name: add rsa public key to remote host\n  ^ here\n"}
 2023-01-09 22:21:57,983 p=5114 u=craig n=ansible | PLAY RECAP ******************************************************************************************************************************************************************************
 2023-01-09 22:21:57,983 p=5114 u=craig n=ansible | 192.168.1.99               : ok=12   changed=6    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2023-01-14 09:31:46,346 p=10843 u=craig n=ansible | PLAY [Install VSCode Server on a fresh ubuntu LXC container] *****************************************************************************************************
+2023-01-14 09:31:46,365 p=10843 u=craig n=ansible | TASK [Gathering Facts] *******************************************************************************************************************************************
+2023-01-14 09:31:47,727 p=10843 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 09:31:47,744 p=10843 u=craig n=ansible | TASK [ansible.builtin.include_vars] ******************************************************************************************************************************
+2023-01-14 09:31:47,756 p=10843 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 09:31:47,785 p=10843 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] ************************************************************************************************************
+2023-01-14 09:31:48,648 p=10843 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 09:31:48,664 p=10843 u=craig n=ansible | TASK [pm_create_lxc : Create a directory to house the ssh keys to pass to a new LXC] *****************************************************************************
+2023-01-14 09:31:49,017 p=10843 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 09:31:49,034 p=10843 u=craig n=ansible | TASK [pm_create_lxc : Copy the bash script to snippets directory and make it executable] *************************************************************************
+2023-01-14 09:31:49,739 p=10843 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 09:31:49,774 p=10843 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] **********************************************************************************************
+2023-01-14 09:31:50,077 p=10843 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-14 09:31:50,094 p=10843 u=craig n=ansible | TASK [pm_create_lxc : Create LXC without hookscript] *************************************************************************************************************
+2023-01-14 09:31:50,103 p=10843 u=craig n=ansible | skipping: [192.168.1.99]
+2023-01-14 09:31:50,119 p=10843 u=craig n=ansible | TASK [pm_create_lxc : Create LXC with hookscript] ****************************************************************************************************************
+2023-01-14 09:32:36,137 p=10843 u=craig n=ansible | fatal: [192.168.1.99]: FAILED! => {"changed": false, "msg": "Reached timeout while waiting for creating VM. Last line in task before timeout: [{'t': 'no content', 'n': 1}]"}
+2023-01-14 09:32:36,138 p=10843 u=craig n=ansible | PLAY RECAP *******************************************************************************************************************************************************
+2023-01-14 09:32:36,138 p=10843 u=craig n=ansible | 192.168.1.99               : ok=6    changed=1    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2023-01-14 12:37:40,375 p=11972 u=craig n=ansible | PLAY [Install VSCode Server on a fresh ubuntu LXC container] *****************************************************************************************************
+2023-01-14 12:37:40,393 p=11972 u=craig n=ansible | TASK [Gathering Facts] *******************************************************************************************************************************************
+2023-01-14 12:37:41,536 p=11972 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 12:37:41,553 p=11972 u=craig n=ansible | TASK [ansible.builtin.include_vars] ******************************************************************************************************************************
+2023-01-14 12:37:41,566 p=11972 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 12:37:41,596 p=11972 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] ************************************************************************************************************
+2023-01-14 12:37:42,233 p=11972 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 12:37:42,254 p=11972 u=craig n=ansible | TASK [pm_create_lxc : Create a directory to house the ssh keys to pass to a new LXC] *****************************************************************************
+2023-01-14 12:37:42,603 p=11972 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 12:37:42,621 p=11972 u=craig n=ansible | TASK [pm_create_lxc : Copy the bash script to snippets directory and make it executable] *************************************************************************
+2023-01-14 12:37:43,298 p=11972 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 12:37:43,328 p=11972 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] **********************************************************************************************
+2023-01-14 12:37:43,628 p=11972 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-14 12:37:43,644 p=11972 u=craig n=ansible | TASK [pm_create_lxc : Create LXC without hookscript] *************************************************************************************************************
+2023-01-14 12:37:43,653 p=11972 u=craig n=ansible | skipping: [192.168.1.99]
+2023-01-14 12:37:43,668 p=11972 u=craig n=ansible | TASK [pm_create_lxc : Create LXC with hookscript] ****************************************************************************************************************
+2023-01-14 12:37:47,354 p=11972 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-14 12:37:47,372 p=11972 u=craig n=ansible | TASK [pm_create_lxc : Start container] ***************************************************************************************************************************
+2023-01-14 12:37:49,921 p=11972 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed
+ from community.general in version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-14 12:37:49,922 p=11972 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-14 12:37:49,943 p=11972 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] ************************************************************************************************************
+2023-01-14 12:37:49,973 p=11972 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-14 12:37:50,007 p=11972 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] *****************************************************************************************
+2023-01-14 12:37:57,495 p=11972 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 12:37:57,526 p=11972 u=craig n=ansible | TASK [pm_create_lxc : Run the equivalent of "apt-get update"] ****************************************************************************************************
+2023-01-14 12:37:58,764 p=11972 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 12:37:58,796 p=11972 u=craig n=ansible | TASK [pm_create_lxc : Update all packages to their latest version] ***********************************************************************************************
+2023-01-14 12:38:29,660 p=11972 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 12:38:29,690 p=11972 u=craig n=ansible | TASK [pm_create_lxc : add rsa public key to remote host] *********************************************************************************************************
+2023-01-14 12:38:29,708 p=11972 u=craig n=ansible | fatal: [192.168.1.99 -> {{machine_ip | regex_replace('/.*', '')}}]: FAILED! => {"msg": "The task includes an option with an undefined variable. The error was: 'rsa_key_path' is undefined\n\nThe error appears to be in '/Users/craig/Projects/homelab/ansible/roles/pm_create_lxc/tasks/main.yaml': line 114, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n- name: add rsa public key to remote host\n  ^ here\n"}
+2023-01-14 12:38:29,709 p=11972 u=craig n=ansible | PLAY RECAP *******************************************************************************************************************************************************
+2023-01-14 12:38:29,709 p=11972 u=craig n=ansible | 192.168.1.99               : ok=12   changed=6    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2023-01-14 12:41:04,010 p=12435 u=craig n=ansible | PLAY [Install VSCode Server on a fresh ubuntu LXC container] *****************************************************************************************************
+2023-01-14 12:41:04,028 p=12435 u=craig n=ansible | TASK [Gathering Facts] *******************************************************************************************************************************************
+2023-01-14 12:41:05,211 p=12435 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 12:41:05,230 p=12435 u=craig n=ansible | TASK [ansible.builtin.include_vars] ******************************************************************************************************************************
+2023-01-14 12:41:05,241 p=12435 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 12:41:05,270 p=12435 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] ************************************************************************************************************
+2023-01-14 12:41:05,911 p=12435 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 12:41:05,929 p=12435 u=craig n=ansible | TASK [pm_create_lxc : Create a directory to house the ssh keys to pass to a new LXC] *****************************************************************************
+2023-01-14 12:41:06,269 p=12435 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 12:41:06,286 p=12435 u=craig n=ansible | TASK [pm_create_lxc : Copy the bash script to snippets directory and make it executable] *************************************************************************
+2023-01-14 12:41:06,962 p=12435 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 12:41:06,991 p=12435 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] **********************************************************************************************
+2023-01-14 12:41:07,292 p=12435 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-14 12:41:07,308 p=12435 u=craig n=ansible | TASK [pm_create_lxc : Create LXC without hookscript] *************************************************************************************************************
+2023-01-14 12:41:07,319 p=12435 u=craig n=ansible | skipping: [192.168.1.99]
+2023-01-14 12:41:07,335 p=12435 u=craig n=ansible | TASK [pm_create_lxc : Create LXC with hookscript] ****************************************************************************************************************
+2023-01-14 12:41:10,922 p=12435 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-14 12:41:10,941 p=12435 u=craig n=ansible | TASK [pm_create_lxc : Start container] ***************************************************************************************************************************
+2023-01-14 12:41:13,809 p=12435 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed
+ from community.general in version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-14 12:41:13,809 p=12435 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-14 12:41:13,832 p=12435 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] ************************************************************************************************************
+2023-01-14 12:41:13,858 p=12435 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-14 12:41:13,892 p=12435 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] *****************************************************************************************
+2023-01-14 12:41:21,804 p=12435 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 12:41:21,839 p=12435 u=craig n=ansible | TASK [pm_create_lxc : Run the equivalent of "apt-get update"] ****************************************************************************************************
+2023-01-14 12:41:23,071 p=12435 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 12:41:23,100 p=12435 u=craig n=ansible | TASK [pm_create_lxc : Update all packages to their latest version] ***********************************************************************************************
+2023-01-14 12:41:54,292 p=12435 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 12:41:54,329 p=12435 u=craig n=ansible | TASK [pm_create_lxc : add rsa public key to remote host] *********************************************************************************************************
+2023-01-14 12:41:55,847 p=12435 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 12:41:55,890 p=12435 u=craig n=ansible | TASK [Ensure the container is running] ***************************************************************************************************************************
+2023-01-14 12:41:56,897 p=12435 u=craig n=ansible | fatal: [192.168.1.99]: FAILED! => {"changed": false, "msg": "The `lxc` module is not importable. Check the requirements."}
+2023-01-14 12:41:56,900 p=12435 u=craig n=ansible | PLAY RECAP *******************************************************************************************************************************************************
+2023-01-14 12:41:56,900 p=12435 u=craig n=ansible | 192.168.1.99               : ok=13   changed=6    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2023-01-14 12:56:56,214 p=13796 u=craig n=ansible | PLAY [Install VSCode Server on a fresh ubuntu LXC container] *****************************************************************************************************
+2023-01-14 12:56:56,231 p=13796 u=craig n=ansible | TASK [Gathering Facts] *******************************************************************************************************************************************
+2023-01-14 12:56:57,441 p=13796 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 12:56:57,459 p=13796 u=craig n=ansible | TASK [ansible.builtin.include_vars] ******************************************************************************************************************************
+2023-01-14 12:56:57,470 p=13796 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 12:56:57,499 p=13796 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] ************************************************************************************************************
+2023-01-14 12:56:58,119 p=13796 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 12:56:58,138 p=13796 u=craig n=ansible | TASK [pm_create_lxc : Create a directory to house the ssh keys to pass to a new LXC] *****************************************************************************
+2023-01-14 12:56:58,469 p=13796 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 12:56:58,486 p=13796 u=craig n=ansible | TASK [pm_create_lxc : Copy the bash script to snippets directory and make it executable] *************************************************************************
+2023-01-14 12:56:59,224 p=13796 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 12:56:59,253 p=13796 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] **********************************************************************************************
+2023-01-14 12:56:59,551 p=13796 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-14 12:56:59,567 p=13796 u=craig n=ansible | TASK [pm_create_lxc : Create LXC without hookscript] *************************************************************************************************************
+2023-01-14 12:56:59,577 p=13796 u=craig n=ansible | skipping: [192.168.1.99]
+2023-01-14 12:56:59,592 p=13796 u=craig n=ansible | TASK [pm_create_lxc : Create LXC with hookscript] ****************************************************************************************************************
+2023-01-14 12:57:03,237 p=13796 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-14 12:57:03,257 p=13796 u=craig n=ansible | TASK [pm_create_lxc : Start container] ***************************************************************************************************************************
+2023-01-14 12:57:05,746 p=13796 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed
+ from community.general in version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-14 12:57:05,747 p=13796 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-14 12:57:05,767 p=13796 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] ************************************************************************************************************
+2023-01-14 12:57:05,790 p=13796 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-14 12:57:05,825 p=13796 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] *****************************************************************************************
+2023-01-14 12:57:15,101 p=13796 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 12:57:15,135 p=13796 u=craig n=ansible | TASK [pm_create_lxc : Run the equivalent of "apt-get update"] ****************************************************************************************************
+2023-01-14 12:57:16,390 p=13796 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 12:57:16,420 p=13796 u=craig n=ansible | TASK [pm_create_lxc : Update all packages to their latest version] ***********************************************************************************************
+2023-01-14 12:57:47,400 p=13796 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 12:57:47,431 p=13796 u=craig n=ansible | TASK [pm_create_lxc : add rsa public key to remote host] *********************************************************************************************************
+2023-01-14 12:57:48,798 p=13796 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 12:57:48,844 p=13796 u=craig n=ansible | TASK [Verify that the target is online/contactable] **************************************************************************************************************
+2023-01-14 12:57:50,021 p=13796 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 12:57:50,056 p=13796 u=craig n=ansible | TASK [Install VSCode Server from this url 'https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64'] *******************************************
+2023-01-14 12:57:51,688 p=13796 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 12:57:51,721 p=13796 u=craig n=ansible | TASK [Unpack the VSCode Server] **********************************************************************************************************************************
+2023-01-14 12:57:52,620 p=13796 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 12:57:52,651 p=13796 u=craig n=ansible | TASK [Move the VSCode Server to the correct location] ************************************************************************************************************
+2023-01-14 12:57:52,962 p=13796 u=craig n=ansible | fatal: [192.168.1.99 -> 192.168.1.112]: FAILED! => {"changed": true, "cmd": ["mv", "/tmp/.vscode-server", "/root/.vscode-server"], "delta": "0:00:00.001858", "end": "2023-01-14 17:57:52.934755", "msg": "non-zero return code", "rc": 1, "start": "2023-01-14 17:57:52.932897", "stderr": "mv: cannot stat '/tmp/.vscode-server': No such file or directory", "stderr_lines": ["mv: cannot stat '/tmp/.vscode-server': No such file or directory"], "stdout": "", "stdout_lines": []}
+2023-01-14 12:57:52,963 p=13796 u=craig n=ansible | PLAY RECAP *******************************************************************************************************************************************************
+2023-01-14 12:57:52,963 p=13796 u=craig n=ansible | 192.168.1.99               : ok=16   changed=8    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2023-01-14 13:02:59,823 p=14441 u=craig n=ansible | PLAY [Install VSCode Server on a fresh ubuntu LXC container] *****************************************************************************************************
+2023-01-14 13:02:59,840 p=14441 u=craig n=ansible | TASK [Gathering Facts] *******************************************************************************************************************************************
+2023-01-14 13:03:01,156 p=14441 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 13:03:01,173 p=14441 u=craig n=ansible | TASK [ansible.builtin.include_vars] ******************************************************************************************************************************
+2023-01-14 13:03:01,185 p=14441 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 13:03:01,214 p=14441 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] ************************************************************************************************************
+2023-01-14 13:03:01,880 p=14441 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 13:03:01,898 p=14441 u=craig n=ansible | TASK [pm_create_lxc : Create a directory to house the ssh keys to pass to a new LXC] *****************************************************************************
+2023-01-14 13:03:02,239 p=14441 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 13:03:02,255 p=14441 u=craig n=ansible | TASK [pm_create_lxc : Copy the bash script to snippets directory and make it executable] *************************************************************************
+2023-01-14 13:03:03,006 p=14441 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 13:03:03,038 p=14441 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] **********************************************************************************************
+2023-01-14 13:03:03,332 p=14441 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-14 13:03:03,348 p=14441 u=craig n=ansible | TASK [pm_create_lxc : Create LXC without hookscript] *************************************************************************************************************
+2023-01-14 13:03:03,358 p=14441 u=craig n=ansible | skipping: [192.168.1.99]
+2023-01-14 13:03:03,373 p=14441 u=craig n=ansible | TASK [pm_create_lxc : Create LXC with hookscript] ****************************************************************************************************************
+2023-01-14 13:03:04,474 p=14441 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 13:03:04,493 p=14441 u=craig n=ansible | TASK [pm_create_lxc : Start container] ***************************************************************************************************************************
+2023-01-14 13:03:05,506 p=14441 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed
+ from community.general in version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-14 13:03:05,507 p=14441 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-14 13:03:05,529 p=14441 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] ************************************************************************************************************
+2023-01-14 13:03:05,552 p=14441 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-14 13:03:05,586 p=14441 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] *****************************************************************************************
+2023-01-14 13:03:07,592 p=14441 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 13:03:07,625 p=14441 u=craig n=ansible | TASK [pm_create_lxc : Run the equivalent of "apt-get update"] ****************************************************************************************************
+2023-01-14 13:03:08,631 p=14441 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 13:03:08,662 p=14441 u=craig n=ansible | TASK [pm_create_lxc : Update all packages to their latest version] ***********************************************************************************************
+2023-01-14 13:03:09,526 p=14441 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 13:03:09,552 p=14441 u=craig n=ansible | TASK [pm_create_lxc : add rsa public key to remote host] *********************************************************************************************************
+2023-01-14 13:03:10,015 p=14441 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 13:03:10,057 p=14441 u=craig n=ansible | TASK [Verify that the target is online/contactable] **************************************************************************************************************
+2023-01-14 13:03:10,456 p=14441 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 13:03:10,484 p=14441 u=craig n=ansible | TASK [Install VSCode Server from this url 'https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64'] *******************************************
+2023-01-14 13:03:11,693 p=14441 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 13:03:11,723 p=14441 u=craig n=ansible | TASK [Unpack the VSCode Server] **********************************************************************************************************************************
+2023-01-14 13:03:12,542 p=14441 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 13:03:12,573 p=14441 u=craig n=ansible | TASK [Move the VSCode Server to the correct location] ************************************************************************************************************
+2023-01-14 13:03:12,900 p=14441 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 13:03:12,931 p=14441 u=craig n=ansible | TASK [Remove the VSCode Server tarball] **************************************************************************************************************************
+2023-01-14 13:03:13,240 p=14441 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 13:03:13,269 p=14441 u=craig n=ansible | TASK [Remove the VSCode Server directory] ************************************************************************************************************************
+2023-01-14 13:03:13,600 p=14441 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 13:03:13,630 p=14441 u=craig n=ansible | TASK [Create a script called 'codeserverstart.sh'] ***************************************************************************************************************
+2023-01-14 13:03:14,301 p=14441 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 13:03:14,329 p=14441 u=craig n=ansible | TASK [Create the VSCode Server systemd service to run './code tunnel' on boot] ***********************************************************************************
+2023-01-14 13:03:14,910 p=14441 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 13:03:14,943 p=14441 u=craig n=ansible | TASK [Enable the VSCode Server systemd service] ******************************************************************************************************************
+2023-01-14 13:03:15,697 p=14441 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 13:03:15,728 p=14441 u=craig n=ansible | TASK [Start the VSCode Server systemd service] *******************************************************************************************************************
+2023-01-14 13:03:16,173 p=14441 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.112]
+2023-01-14 13:03:16,206 p=14441 u=craig n=ansible | PLAY RECAP *******************************************************************************************************************************************************
+2023-01-14 13:03:16,206 p=14441 u=craig n=ansible | 192.168.1.99               : ok=23   changed=9    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+2023-01-15 21:08:54,204 p=45305 u=craig n=ansible | ERROR! the playbook: docker.yaml could not be found
+2023-01-15 21:09:03,101 p=45330 u=craig n=ansible | PLAY [Set up an LXC container with Docker running] **********************************************************************************************************************************************
+2023-01-15 21:09:03,111 p=45330 u=craig n=ansible | ERROR! vars file ../../vault.yaml was not found
+Could not find file on the Ansible Controller.
+If you are using a module and expect the file to exist on the remote, see the remote_src option
+2023-01-15 21:09:15,825 p=45358 u=craig n=ansible | PLAY [Set up an LXC container with Docker running] **********************************************************************************************************************************************
+2023-01-15 21:09:15,841 p=45358 u=craig n=ansible | TASK [Gathering Facts] **************************************************************************************************************************************************************************
+2023-01-15 21:09:17,273 p=45358 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-15 21:09:17,290 p=45358 u=craig n=ansible | TASK [ansible.builtin.include_vars] *************************************************************************************************************************************************************
+2023-01-15 21:09:17,304 p=45358 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-15 21:09:17,337 p=45358 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] *******************************************************************************************************************************************
+2023-01-15 21:09:18,173 p=45358 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-15 21:09:18,195 p=45358 u=craig n=ansible | TASK [pm_create_lxc : Create a directory to house the ssh keys to pass to a new LXC] ************************************************************************************************************
+2023-01-15 21:09:18,568 p=45358 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-15 21:09:18,584 p=45358 u=craig n=ansible | TASK [pm_create_lxc : Copy the bash script to snippets directory and make it executable] ********************************************************************************************************
+2023-01-15 21:09:19,319 p=45358 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-15 21:09:19,348 p=45358 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] *****************************************************************************************************************************
+2023-01-15 21:09:19,656 p=45358 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-15 21:09:19,671 p=45358 u=craig n=ansible | TASK [pm_create_lxc : Create LXC without hookscript] ********************************************************************************************************************************************
+2023-01-15 21:09:19,682 p=45358 u=craig n=ansible | skipping: [192.168.1.99]
+2023-01-15 21:09:19,698 p=45358 u=craig n=ansible | TASK [pm_create_lxc : Create LXC with hookscript] ***********************************************************************************************************************************************
+2023-01-15 21:09:24,421 p=45358 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-15 21:09:24,442 p=45358 u=craig n=ansible | TASK [pm_create_lxc : Start container] **********************************************************************************************************************************************************
+2023-01-15 21:09:26,876 p=45358 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed from community.general in 
+version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-15 21:09:26,877 p=45358 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-15 21:09:26,898 p=45358 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] *******************************************************************************************************************************************
+2023-01-15 21:09:26,927 p=45358 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-15 21:09:26,962 p=45358 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] ************************************************************************************************************************
+2023-01-15 21:09:32,201 p=45358 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.113]
+2023-01-15 21:09:32,232 p=45358 u=craig n=ansible | TASK [pm_create_lxc : Run the equivalent of "apt-get update"] ***********************************************************************************************************************************
+2023-01-15 21:09:33,565 p=45358 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.113]
+2023-01-15 21:09:33,597 p=45358 u=craig n=ansible | TASK [pm_create_lxc : Update all packages to their latest version] ******************************************************************************************************************************
+2023-01-15 21:10:25,299 p=45358 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.113]
+2023-01-15 21:10:25,327 p=45358 u=craig n=ansible | TASK [pm_create_lxc : add rsa public key to remote host] ****************************************************************************************************************************************
+2023-01-15 21:10:25,820 p=45358 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.113]
+2023-01-15 21:10:25,863 p=45358 u=craig n=ansible | TASK [Verify that the target is online/contactable] *********************************************************************************************************************************************
+2023-01-15 21:10:26,340 p=45358 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.113]
+2023-01-15 21:10:26,369 p=45358 u=craig n=ansible | TASK [Install Docker] ***************************************************************************************************************************************************************************
+2023-01-15 21:10:40,601 p=45358 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.113]
+2023-01-15 21:10:40,628 p=45358 u=craig n=ansible | TASK [Enable Docker] ****************************************************************************************************************************************************************************
+2023-01-15 21:10:41,733 p=45358 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.113]
+2023-01-15 21:10:41,760 p=45358 u=craig n=ansible | TASK [Start Docker] *****************************************************************************************************************************************************************************
+2023-01-15 21:10:42,645 p=45358 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.113]
+2023-01-15 21:10:42,675 p=45358 u=craig n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2023-01-15 21:10:42,675 p=45358 u=craig n=ansible | 192.168.1.99               : ok=17   changed=7    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+2023-01-17 21:46:21,154 p=40328 u=craig n=ansible | ERROR! No action selected, at least one of --host, --graph or --list needs to be specified.
+2023-01-17 21:49:47,608 p=40376 u=craig n=ansible |  [ERROR]: User interrupted execution
+
+2023-01-17 21:51:07,833 p=40724 u=craig n=ansible |  [ERROR]: User interrupted execution
+
+2023-01-17 21:51:24,242 p=40758 u=craig n=ansible |  [ERROR]: User interrupted execution
+
+2023-01-17 21:51:50,972 p=40817 u=craig n=ansible | {
+    "_meta": {
+        "hostvars": {
+            "192.168.1.112": {
+                "ip": "192.168.1.112",
+                "name": "192.168.1.112"
+            },
+            "192.168.1.113": {
+                "ip": "192.168.1.113",
+                "name": "192.168.1.113"
+            },
+            "192.168.1.120": {
+                "ip": "192.168.1.120",
+                "name": "192.168.1.120"
+            },
+            "192.168.1.130": {
+                "ip": "192.168.1.130",
+                "name": "192.168.1.130"
+            },
+            "192.168.1.145": {
+                "ip": "192.168.1.145",
+                "name": "192.168.1.145"
+            },
+            "192.168.1.170": {
+                "ip": "192.168.1.170",
+                "name": "192.168.1.170"
+            },
+            "192.168.1.2": {
+                "ip": "192.168.1.2",
+                "name": "192.168.1.2"
+            },
+            "192.168.1.209": {
+                "ip": "192.168.1.209",
+                "name": "192.168.1.209"
+            },
+            "192.168.1.99": {
+                "ip": "192.168.1.99",
+                "name": "192.168.1.99"
+            },
+            "MBP.lan": {
+                "ip": "192.168.1.100",
+                "name": "MBP.lan"
+            },
+            "OpenWrt": {
+                "ip": "192.168.1.1",
+                "name": "OpenWrt"
+            },
+            "miniprox.lan": {
+                "ip": "192.168.1.97",
+                "name": "miniprox.lan"
+            },
+            "pikvm.home.lan": {
+                "ip": "192.168.1.87",
+                "name": "pikvm.home.lan"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped"
+        ]
+    },
+    "ungrouped": {
+        "hosts": [
+            "192.168.1.112",
+            "192.168.1.113",
+            "192.168.1.120",
+            "192.168.1.130",
+            "192.168.1.145",
+            "192.168.1.170",
+            "192.168.1.2",
+            "192.168.1.209",
+            "192.168.1.99",
+            "MBP.lan",
+            "OpenWrt",
+            "miniprox.lan",
+            "pikvm.home.lan"
+        ]
+    }
+}
+2023-01-17 22:05:39,828 p=41171 u=craig n=ansible |  [ERROR]: User interrupted execution
+
+2023-01-17 22:06:46,938 p=43670 u=craig n=ansible | {
+    "_meta": {
+        "hostvars": {
+            "192.168.1.112": {
+                "ip": "192.168.1.112",
+                "name": "192.168.1.112"
+            },
+            "192.168.1.113": {
+                "ip": "192.168.1.113",
+                "name": "192.168.1.113"
+            },
+            "192.168.1.120": {
+                "ip": "192.168.1.120",
+                "name": "192.168.1.120"
+            },
+            "192.168.1.130": {
+                "ip": "192.168.1.130",
+                "name": "192.168.1.130"
+            },
+            "192.168.1.145": {
+                "ip": "192.168.1.145",
+                "name": "192.168.1.145"
+            },
+            "192.168.1.170": {
+                "ip": "192.168.1.170",
+                "name": "192.168.1.170"
+            },
+            "192.168.1.2": {
+                "ip": "192.168.1.2",
+                "name": "192.168.1.2"
+            },
+            "192.168.1.209": {
+                "ip": "192.168.1.209",
+                "name": "192.168.1.209"
+            },
+            "192.168.1.219": {
+                "ip": "192.168.1.219",
+                "name": "192.168.1.219"
+            },
+            "192.168.1.99": {
+                "ip": "192.168.1.99",
+                "name": "192.168.1.99"
+            },
+            "MBP.lan": {
+                "ip": "192.168.1.100",
+                "name": "MBP.lan"
+            },
+            "OpenWrt": {
+                "ip": "192.168.1.1",
+                "name": "OpenWrt"
+            },
+            "miniprox.lan": {
+                "ip": "192.168.1.97",
+                "name": "miniprox.lan"
+            },
+            "pikvm.home.lan": {
+                "ip": "192.168.1.87",
+                "name": "pikvm.home.lan"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped"
+        ]
+    },
+    "ungrouped": {
+        "hosts": [
+            "192.168.1.112",
+            "192.168.1.113",
+            "192.168.1.120",
+            "192.168.1.130",
+            "192.168.1.145",
+            "192.168.1.170",
+            "192.168.1.2",
+            "192.168.1.209",
+            "192.168.1.219",
+            "192.168.1.99",
+            "MBP.lan",
+            "OpenWrt",
+            "miniprox.lan",
+            "pikvm.home.lan"
+        ]
+    }
+}
+2023-01-17 22:08:28,752 p=43864 u=craig n=ansible | {
+    "_meta": {
+        "hostvars": {
+            "192.168.1.112": {
+                "ip": "192.168.1.112",
+                "name": "192.168.1.112"
+            },
+            "192.168.1.113": {
+                "ip": "192.168.1.113",
+                "name": "192.168.1.113"
+            },
+            "192.168.1.120": {
+                "ip": "192.168.1.120",
+                "name": "192.168.1.120"
+            },
+            "192.168.1.130": {
+                "ip": "192.168.1.130",
+                "name": "192.168.1.130"
+            },
+            "192.168.1.145": {
+                "ip": "192.168.1.145",
+                "name": "192.168.1.145"
+            },
+            "192.168.1.170": {
+                "ip": "192.168.1.170",
+                "name": "192.168.1.170"
+            },
+            "192.168.1.2": {
+                "ip": "192.168.1.2",
+                "name": "192.168.1.2"
+            },
+            "192.168.1.99": {
+                "ip": "192.168.1.99",
+                "name": "192.168.1.99"
+            },
+            "MBP.lan": {
+                "ip": "192.168.1.100",
+                "name": "MBP.lan"
+            },
+            "OpenWrt": {
+                "ip": "192.168.1.1",
+                "name": "OpenWrt"
+            },
+            "miniprox.lan": {
+                "ip": "192.168.1.97",
+                "name": "miniprox.lan"
+            },
+            "pikvm.home.lan": {
+                "ip": "192.168.1.87",
+                "name": "pikvm.home.lan"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped"
+        ]
+    },
+    "ungrouped": {
+        "hosts": [
+            "192.168.1.112",
+            "192.168.1.113",
+            "192.168.1.120",
+            "192.168.1.130",
+            "192.168.1.145",
+            "192.168.1.170",
+            "192.168.1.2",
+            "192.168.1.99",
+            "MBP.lan",
+            "OpenWrt",
+            "miniprox.lan",
+            "pikvm.home.lan"
+        ]
+    }
+}
+2023-01-18 21:06:26,239 p=90651 u=craig n=ansible | {
+    "_meta": {
+        "hostvars": {
+            "192.168.1.112": {
+                "ip": "192.168.1.112",
+                "name": "192.168.1.112"
+            },
+            "192.168.1.113": {
+                "ip": "192.168.1.113",
+                "name": "192.168.1.113"
+            },
+            "192.168.1.120": {
+                "ip": "192.168.1.120",
+                "name": "192.168.1.120"
+            },
+            "192.168.1.145": {
+                "ip": "192.168.1.145",
+                "name": "192.168.1.145"
+            },
+            "192.168.1.170": {
+                "ip": "192.168.1.170",
+                "name": "192.168.1.170"
+            },
+            "192.168.1.2": {
+                "ip": "192.168.1.2",
+                "name": "192.168.1.2"
+            },
+            "192.168.1.209": {
+                "ip": "192.168.1.209",
+                "name": "192.168.1.209"
+            },
+            "192.168.1.219": {
+                "ip": "192.168.1.219",
+                "name": "192.168.1.219"
+            },
+            "192.168.1.99": {
+                "ip": "192.168.1.99",
+                "name": "192.168.1.99"
+            },
+            "MBP.lan": {
+                "ip": "192.168.1.100",
+                "name": "MBP.lan"
+            },
+            "OpenWrt": {
+                "ip": "192.168.1.1",
+                "name": "OpenWrt"
+            },
+            "miniprox.lan": {
+                "ip": "192.168.1.97",
+                "name": "miniprox.lan"
+            },
+            "pikvm.home.lan": {
+                "ip": "192.168.1.87",
+                "name": "pikvm.home.lan"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped"
+        ]
+    },
+    "ungrouped": {
+        "hosts": [
+            "192.168.1.112",
+            "192.168.1.113",
+            "192.168.1.120",
+            "192.168.1.145",
+            "192.168.1.170",
+            "192.168.1.2",
+            "192.168.1.209",
+            "192.168.1.219",
+            "192.168.1.99",
+            "MBP.lan",
+            "OpenWrt",
+            "miniprox.lan",
+            "pikvm.home.lan"
+        ]
+    }
+}
+2023-01-18 21:12:07,550 p=91267 u=craig n=ansible | {
+    "_meta": {
+        "hostvars": {
+            "192.168.1.112": {
+                "ip": "192.168.1.112",
+                "name": "192.168.1.112"
+            },
+            "192.168.1.113": {
+                "ip": "192.168.1.113",
+                "name": "192.168.1.113"
+            },
+            "192.168.1.120": {
+                "ip": "192.168.1.120",
+                "name": "192.168.1.120"
+            },
+            "192.168.1.145": {
+                "ip": "192.168.1.145",
+                "name": "192.168.1.145"
+            },
+            "192.168.1.170": {
+                "ip": "192.168.1.170",
+                "name": "192.168.1.170"
+            },
+            "192.168.1.2": {
+                "ip": "192.168.1.2",
+                "name": "192.168.1.2"
+            },
+            "192.168.1.209": {
+                "ip": "192.168.1.209",
+                "name": "192.168.1.209"
+            },
+            "192.168.1.99": {
+                "ip": "192.168.1.99",
+                "name": "192.168.1.99"
+            },
+            "MBP.lan": {
+                "ip": "192.168.1.100",
+                "name": "MBP.lan"
+            },
+            "OpenWrt": {
+                "ip": "192.168.1.1",
+                "name": "OpenWrt"
+            },
+            "miniprox.lan": {
+                "ip": "192.168.1.97",
+                "name": "miniprox.lan"
+            },
+            "pikvm.home.lan": {
+                "ip": "192.168.1.87",
+                "name": "pikvm.home.lan"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "bigprox",
+            "miniprox",
+            "ungrouped"
+        ]
+    },
+    "bigprox": {
+        "hosts": [
+            "192.168.1.99"
+        ]
+    },
+    "miniprox": {
+        "hosts": [
+            "miniprox.lan"
+        ]
+    },
+    "ungrouped": {
+        "hosts": [
+            "192.168.1.112",
+            "192.168.1.113",
+            "192.168.1.120",
+            "192.168.1.145",
+            "192.168.1.170",
+            "192.168.1.2",
+            "192.168.1.209",
+            "MBP.lan",
+            "OpenWrt",
+            "pikvm.home.lan"
+        ]
+    }
+}
+2023-01-18 21:14:05,769 p=91451 u=craig n=ansible | {
+    "_meta": {
+        "hostvars": {
+            "192.168.1.112": {
+                "ip": "192.168.1.112",
+                "name": "192.168.1.112"
+            },
+            "192.168.1.113": {
+                "ip": "192.168.1.113",
+                "name": "192.168.1.113"
+            },
+            "192.168.1.120": {
+                "ip": "192.168.1.120",
+                "name": "192.168.1.120"
+            },
+            "192.168.1.145": {
+                "ip": "192.168.1.145",
+                "name": "192.168.1.145"
+            },
+            "192.168.1.170": {
+                "ip": "192.168.1.170",
+                "name": "192.168.1.170"
+            },
+            "192.168.1.2": {
+                "ip": "192.168.1.2",
+                "name": "192.168.1.2"
+            },
+            "192.168.1.209": {
+                "ip": "192.168.1.209",
+                "name": "192.168.1.209"
+            },
+            "192.168.1.99": {
+                "ip": "192.168.1.99",
+                "name": "192.168.1.99"
+            },
+            "MBP.lan": {
+                "ip": "192.168.1.100",
+                "name": "MBP.lan"
+            },
+            "OpenWrt": {
+                "ip": "192.168.1.1",
+                "name": "OpenWrt"
+            },
+            "miniprox.lan": {
+                "ip": "192.168.1.97",
+                "name": "miniprox.lan"
+            },
+            "pikvm.home.lan": {
+                "ip": "192.168.1.87",
+                "name": "pikvm.home.lan"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "bigprox",
+            "miniprox",
+            "ungrouped"
+        ]
+    },
+    "bigprox": {
+        "hosts": [
+            "192.168.1.99"
+        ]
+    },
+    "miniprox": {
+        "hosts": [
+            "miniprox.lan"
+        ]
+    },
+    "ungrouped": {
+        "hosts": [
+            "192.168.1.112",
+            "192.168.1.113",
+            "192.168.1.120",
+            "192.168.1.145",
+            "192.168.1.170",
+            "192.168.1.2",
+            "192.168.1.209",
+            "MBP.lan",
+            "OpenWrt",
+            "pikvm.home.lan"
+        ]
+    }
+}
+2023-01-18 21:21:36,060 p=92017 u=craig n=ansible | [WARNING]: Found both group and host with same name: OpenWrt
+
+2023-01-18 21:21:36,085 p=92017 u=craig n=ansible | {
+    "MBP_lan": {
+        "hosts": [
+            "MBP.lan"
+        ]
+    },
+    "OpenWrt": {
+        "hosts": [
+            "OpenWrt"
+        ]
+    },
+    "_92_168_1_1": {
+        "hosts": [
+            "OpenWrt"
+        ]
+    },
+    "_92_168_1_100": {
+        "hosts": [
+            "MBP.lan"
+        ]
+    },
+    "_92_168_1_112": {
+        "hosts": [
+            "192.168.1.112"
+        ]
+    },
+    "_92_168_1_113": {
+        "hosts": [
+            "192.168.1.113"
+        ]
+    },
+    "_92_168_1_120": {
+        "hosts": [
+            "192.168.1.120"
+        ]
+    },
+    "_92_168_1_145": {
+        "hosts": [
+            "192.168.1.145"
+        ]
+    },
+    "_92_168_1_170": {
+        "hosts": [
+            "192.168.1.170"
+        ]
+    },
+    "_92_168_1_2": {
+        "hosts": [
+            "192.168.1.2"
+        ]
+    },
+    "_92_168_1_209": {
+        "hosts": [
+            "192.168.1.209"
+        ]
+    },
+    "_92_168_1_87": {
+        "hosts": [
+            "pikvm.home.lan"
+        ]
+    },
+    "_92_168_1_97": {
+        "hosts": [
+            "miniprox.lan"
+        ]
+    },
+    "_92_168_1_99": {
+        "hosts": [
+            "192.168.1.99"
+        ]
+    },
+    "_meta": {
+        "hostvars": {
+            "192.168.1.112": {
+                "ip": "192.168.1.112",
+                "name": "192.168.1.112"
+            },
+            "192.168.1.113": {
+                "ip": "192.168.1.113",
+                "name": "192.168.1.113"
+            },
+            "192.168.1.120": {
+                "ip": "192.168.1.120",
+                "name": "192.168.1.120"
+            },
+            "192.168.1.145": {
+                "ip": "192.168.1.145",
+                "name": "192.168.1.145"
+            },
+            "192.168.1.170": {
+                "ip": "192.168.1.170",
+                "name": "192.168.1.170"
+            },
+            "192.168.1.2": {
+                "ip": "192.168.1.2",
+                "name": "192.168.1.2"
+            },
+            "192.168.1.209": {
+                "ip": "192.168.1.209",
+                "name": "192.168.1.209"
+            },
+            "192.168.1.99": {
+                "ip": "192.168.1.99",
+                "name": "192.168.1.99"
+            },
+            "MBP.lan": {
+                "ip": "192.168.1.100",
+                "name": "MBP.lan"
+            },
+            "OpenWrt": {
+                "ip": "192.168.1.1",
+                "name": "OpenWrt"
+            },
+            "miniprox.lan": {
+                "ip": "192.168.1.97",
+                "name": "miniprox.lan"
+            },
+            "pikvm.home.lan": {
+                "ip": "192.168.1.87",
+                "name": "pikvm.home.lan"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "bigprox",
+            "miniprox",
+            "proxmox_nodes",
+            "ungrouped"
+        ]
+    },
+    "bigprox": {
+        "hosts": [
+            "192.168.1.99"
+        ]
+    },
+    "miniprox": {
+        "hosts": [
+            "miniprox.lan"
+        ]
+    },
+    "miniprox_lan": {
+        "hosts": [
+            "miniprox.lan"
+        ]
+    },
+    "pikvm_home_lan": {
+        "hosts": [
+            "pikvm.home.lan"
+        ]
+    },
+    "proxmox_nodes": {
+        "children": [
+            "MBP_lan",
+            "OpenWrt",
+            "_92_168_1_1",
+            "_92_168_1_100",
+            "_92_168_1_112",
+            "_92_168_1_113",
+            "_92_168_1_120",
+            "_92_168_1_145",
+            "_92_168_1_170",
+            "_92_168_1_2",
+            "_92_168_1_209",
+            "_92_168_1_87",
+            "_92_168_1_97",
+            "_92_168_1_99",
+            "miniprox_lan",
+            "pikvm_home_lan"
+        ]
+    }
+}
+2023-01-18 21:22:04,374 p=92090 u=craig n=ansible | {
+    "_meta": {
+        "hostvars": {
+            "192.168.1.112": {
+                "ip": "192.168.1.112",
+                "name": "192.168.1.112"
+            },
+            "192.168.1.113": {
+                "ip": "192.168.1.113",
+                "name": "192.168.1.113"
+            },
+            "192.168.1.120": {
+                "ip": "192.168.1.120",
+                "name": "192.168.1.120"
+            },
+            "192.168.1.145": {
+                "ip": "192.168.1.145",
+                "name": "192.168.1.145"
+            },
+            "192.168.1.170": {
+                "ip": "192.168.1.170",
+                "name": "192.168.1.170"
+            },
+            "192.168.1.2": {
+                "ip": "192.168.1.2",
+                "name": "192.168.1.2"
+            },
+            "192.168.1.209": {
+                "ip": "192.168.1.209",
+                "name": "192.168.1.209"
+            },
+            "192.168.1.99": {
+                "ip": "192.168.1.99",
+                "name": "192.168.1.99"
+            },
+            "MBP.lan": {
+                "ip": "192.168.1.100",
+                "name": "MBP.lan"
+            },
+            "OpenWrt": {
+                "ip": "192.168.1.1",
+                "name": "OpenWrt"
+            },
+            "miniprox.lan": {
+                "ip": "192.168.1.97",
+                "name": "miniprox.lan"
+            },
+            "pikvm.home.lan": {
+                "ip": "192.168.1.87",
+                "name": "pikvm.home.lan"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "bigprox",
+            "miniprox",
+            "ungrouped"
+        ]
+    },
+    "bigprox": {
+        "hosts": [
+            "192.168.1.99"
+        ]
+    },
+    "miniprox": {
+        "hosts": [
+            "miniprox.lan"
+        ]
+    },
+    "ungrouped": {
+        "hosts": [
+            "192.168.1.112",
+            "192.168.1.113",
+            "192.168.1.120",
+            "192.168.1.145",
+            "192.168.1.170",
+            "192.168.1.2",
+            "192.168.1.209",
+            "MBP.lan",
+            "OpenWrt",
+            "pikvm.home.lan"
+        ]
+    }
+}
+2023-01-18 22:05:03,684 p=95339 u=craig n=ansible | PLAY [Create a LXC Docker container running the official Caddy image] ***************************************************************************************************************************
+2023-01-18 22:05:03,702 p=95339 u=craig n=ansible | TASK [Gathering Facts] **************************************************************************************************************************************************************************
+2023-01-18 22:05:05,122 p=95339 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:05:05,140 p=95339 u=craig n=ansible | TASK [ansible.builtin.include_vars] *************************************************************************************************************************************************************
+2023-01-18 22:05:05,152 p=95339 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:05:05,186 p=95339 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] *******************************************************************************************************************************************
+2023-01-18 22:05:05,878 p=95339 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:05:05,900 p=95339 u=craig n=ansible | TASK [pm_create_lxc : Create a directory to house the ssh keys to pass to a new LXC] ************************************************************************************************************
+2023-01-18 22:05:06,279 p=95339 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:05:06,296 p=95339 u=craig n=ansible | TASK [pm_create_lxc : Copy the bash script to snippets directory and make it executable] ********************************************************************************************************
+2023-01-18 22:05:06,995 p=95339 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:05:07,027 p=95339 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] *****************************************************************************************************************************
+2023-01-18 22:05:07,341 p=95339 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-18 22:05:07,357 p=95339 u=craig n=ansible | TASK [pm_create_lxc : Create LXC without hookscript] ********************************************************************************************************************************************
+2023-01-18 22:05:07,368 p=95339 u=craig n=ansible | skipping: [192.168.1.99]
+2023-01-18 22:05:07,385 p=95339 u=craig n=ansible | TASK [pm_create_lxc : Create LXC with hookscript] ***********************************************************************************************************************************************
+2023-01-18 22:05:14,124 p=95339 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-18 22:05:14,143 p=95339 u=craig n=ansible | TASK [pm_create_lxc : Start container] **********************************************************************************************************************************************************
+2023-01-18 22:05:16,531 p=95339 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed from community.general in 
+version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-18 22:05:16,532 p=95339 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-18 22:05:16,554 p=95339 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] *******************************************************************************************************************************************
+2023-01-18 22:05:16,588 p=95339 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-18 22:05:16,623 p=95339 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] ************************************************************************************************************************
+2023-01-18 22:05:16,656 p=95339 u=craig n=ansible | fatal: [192.168.1.99 -> 192.168.1.4]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 192.168.1.4 port 22: Connection refused", "unreachable": true}
+2023-01-18 22:05:16,657 p=95339 u=craig n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2023-01-18 22:05:16,657 p=95339 u=craig n=ansible | 192.168.1.99               : ok=9    changed=4    unreachable=1    failed=0    skipped=1    rescued=0    ignored=0   
+2023-01-18 22:05:27,917 p=95495 u=craig n=ansible | PLAY [Create a LXC Docker container running the official Caddy image] ***************************************************************************************************************************
+2023-01-18 22:05:27,934 p=95495 u=craig n=ansible | TASK [Gathering Facts] **************************************************************************************************************************************************************************
+2023-01-18 22:05:29,043 p=95495 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:05:29,060 p=95495 u=craig n=ansible | TASK [ansible.builtin.include_vars] *************************************************************************************************************************************************************
+2023-01-18 22:05:29,073 p=95495 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:05:29,103 p=95495 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] *******************************************************************************************************************************************
+2023-01-18 22:05:29,841 p=95495 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:05:29,861 p=95495 u=craig n=ansible | TASK [pm_create_lxc : Create a directory to house the ssh keys to pass to a new LXC] ************************************************************************************************************
+2023-01-18 22:05:30,204 p=95495 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:05:30,220 p=95495 u=craig n=ansible | TASK [pm_create_lxc : Copy the bash script to snippets directory and make it executable] ********************************************************************************************************
+2023-01-18 22:05:30,962 p=95495 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:05:30,995 p=95495 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] *****************************************************************************************************************************
+2023-01-18 22:05:31,295 p=95495 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-18 22:05:31,311 p=95495 u=craig n=ansible | TASK [pm_create_lxc : Create LXC without hookscript] ********************************************************************************************************************************************
+2023-01-18 22:05:31,322 p=95495 u=craig n=ansible | skipping: [192.168.1.99]
+2023-01-18 22:05:31,337 p=95495 u=craig n=ansible | TASK [pm_create_lxc : Create LXC with hookscript] ***********************************************************************************************************************************************
+2023-01-18 22:05:31,794 p=95495 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:05:31,812 p=95495 u=craig n=ansible | TASK [pm_create_lxc : Start container] **********************************************************************************************************************************************************
+2023-01-18 22:05:32,214 p=95495 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed from community.general in 
+version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-18 22:05:32,215 p=95495 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:05:32,237 p=95495 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] *******************************************************************************************************************************************
+2023-01-18 22:05:32,262 p=95495 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-18 22:05:32,298 p=95495 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] ************************************************************************************************************************
+2023-01-18 22:05:37,829 p=95495 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:05:37,863 p=95495 u=craig n=ansible | TASK [pm_create_lxc : Run the equivalent of "apt-get update"] ***********************************************************************************************************************************
+2023-01-18 22:05:38,939 p=95495 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:05:38,972 p=95495 u=craig n=ansible | TASK [pm_create_lxc : Update all packages to their latest version] ******************************************************************************************************************************
+2023-01-18 22:06:29,915 p=95495 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:06:29,948 p=95495 u=craig n=ansible | TASK [pm_create_lxc : add rsa public key to remote host] ****************************************************************************************************************************************
+2023-01-18 22:06:30,455 p=95495 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:06:30,502 p=95495 u=craig n=ansible | TASK [Create a Caddyfile in this directory that maps adguard.home to 192.168.1.1 port 8888] *****************************************************************************************************
+2023-01-18 22:06:31,084 p=95495 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-18 22:06:31,099 p=95495 u=craig n=ansible | TASK [Create a Caddy container with the Caddyfile mounted] **************************************************************************************************************************************
+2023-01-18 22:06:31,562 p=95495 u=craig n=ansible | An exception occurred during task execution. To see the full traceback, use -vvv. The error was: ModuleNotFoundError: No module named 'docker'
+2023-01-18 22:06:31,563 p=95495 u=craig n=ansible | fatal: [192.168.1.99]: FAILED! => {"changed": false, "msg": "Failed to import the required Python library (Docker SDK for Python: docker above 5.0.0 (Python >= 3.6) or docker before 5.0.0 (Python 2.7) or docker-py (Python 2.6)) on bigprox's Python /usr/bin/python3. Please read the module documentation and install it in the appropriate location. If the required library is installed, but Ansible is using the wrong Python interpreter, please consult the documentation on ansible_python_interpreter, for example via `pip install docker` (Python >= 3.6) or `pip install docker==4.4.4` (Python 2.7) or `pip install docker-py` (Python 2.6). The error was: No module named 'docker'"}
+2023-01-18 22:06:31,564 p=95495 u=craig n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2023-01-18 22:06:31,564 p=95495 u=craig n=ansible | 192.168.1.99               : ok=14   changed=5    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2023-01-18 22:10:24,501 p=96033 u=craig n=ansible | PLAY [Create a LXC Docker container running the official Caddy image] ***************************************************************************************************************************
+2023-01-18 22:10:24,520 p=96033 u=craig n=ansible | TASK [Gathering Facts] **************************************************************************************************************************************************************************
+2023-01-18 22:10:25,902 p=96033 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:10:25,918 p=96033 u=craig n=ansible | TASK [ansible.builtin.include_vars] *************************************************************************************************************************************************************
+2023-01-18 22:10:25,931 p=96033 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:10:25,960 p=96033 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] *******************************************************************************************************************************************
+2023-01-18 22:10:26,702 p=96033 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:10:26,721 p=96033 u=craig n=ansible | TASK [pm_create_lxc : Create a directory to house the ssh keys to pass to a new LXC] ************************************************************************************************************
+2023-01-18 22:10:27,080 p=96033 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:10:27,098 p=96033 u=craig n=ansible | TASK [pm_create_lxc : Copy the bash script to snippets directory and make it executable] ********************************************************************************************************
+2023-01-18 22:10:27,838 p=96033 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:10:27,869 p=96033 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] *****************************************************************************************************************************
+2023-01-18 22:10:28,173 p=96033 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-18 22:10:28,189 p=96033 u=craig n=ansible | TASK [pm_create_lxc : Create LXC without hookscript] ********************************************************************************************************************************************
+2023-01-18 22:10:28,199 p=96033 u=craig n=ansible | skipping: [192.168.1.99]
+2023-01-18 22:10:28,215 p=96033 u=craig n=ansible | TASK [pm_create_lxc : Create LXC with hookscript] ***********************************************************************************************************************************************
+2023-01-18 22:10:28,648 p=96033 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:10:28,667 p=96033 u=craig n=ansible | TASK [pm_create_lxc : Start container] **********************************************************************************************************************************************************
+2023-01-18 22:10:29,005 p=96033 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed from community.general in 
+version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-18 22:10:29,005 p=96033 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:10:29,025 p=96033 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] *******************************************************************************************************************************************
+2023-01-18 22:10:29,050 p=96033 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-18 22:10:29,085 p=96033 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] ************************************************************************************************************************
+2023-01-18 22:10:31,004 p=96033 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:10:31,036 p=96033 u=craig n=ansible | TASK [pm_create_lxc : Run the equivalent of "apt-get update"] ***********************************************************************************************************************************
+2023-01-18 22:10:32,547 p=96033 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:10:32,577 p=96033 u=craig n=ansible | TASK [pm_create_lxc : Update all packages to their latest version] ******************************************************************************************************************************
+2023-01-18 22:10:33,564 p=96033 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:10:33,595 p=96033 u=craig n=ansible | TASK [pm_create_lxc : add rsa public key to remote host] ****************************************************************************************************************************************
+2023-01-18 22:10:34,103 p=96033 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:10:34,147 p=96033 u=craig n=ansible | TASK [docker_lxc : Verify that the target is online/contactable] ********************************************************************************************************************************
+2023-01-18 22:10:34,563 p=96033 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:10:34,592 p=96033 u=craig n=ansible | TASK [docker_lxc : Install Docker] **************************************************************************************************************************************************************
+2023-01-18 22:10:49,909 p=96033 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:10:49,944 p=96033 u=craig n=ansible | TASK [docker_lxc : Enable Docker] ***************************************************************************************************************************************************************
+2023-01-18 22:10:51,084 p=96033 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:10:51,111 p=96033 u=craig n=ansible | TASK [docker_lxc : Start Docker] ****************************************************************************************************************************************************************
+2023-01-18 22:10:52,041 p=96033 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:10:52,090 p=96033 u=craig n=ansible | TASK [Create a Caddyfile in this directory that maps adguard.home to 192.168.1.1 port 8888] *****************************************************************************************************
+2023-01-18 22:10:52,832 p=96033 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:10:52,862 p=96033 u=craig n=ansible | TASK [Create a Caddy container with the Caddyfile mounted] **************************************************************************************************************************************
+2023-01-18 22:10:53,404 p=96033 u=craig n=ansible | An exception occurred during task execution. To see the full traceback, use -vvv. The error was: ModuleNotFoundError: No module named 'requests'
+2023-01-18 22:10:53,405 p=96033 u=craig n=ansible | fatal: [192.168.1.99 -> 192.168.1.4]: FAILED! => {"changed": false, "msg": "Failed to import the required Python library (Docker SDK for Python: docker above 5.0.0 (Python >= 3.6) or docker before 5.0.0 (Python 2.7) or docker-py (Python 2.6)) on networkdocker's Python /usr/bin/python3. Please read the module documentation and install it in the appropriate location. If the required library is installed, but Ansible is using the wrong Python interpreter, please consult the documentation on ansible_python_interpreter, for example via `pip install docker` (Python >= 3.6) or `pip install docker==4.4.4` (Python 2.7) or `pip install docker-py` (Python 2.6). The error was: No module named 'requests'"}
+2023-01-18 22:10:53,406 p=96033 u=craig n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2023-01-18 22:10:53,406 p=96033 u=craig n=ansible | 192.168.1.99               : ok=18   changed=5    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2023-01-18 22:13:04,490 p=96494 u=craig n=ansible | PLAY [Create a LXC Docker container running the official Caddy image] ***************************************************************************************************************************
+2023-01-18 22:13:04,509 p=96494 u=craig n=ansible | TASK [Gathering Facts] **************************************************************************************************************************************************************************
+2023-01-18 22:13:05,917 p=96494 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:13:05,934 p=96494 u=craig n=ansible | TASK [ansible.builtin.include_vars] *************************************************************************************************************************************************************
+2023-01-18 22:13:05,945 p=96494 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:13:05,975 p=96494 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] *******************************************************************************************************************************************
+2023-01-18 22:13:06,717 p=96494 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:13:06,736 p=96494 u=craig n=ansible | TASK [pm_create_lxc : Create a directory to house the ssh keys to pass to a new LXC] ************************************************************************************************************
+2023-01-18 22:13:07,077 p=96494 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:13:07,094 p=96494 u=craig n=ansible | TASK [pm_create_lxc : Copy the bash script to snippets directory and make it executable] ********************************************************************************************************
+2023-01-18 22:13:07,797 p=96494 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:13:07,828 p=96494 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] *****************************************************************************************************************************
+2023-01-18 22:13:08,129 p=96494 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-18 22:13:08,145 p=96494 u=craig n=ansible | TASK [pm_create_lxc : Create LXC without hookscript] ********************************************************************************************************************************************
+2023-01-18 22:13:08,156 p=96494 u=craig n=ansible | skipping: [192.168.1.99]
+2023-01-18 22:13:08,171 p=96494 u=craig n=ansible | TASK [pm_create_lxc : Create LXC with hookscript] ***********************************************************************************************************************************************
+2023-01-18 22:13:08,609 p=96494 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:13:08,628 p=96494 u=craig n=ansible | TASK [pm_create_lxc : Start container] **********************************************************************************************************************************************************
+2023-01-18 22:13:08,966 p=96494 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed from community.general in 
+version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-18 22:13:08,966 p=96494 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:13:08,985 p=96494 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] *******************************************************************************************************************************************
+2023-01-18 22:13:09,010 p=96494 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-18 22:13:09,045 p=96494 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] ************************************************************************************************************************
+2023-01-18 22:13:10,891 p=96494 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:13:10,927 p=96494 u=craig n=ansible | TASK [pm_create_lxc : Run the equivalent of "apt-get update"] ***********************************************************************************************************************************
+2023-01-18 22:13:12,326 p=96494 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:13:12,356 p=96494 u=craig n=ansible | TASK [pm_create_lxc : Update all packages to their latest version] ******************************************************************************************************************************
+2023-01-18 22:13:13,373 p=96494 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:13:13,403 p=96494 u=craig n=ansible | TASK [pm_create_lxc : add rsa public key to remote host] ****************************************************************************************************************************************
+2023-01-18 22:13:13,884 p=96494 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:13:13,926 p=96494 u=craig n=ansible | TASK [docker_lxc : Verify that the target is online/contactable] ********************************************************************************************************************************
+2023-01-18 22:13:14,350 p=96494 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:13:14,381 p=96494 u=craig n=ansible | TASK [docker_lxc : Install Docker] **************************************************************************************************************************************************************
+2023-01-18 22:13:15,600 p=96494 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:13:15,633 p=96494 u=craig n=ansible | TASK [docker_lxc : Enable Docker] ***************************************************************************************************************************************************************
+2023-01-18 22:13:16,667 p=96494 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:13:16,702 p=96494 u=craig n=ansible | TASK [docker_lxc : Start Docker] ****************************************************************************************************************************************************************
+2023-01-18 22:13:17,560 p=96494 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:13:17,588 p=96494 u=craig n=ansible | TASK [docker_lxc : Make sure the required Python packages are installed] ************************************************************************************************************************
+2023-01-18 22:13:17,988 p=96494 u=craig n=ansible | failed: [192.168.1.99 -> 192.168.1.4] (item=requests) => {"ansible_loop_var": "item", "changed": false, "item": "requests", "msg": "Unable to find any of pip3 to use.  pip needs to be installed."}
+2023-01-18 22:13:17,991 p=96494 u=craig n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2023-01-18 22:13:17,991 p=96494 u=craig n=ansible | 192.168.1.99               : ok=17   changed=3    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2023-01-18 22:16:45,901 p=96989 u=craig n=ansible | ERROR! conflicting action statements: ansible.builtin.pip, executable
+
+The error appears to be in '/Users/craig/Projects/homelab/ansible/roles/docker_lxc/tasks/main.yaml': line 24, column 3, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+  delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+- name: Make sure the required Python packages are installed
+  ^ here
+
+2023-01-18 22:17:14,684 p=97055 u=craig n=ansible | PLAY [Create a LXC Docker container running the official Caddy image] ***************************************************************************************************************************
+2023-01-18 22:17:14,703 p=97055 u=craig n=ansible | TASK [Gathering Facts] **************************************************************************************************************************************************************************
+2023-01-18 22:17:16,150 p=97055 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:17:16,166 p=97055 u=craig n=ansible | TASK [ansible.builtin.include_vars] *************************************************************************************************************************************************************
+2023-01-18 22:17:16,179 p=97055 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:17:16,209 p=97055 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] *******************************************************************************************************************************************
+2023-01-18 22:17:16,983 p=97055 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:17:17,001 p=97055 u=craig n=ansible | TASK [pm_create_lxc : Create a directory to house the ssh keys to pass to a new LXC] ************************************************************************************************************
+2023-01-18 22:17:17,345 p=97055 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:17:17,362 p=97055 u=craig n=ansible | TASK [pm_create_lxc : Copy the bash script to snippets directory and make it executable] ********************************************************************************************************
+2023-01-18 22:17:18,118 p=97055 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:17:18,147 p=97055 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] *****************************************************************************************************************************
+2023-01-18 22:17:18,449 p=97055 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-18 22:17:18,464 p=97055 u=craig n=ansible | TASK [pm_create_lxc : Create LXC without hookscript] ********************************************************************************************************************************************
+2023-01-18 22:17:18,475 p=97055 u=craig n=ansible | skipping: [192.168.1.99]
+2023-01-18 22:17:18,491 p=97055 u=craig n=ansible | TASK [pm_create_lxc : Create LXC with hookscript] ***********************************************************************************************************************************************
+2023-01-18 22:17:18,952 p=97055 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:17:18,971 p=97055 u=craig n=ansible | TASK [pm_create_lxc : Start container] **********************************************************************************************************************************************************
+2023-01-18 22:17:19,336 p=97055 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed from community.general in 
+version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-18 22:17:19,336 p=97055 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:17:19,356 p=97055 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] *******************************************************************************************************************************************
+2023-01-18 22:17:19,382 p=97055 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-18 22:17:19,417 p=97055 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] ************************************************************************************************************************
+2023-01-18 22:17:21,247 p=97055 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:17:21,282 p=97055 u=craig n=ansible | TASK [pm_create_lxc : Run the equivalent of "apt-get update"] ***********************************************************************************************************************************
+2023-01-18 22:17:22,676 p=97055 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:17:22,707 p=97055 u=craig n=ansible | TASK [pm_create_lxc : Update all packages to their latest version] ******************************************************************************************************************************
+2023-01-18 22:17:23,684 p=97055 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:17:23,715 p=97055 u=craig n=ansible | TASK [pm_create_lxc : add rsa public key to remote host] ****************************************************************************************************************************************
+2023-01-18 22:17:24,198 p=97055 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:17:24,258 p=97055 u=craig n=ansible | TASK [docker_lxc : Verify that the target is online/contactable] ********************************************************************************************************************************
+2023-01-18 22:17:24,683 p=97055 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:17:24,713 p=97055 u=craig n=ansible | TASK [docker_lxc : Install Docker] **************************************************************************************************************************************************************
+2023-01-18 22:17:25,885 p=97055 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:17:25,918 p=97055 u=craig n=ansible | TASK [docker_lxc : Enable Docker] ***************************************************************************************************************************************************************
+2023-01-18 22:17:26,935 p=97055 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:17:26,968 p=97055 u=craig n=ansible | TASK [docker_lxc : Start Docker] ****************************************************************************************************************************************************************
+2023-01-18 22:17:27,852 p=97055 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:17:27,886 p=97055 u=craig n=ansible | TASK [docker_lxc : Make sure the required Python packages are installed] ************************************************************************************************************************
+2023-01-18 22:17:28,295 p=97055 u=craig n=ansible | failed: [192.168.1.99 -> 192.168.1.4] (item=requests) => {"ansible_loop_var": "item", "changed": false, "item": "requests", "msg": "Unable to find any of pip3 to use.  pip needs to be installed."}
+2023-01-18 22:17:28,298 p=97055 u=craig n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2023-01-18 22:17:28,298 p=97055 u=craig n=ansible | 192.168.1.99               : ok=17   changed=3    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2023-01-18 22:19:38,703 p=97431 u=craig n=ansible | PLAY [Create a LXC Docker container running the official Caddy image] ***************************************************************************************************************************
+2023-01-18 22:19:38,722 p=97431 u=craig n=ansible | TASK [Gathering Facts] **************************************************************************************************************************************************************************
+2023-01-18 22:19:40,108 p=97431 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:19:40,126 p=97431 u=craig n=ansible | TASK [ansible.builtin.include_vars] *************************************************************************************************************************************************************
+2023-01-18 22:19:40,139 p=97431 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:19:40,169 p=97431 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] *******************************************************************************************************************************************
+2023-01-18 22:19:40,844 p=97431 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:19:40,866 p=97431 u=craig n=ansible | TASK [pm_create_lxc : Create a directory to house the ssh keys to pass to a new LXC] ************************************************************************************************************
+2023-01-18 22:19:41,212 p=97431 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:19:41,229 p=97431 u=craig n=ansible | TASK [pm_create_lxc : Copy the bash script to snippets directory and make it executable] ********************************************************************************************************
+2023-01-18 22:19:41,987 p=97431 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:19:42,017 p=97431 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] *****************************************************************************************************************************
+2023-01-18 22:19:42,320 p=97431 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-18 22:19:42,335 p=97431 u=craig n=ansible | TASK [pm_create_lxc : Create LXC without hookscript] ********************************************************************************************************************************************
+2023-01-18 22:19:42,346 p=97431 u=craig n=ansible | skipping: [192.168.1.99]
+2023-01-18 22:19:42,361 p=97431 u=craig n=ansible | TASK [pm_create_lxc : Create LXC with hookscript] ***********************************************************************************************************************************************
+2023-01-18 22:19:42,803 p=97431 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:19:42,823 p=97431 u=craig n=ansible | TASK [pm_create_lxc : Start container] **********************************************************************************************************************************************************
+2023-01-18 22:19:43,173 p=97431 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed from community.general in 
+version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-18 22:19:43,174 p=97431 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:19:43,192 p=97431 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] *******************************************************************************************************************************************
+2023-01-18 22:19:43,220 p=97431 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-18 22:19:43,235 p=97431 u=craig n=ansible | TASK [pm_create_lxc : Wait for port 22 to become open on the host] ******************************************************************************************************************************
+2023-01-18 22:19:43,594 p=97431 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:19:43,630 p=97431 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] ************************************************************************************************************************
+2023-01-18 22:19:45,581 p=97431 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:19:45,612 p=97431 u=craig n=ansible | TASK [pm_create_lxc : Run the equivalent of "apt-get update"] ***********************************************************************************************************************************
+2023-01-18 22:19:46,978 p=97431 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:19:47,009 p=97431 u=craig n=ansible | TASK [pm_create_lxc : Update all packages to their latest version] ******************************************************************************************************************************
+2023-01-18 22:19:47,948 p=97431 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:19:47,980 p=97431 u=craig n=ansible | TASK [pm_create_lxc : add rsa public key to remote host] ****************************************************************************************************************************************
+2023-01-18 22:19:48,459 p=97431 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:19:48,477 p=97431 u=craig n=ansible | TASK [pm_create_lxc : Install and upgrade pip] **************************************************************************************************************************************************
+2023-01-18 22:19:50,058 p=97431 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-18 22:19:50,104 p=97431 u=craig n=ansible | TASK [docker_lxc : Verify that the target is online/contactable] ********************************************************************************************************************************
+2023-01-18 22:19:50,527 p=97431 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:19:50,558 p=97431 u=craig n=ansible | TASK [docker_lxc : Install Docker] **************************************************************************************************************************************************************
+2023-01-18 22:19:51,813 p=97431 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:19:51,845 p=97431 u=craig n=ansible | TASK [docker_lxc : Enable Docker] ***************************************************************************************************************************************************************
+2023-01-18 22:19:52,873 p=97431 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:19:52,907 p=97431 u=craig n=ansible | TASK [docker_lxc : Start Docker] ****************************************************************************************************************************************************************
+2023-01-18 22:19:53,785 p=97431 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:19:53,819 p=97431 u=craig n=ansible | TASK [docker_lxc : Make sure the required Python packages are installed] ************************************************************************************************************************
+2023-01-18 22:19:54,209 p=97431 u=craig n=ansible | failed: [192.168.1.99 -> 192.168.1.4] (item=requests) => {"ansible_loop_var": "item", "changed": false, "item": "requests", "msg": "Unable to find any of pip3 to use.  pip needs to be installed."}
+2023-01-18 22:19:54,211 p=97431 u=craig n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2023-01-18 22:19:54,211 p=97431 u=craig n=ansible | 192.168.1.99               : ok=19   changed=4    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2023-01-18 22:20:42,296 p=97768 u=craig n=ansible | PLAY [Create a LXC Docker container running the official Caddy image] ***************************************************************************************************************************
+2023-01-18 22:20:42,313 p=97768 u=craig n=ansible | TASK [Gathering Facts] **************************************************************************************************************************************************************************
+2023-01-18 22:20:43,552 p=97768 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:20:43,570 p=97768 u=craig n=ansible | TASK [ansible.builtin.include_vars] *************************************************************************************************************************************************************
+2023-01-18 22:20:43,581 p=97768 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:20:43,611 p=97768 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] *******************************************************************************************************************************************
+2023-01-18 22:20:44,324 p=97768 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:20:44,343 p=97768 u=craig n=ansible | TASK [pm_create_lxc : Create a directory to house the ssh keys to pass to a new LXC] ************************************************************************************************************
+2023-01-18 22:20:44,705 p=97768 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:20:44,723 p=97768 u=craig n=ansible | TASK [pm_create_lxc : Copy the bash script to snippets directory and make it executable] ********************************************************************************************************
+2023-01-18 22:20:45,444 p=97768 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:20:45,474 p=97768 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] *****************************************************************************************************************************
+2023-01-18 22:20:45,775 p=97768 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-18 22:20:45,790 p=97768 u=craig n=ansible | TASK [pm_create_lxc : Create LXC without hookscript] ********************************************************************************************************************************************
+2023-01-18 22:20:45,802 p=97768 u=craig n=ansible | skipping: [192.168.1.99]
+2023-01-18 22:20:45,818 p=97768 u=craig n=ansible | TASK [pm_create_lxc : Create LXC with hookscript] ***********************************************************************************************************************************************
+2023-01-18 22:20:46,272 p=97768 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:20:46,292 p=97768 u=craig n=ansible | TASK [pm_create_lxc : Start container] **********************************************************************************************************************************************************
+2023-01-18 22:20:46,630 p=97768 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed from community.general in 
+version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-18 22:20:46,631 p=97768 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:20:46,650 p=97768 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] *******************************************************************************************************************************************
+2023-01-18 22:20:46,675 p=97768 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-18 22:20:46,691 p=97768 u=craig n=ansible | TASK [pm_create_lxc : Wait for port 22 to become open on the host] ******************************************************************************************************************************
+2023-01-18 22:20:47,067 p=97768 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:20:47,104 p=97768 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] ************************************************************************************************************************
+2023-01-18 22:20:48,963 p=97768 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:20:48,994 p=97768 u=craig n=ansible | TASK [pm_create_lxc : Run the equivalent of "apt-get update"] ***********************************************************************************************************************************
+2023-01-18 22:20:50,395 p=97768 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:20:50,425 p=97768 u=craig n=ansible | TASK [pm_create_lxc : Update all packages to their latest version] ******************************************************************************************************************************
+2023-01-18 22:20:51,510 p=97768 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:20:51,542 p=97768 u=craig n=ansible | TASK [pm_create_lxc : add rsa public key to remote host] ****************************************************************************************************************************************
+2023-01-18 22:20:52,019 p=97768 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:20:52,049 p=97768 u=craig n=ansible | TASK [pm_create_lxc : Install and upgrade pip] **************************************************************************************************************************************************
+2023-01-18 22:20:52,435 p=97768 u=craig n=ansible | fatal: [192.168.1.99 -> 192.168.1.4]: FAILED! => {"changed": false, "msg": "Unable to find any of pip3 to use.  pip needs to be installed."}
+2023-01-18 22:20:52,436 p=97768 u=craig n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2023-01-18 22:20:52,436 p=97768 u=craig n=ansible | 192.168.1.99               : ok=14   changed=3    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2023-01-18 22:21:15,338 p=97965 u=craig n=ansible | PLAY [Create a LXC Docker container running the official Caddy image] ***************************************************************************************************************************
+2023-01-18 22:21:15,356 p=97965 u=craig n=ansible | TASK [Gathering Facts] **************************************************************************************************************************************************************************
+2023-01-18 22:21:16,524 p=97965 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:21:16,541 p=97965 u=craig n=ansible | TASK [ansible.builtin.include_vars] *************************************************************************************************************************************************************
+2023-01-18 22:21:16,554 p=97965 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:21:16,584 p=97965 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] *******************************************************************************************************************************************
+2023-01-18 22:21:17,236 p=97965 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:21:17,255 p=97965 u=craig n=ansible | TASK [pm_create_lxc : Create a directory to house the ssh keys to pass to a new LXC] ************************************************************************************************************
+2023-01-18 22:21:17,624 p=97965 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:21:17,641 p=97965 u=craig n=ansible | TASK [pm_create_lxc : Copy the bash script to snippets directory and make it executable] ********************************************************************************************************
+2023-01-18 22:21:18,401 p=97965 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:21:18,431 p=97965 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] *****************************************************************************************************************************
+2023-01-18 22:21:18,731 p=97965 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-18 22:21:18,746 p=97965 u=craig n=ansible | TASK [pm_create_lxc : Create LXC without hookscript] ********************************************************************************************************************************************
+2023-01-18 22:21:18,757 p=97965 u=craig n=ansible | skipping: [192.168.1.99]
+2023-01-18 22:21:18,772 p=97965 u=craig n=ansible | TASK [pm_create_lxc : Create LXC with hookscript] ***********************************************************************************************************************************************
+2023-01-18 22:21:19,199 p=97965 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:21:19,216 p=97965 u=craig n=ansible | TASK [pm_create_lxc : Start container] **********************************************************************************************************************************************************
+2023-01-18 22:21:19,578 p=97965 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed from community.general in 
+version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-18 22:21:19,578 p=97965 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:21:19,598 p=97965 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] *******************************************************************************************************************************************
+2023-01-18 22:21:19,621 p=97965 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-18 22:21:19,636 p=97965 u=craig n=ansible | TASK [pm_create_lxc : Wait for port 22 to become open on the host] ******************************************************************************************************************************
+2023-01-18 22:21:20,041 p=97965 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:21:20,078 p=97965 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] ************************************************************************************************************************
+2023-01-18 22:21:21,927 p=97965 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:21:21,959 p=97965 u=craig n=ansible | TASK [pm_create_lxc : Run the equivalent of "apt-get update"] ***********************************************************************************************************************************
+2023-01-18 22:21:23,464 p=97965 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:21:23,494 p=97965 u=craig n=ansible | TASK [pm_create_lxc : Update all packages to their latest version] ******************************************************************************************************************************
+2023-01-18 22:21:24,482 p=97965 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:21:24,513 p=97965 u=craig n=ansible | TASK [pm_create_lxc : add rsa public key to remote host] ****************************************************************************************************************************************
+2023-01-18 22:21:24,985 p=97965 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:21:25,014 p=97965 u=craig n=ansible | TASK [pm_create_lxc : Install and upgrade pip] **************************************************************************************************************************************************
+2023-01-18 22:21:25,399 p=97965 u=craig n=ansible | fatal: [192.168.1.99 -> 192.168.1.4]: FAILED! => {"changed": false, "msg": "Unable to find any of pip3 to use.  pip needs to be installed."}
+2023-01-18 22:21:25,400 p=97965 u=craig n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2023-01-18 22:21:25,400 p=97965 u=craig n=ansible | 192.168.1.99               : ok=14   changed=3    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2023-01-18 22:23:41,087 p=98334 u=craig n=ansible | PLAY [Create a LXC Docker container running the official Caddy image] ***************************************************************************************************************************
+2023-01-18 22:23:41,105 p=98334 u=craig n=ansible | TASK [Gathering Facts] **************************************************************************************************************************************************************************
+2023-01-18 22:23:42,637 p=98334 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:23:42,656 p=98334 u=craig n=ansible | TASK [ansible.builtin.include_vars] *************************************************************************************************************************************************************
+2023-01-18 22:23:42,668 p=98334 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:23:42,698 p=98334 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] *******************************************************************************************************************************************
+2023-01-18 22:23:43,366 p=98334 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:23:43,386 p=98334 u=craig n=ansible | TASK [pm_create_lxc : Create a directory to house the ssh keys to pass to a new LXC] ************************************************************************************************************
+2023-01-18 22:23:43,739 p=98334 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:23:43,756 p=98334 u=craig n=ansible | TASK [pm_create_lxc : Copy the bash script to snippets directory and make it executable] ********************************************************************************************************
+2023-01-18 22:23:44,511 p=98334 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:23:44,547 p=98334 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] *****************************************************************************************************************************
+2023-01-18 22:23:44,848 p=98334 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-18 22:23:44,863 p=98334 u=craig n=ansible | TASK [pm_create_lxc : Create LXC without hookscript] ********************************************************************************************************************************************
+2023-01-18 22:23:44,874 p=98334 u=craig n=ansible | skipping: [192.168.1.99]
+2023-01-18 22:23:44,889 p=98334 u=craig n=ansible | TASK [pm_create_lxc : Create LXC with hookscript] ***********************************************************************************************************************************************
+2023-01-18 22:23:45,350 p=98334 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:23:45,368 p=98334 u=craig n=ansible | TASK [pm_create_lxc : Start container] **********************************************************************************************************************************************************
+2023-01-18 22:23:45,705 p=98334 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed from community.general in 
+version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-18 22:23:45,705 p=98334 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:23:45,724 p=98334 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] *******************************************************************************************************************************************
+2023-01-18 22:23:45,747 p=98334 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-18 22:23:45,762 p=98334 u=craig n=ansible | TASK [pm_create_lxc : Wait for port 22 to become open on the host] ******************************************************************************************************************************
+2023-01-18 22:23:46,123 p=98334 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:23:46,158 p=98334 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] ************************************************************************************************************************
+2023-01-18 22:23:47,592 p=98334 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:23:47,620 p=98334 u=craig n=ansible | TASK [pm_create_lxc : Run the equivalent of "apt-get update"] ***********************************************************************************************************************************
+2023-01-18 22:23:48,786 p=98334 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:23:48,815 p=98334 u=craig n=ansible | TASK [pm_create_lxc : Update all packages to their latest version] ******************************************************************************************************************************
+2023-01-18 22:23:49,756 p=98334 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:23:49,787 p=98334 u=craig n=ansible | TASK [pm_create_lxc : add rsa public key to remote host] ****************************************************************************************************************************************
+2023-01-18 22:23:50,265 p=98334 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:23:50,293 p=98334 u=craig n=ansible | TASK [pm_create_lxc : Install or update pip] ****************************************************************************************************************************************************
+2023-01-18 22:23:50,721 p=98334 u=craig n=ansible | fatal: [192.168.1.99 -> 192.168.1.4]: FAILED! => {"changed": false, "msg": "Failed to find required executable \"easy_install\" in paths: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"}
+2023-01-18 22:23:50,723 p=98334 u=craig n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2023-01-18 22:23:50,723 p=98334 u=craig n=ansible | 192.168.1.99               : ok=14   changed=3    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2023-01-18 22:26:21,909 p=98695 u=craig n=ansible | PLAY [Create a LXC Docker container running the official Caddy image] ***************************************************************************************************************************
+2023-01-18 22:26:21,927 p=98695 u=craig n=ansible | TASK [Gathering Facts] **************************************************************************************************************************************************************************
+2023-01-18 22:26:23,307 p=98695 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:26:23,324 p=98695 u=craig n=ansible | TASK [ansible.builtin.include_vars] *************************************************************************************************************************************************************
+2023-01-18 22:26:23,335 p=98695 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:26:23,366 p=98695 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] *******************************************************************************************************************************************
+2023-01-18 22:26:24,049 p=98695 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:26:24,065 p=98695 u=craig n=ansible | TASK [pm_create_lxc : Create a directory to house the ssh keys to pass to a new LXC] ************************************************************************************************************
+2023-01-18 22:26:24,414 p=98695 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:26:24,431 p=98695 u=craig n=ansible | TASK [pm_create_lxc : Copy the bash script to snippets directory and make it executable] ********************************************************************************************************
+2023-01-18 22:26:25,165 p=98695 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:26:25,195 p=98695 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] *****************************************************************************************************************************
+2023-01-18 22:26:25,498 p=98695 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-18 22:26:25,513 p=98695 u=craig n=ansible | TASK [pm_create_lxc : Create LXC without hookscript] ********************************************************************************************************************************************
+2023-01-18 22:26:25,524 p=98695 u=craig n=ansible | skipping: [192.168.1.99]
+2023-01-18 22:26:25,539 p=98695 u=craig n=ansible | TASK [pm_create_lxc : Create LXC with hookscript] ***********************************************************************************************************************************************
+2023-01-18 22:26:26,013 p=98695 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:26:26,031 p=98695 u=craig n=ansible | TASK [pm_create_lxc : Start container] **********************************************************************************************************************************************************
+2023-01-18 22:26:26,361 p=98695 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed from community.general in 
+version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-18 22:26:26,361 p=98695 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:26:26,380 p=98695 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] *******************************************************************************************************************************************
+2023-01-18 22:26:26,404 p=98695 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-18 22:26:26,419 p=98695 u=craig n=ansible | TASK [pm_create_lxc : Wait for port 22 to become open on the host] ******************************************************************************************************************************
+2023-01-18 22:26:26,809 p=98695 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:26:26,844 p=98695 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] ************************************************************************************************************************
+2023-01-18 22:26:28,717 p=98695 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:26:28,746 p=98695 u=craig n=ansible | TASK [pm_create_lxc : Run the equivalent of "apt-get update"] ***********************************************************************************************************************************
+2023-01-18 22:26:30,120 p=98695 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:26:30,150 p=98695 u=craig n=ansible | TASK [pm_create_lxc : Update all packages to their latest version] ******************************************************************************************************************************
+2023-01-18 22:26:31,131 p=98695 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:26:31,160 p=98695 u=craig n=ansible | TASK [pm_create_lxc : add rsa public key to remote host] ****************************************************************************************************************************************
+2023-01-18 22:26:31,651 p=98695 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:26:31,679 p=98695 u=craig n=ansible | TASK [pm_create_lxc : Install the latest version of python] *************************************************************************************************************************************
+2023-01-18 22:26:32,477 p=98695 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:26:32,512 p=98695 u=craig n=ansible | TASK [pm_create_lxc : Install or update pip] ****************************************************************************************************************************************************
+2023-01-18 22:26:32,919 p=98695 u=craig n=ansible | fatal: [192.168.1.99 -> 192.168.1.4]: FAILED! => {"changed": false, "msg": "Failed to find required executable \"easy_install\" in paths: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"}
+2023-01-18 22:26:32,920 p=98695 u=craig n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2023-01-18 22:26:32,920 p=98695 u=craig n=ansible | 192.168.1.99               : ok=15   changed=3    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+2023-01-18 22:27:05,898 p=98971 u=craig n=ansible | PLAY [Create a LXC Docker container running the official Caddy image] ***************************************************************************************************************************
+2023-01-18 22:27:05,916 p=98971 u=craig n=ansible | TASK [Gathering Facts] **************************************************************************************************************************************************************************
+2023-01-18 22:27:07,139 p=98971 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:27:07,155 p=98971 u=craig n=ansible | TASK [ansible.builtin.include_vars] *************************************************************************************************************************************************************
+2023-01-18 22:27:07,167 p=98971 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:27:07,197 p=98971 u=craig n=ansible | TASK [pm_create_lxc : Install proxmoxer on main host] *******************************************************************************************************************************************
+2023-01-18 22:27:07,852 p=98971 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:27:07,870 p=98971 u=craig n=ansible | TASK [pm_create_lxc : Create a directory to house the ssh keys to pass to a new LXC] ************************************************************************************************************
+2023-01-18 22:27:08,219 p=98971 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:27:08,236 p=98971 u=craig n=ansible | TASK [pm_create_lxc : Copy the bash script to snippets directory and make it executable] ********************************************************************************************************
+2023-01-18 22:27:08,970 p=98971 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:27:08,998 p=98971 u=craig n=ansible | TASK [pm_create_lxc : Print the ssh key and store it to a variable] *****************************************************************************************************************************
+2023-01-18 22:27:09,298 p=98971 u=craig n=ansible | changed: [192.168.1.99 -> localhost]
+2023-01-18 22:27:09,313 p=98971 u=craig n=ansible | TASK [pm_create_lxc : Create LXC without hookscript] ********************************************************************************************************************************************
+2023-01-18 22:27:09,324 p=98971 u=craig n=ansible | skipping: [192.168.1.99]
+2023-01-18 22:27:09,339 p=98971 u=craig n=ansible | TASK [pm_create_lxc : Create LXC with hookscript] ***********************************************************************************************************************************************
+2023-01-18 22:27:09,769 p=98971 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:27:09,788 p=98971 u=craig n=ansible | TASK [pm_create_lxc : Start container] **********************************************************************************************************************************************************
+2023-01-18 22:27:10,129 p=98971 u=craig n=ansible | [DEPRECATION WARNING]: The default value `false` for the parameter "unprivileged" is deprecated and it will be replaced with `true`. This feature will be removed from community.general in 
+version 7.0.0. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+2023-01-18 22:27:10,130 p=98971 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:27:10,147 p=98971 u=craig n=ansible | TASK [pm_create_lxc : Add new container to inventory] *******************************************************************************************************************************************
+2023-01-18 22:27:10,170 p=98971 u=craig n=ansible | changed: [192.168.1.99]
+2023-01-18 22:27:10,185 p=98971 u=craig n=ansible | TASK [pm_create_lxc : Wait for port 22 to become open on the host] ******************************************************************************************************************************
+2023-01-18 22:27:10,602 p=98971 u=craig n=ansible | ok: [192.168.1.99]
+2023-01-18 22:27:10,639 p=98971 u=craig n=ansible | TASK [pm_create_lxc : Allow release-info to change for APT repositories] ************************************************************************************************************************
+2023-01-18 22:27:12,325 p=98971 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:27:12,354 p=98971 u=craig n=ansible | TASK [pm_create_lxc : Run the equivalent of "apt-get update"] ***********************************************************************************************************************************
+2023-01-18 22:27:13,774 p=98971 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:27:13,804 p=98971 u=craig n=ansible | TASK [pm_create_lxc : Update all packages to their latest version] ******************************************************************************************************************************
+2023-01-18 22:27:14,795 p=98971 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:27:14,829 p=98971 u=craig n=ansible | TASK [pm_create_lxc : add rsa public key to remote host] ****************************************************************************************************************************************
+2023-01-18 22:27:15,302 p=98971 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:27:15,331 p=98971 u=craig n=ansible | TASK [pm_create_lxc : Install the latest version of python] *************************************************************************************************************************************
+2023-01-18 22:27:16,117 p=98971 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:27:16,144 p=98971 u=craig n=ansible | TASK [pm_create_lxc : Install or update to latest version of pip] *******************************************************************************************************************************
+2023-01-18 22:27:52,929 p=98971 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:27:52,972 p=98971 u=craig n=ansible | TASK [docker_lxc : Verify that the target is online/contactable] ********************************************************************************************************************************
+2023-01-18 22:27:53,426 p=98971 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:27:53,455 p=98971 u=craig n=ansible | TASK [docker_lxc : Install Docker] **************************************************************************************************************************************************************
+2023-01-18 22:27:54,637 p=98971 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:27:54,667 p=98971 u=craig n=ansible | TASK [docker_lxc : Enable Docker] ***************************************************************************************************************************************************************
+2023-01-18 22:27:55,713 p=98971 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:27:55,742 p=98971 u=craig n=ansible | TASK [docker_lxc : Start Docker] ****************************************************************************************************************************************************************
+2023-01-18 22:27:56,580 p=98971 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:27:56,610 p=98971 u=craig n=ansible | TASK [docker_lxc : Make sure the required Python packages are installed] ************************************************************************************************************************
+2023-01-18 22:27:58,724 p=98971 u=craig n=ansible | changed: [192.168.1.99 -> 192.168.1.4] => (item=requests)
+2023-01-18 22:27:58,768 p=98971 u=craig n=ansible | TASK [Create a Caddyfile in this directory that maps adguard.home to 192.168.1.1 port 8888] *****************************************************************************************************
+2023-01-18 22:27:59,321 p=98971 u=craig n=ansible | ok: [192.168.1.99 -> 192.168.1.4]
+2023-01-18 22:27:59,350 p=98971 u=craig n=ansible | TASK [Create a Caddy container with the Caddyfile mounted] **************************************************************************************************************************************
+2023-01-18 22:27:59,898 p=98971 u=craig n=ansible | An exception occurred during task execution. To see the full traceback, use -vvv. The error was: ModuleNotFoundError: No module named 'docker'
+2023-01-18 22:27:59,898 p=98971 u=craig n=ansible | fatal: [192.168.1.99 -> 192.168.1.4]: FAILED! => {"changed": false, "msg": "Failed to import the required Python library (Docker SDK for Python: docker above 5.0.0 (Python >= 3.6) or docker before 5.0.0 (Python 2.7) or docker-py (Python 2.6)) on networkdocker's Python /usr/bin/python3. Please read the module documentation and install it in the appropriate location. If the required library is installed, but Ansible is using the wrong Python interpreter, please consult the documentation on ansible_python_interpreter, for example via `pip install docker` (Python >= 3.6) or `pip install docker==4.4.4` (Python 2.7) or `pip install docker-py` (Python 2.6). The error was: No module named 'docker'"}
+2023-01-18 22:27:59,900 p=98971 u=craig n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************
+2023-01-18 22:27:59,900 p=98971 u=craig n=ansible | 192.168.1.99               : ok=22   changed=5    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   

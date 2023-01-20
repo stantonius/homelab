@@ -1,0 +1,41 @@
+# Create an Ansible inventory file with the following contents:
+# ---
+# [bigprox]
+# 192.168.1.99
+
+# [miniprox]
+# 192.158.1.97
+
+# [proxmox_nodes:children]
+# bigprox
+# miniprox
+
+# [proxmox_nodes:vars]
+# ansible_user=root
+# ansible_ssh_private_key_file=~/.ssh/proxmox
+
+all:
+  children:
+    proxmox_nodes:
+      children:
+        bigprox:
+          hosts:
+            192.168.1.99:
+        miniprox:
+          hosts:
+            192.168.1.97:
+      vars:
+        ansible_user: root
+        ansible_ssh_private_key_file: ~/.ssh/proxmox
+
+
+plugin: nmap
+strict: False
+sudo: True
+address: 192.168.1.1/24
+ipv4: True
+ports: False
+dns: True
+groups:
+  bigprox: "'bigprox' in name or '192.168.1.99' in ip"
+  miniprox: "'miniprox' in name or '192.168.1.97' in ip"
