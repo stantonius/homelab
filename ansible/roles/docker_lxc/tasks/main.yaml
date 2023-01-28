@@ -15,18 +15,23 @@
     enabled: yes
   become: yes
   delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
-- name: Start Docker
-  ansible.builtin.service:
-    name: docker
-    state: started
-  become: yes
-  delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+# - name: Start Docker
+#   ansible.builtin.service:
+#     name: docker
+#     state: started
+#   become: yes
+#   delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
 - name: Make sure the required Python packages are installed
   ansible.builtin.pip:
     name: "{{item}}"
     state: present
-    executable: pip3
   become: yes
   delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
   loop:
     - requests
+    - docker
+# - name: Install Docker Python module
+#   pip:
+#     name: docker
+#     state: present
+#   delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"

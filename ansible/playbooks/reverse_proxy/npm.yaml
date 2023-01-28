@@ -1,0 +1,30 @@
+---
+- name: Create a LXC Docker container running Nginx Proxy Manager
+  hosts: bigprox
+  gather_facts: yes
+  pre_tasks:
+    - ansible.builtin.include_vars:
+        file: "./config.json"
+
+  vars_files:
+    - ../../../vault.yaml
+
+  roles:
+    - pm_create_lxc
+    - docker_lxc
+  
+  tasks:
+    - name: Create the NPM container
+      community.docker.docker_container:
+        name: nginx-proxy-manager
+        image: 'jc21/nginx-proxy-manager:latest'
+        state: started
+        restart_policy: unless-stopped
+        ports:
+          - '80:80'
+          - '81:81'
+          - '443:443'
+        volumes:
+          - ./data:/data
+          - ./letsencrypt:/etc/letsencrypt
+      delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"

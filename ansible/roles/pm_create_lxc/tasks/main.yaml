@@ -63,7 +63,7 @@
     features:
       - nesting=1
       - keyctl=1
-      - fuse=1
+      # - fuse=1
     hookscript: "local:snippets/enable_lxc_ssh_hook.sh"
     netif: "{'net0':'name=enp6s0,gw=192.168.1.1,ip={{machine_ip}},bridge=vmbr0'}"
     pubkey: "{{ssh_key.stdout}}" # needs to be in format "ssh-rsa ..."
@@ -119,14 +119,28 @@
     key: "{{ lookup('file', machine_ssh_key) }}"
 
 
-- name: Install the latest version of python
-  delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
-  ansible.builtin.apt:
-    name: python3
-    state: latest
+# - name: Install the latest version of python
+#   delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+#   ansible.builtin.apt:
+#     name: python3
+#     state: latest
 
-- name: Install or update to latest version of pip
-  delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
-  ansible.builtin.apt:
-    name: python3-pip
+# - name: Install or update to latest version of pip
+#   delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+#   ansible.builtin.apt:
+#     name: python3-pip
+#     state: latest
+
+- name: Install required system packages
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python3-pip
+      - virtualenv
+      - python3-setuptools
     state: latest
+    update_cache: true
+  delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
