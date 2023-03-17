@@ -5,22 +5,13 @@ autoinstall:
   keyboard:
     layout: us
   identity:
-    hostname: "ubuntu-server"
-    username: "ubuntu"
-    password: "$6$exDY1mhS4KUYCE/2$zmn9ToZwTKLhCw.b4/b.ZRTIZM30JZ4QrOQ2aOXJ8yk96xpcCof0kxKwuX1kqLG/ygbJ1f8wxED22bTL4F46P0"
+    hostname: {{machine_name}}
+    username: {{machine_user}}
+    password: {{machine_password_hash}}
   ssh:
-    allow-pw: false
+    allow-pw: true
     install-server: true
-    authorized_keys:
-      - {{ ssh_key.stdout }}
-  storage:
-    layout:
-      name: lvm
-  users:
-  - name: ubuntu
-    shell: /bin/bash
-    sudo: ['ALL=(ALL) NOPASSWD:ALL']
-    ssh_authorized_keys:
+    authorized-keys:
       - {{ ssh_key.stdout }}
   network:
     network:
@@ -63,3 +54,25 @@ autoinstall:
         id: mount-0
         path: /
         type: mount
+
+  user-data:
+    disable_root: false
+    users:
+      - name: {{machine_user}}
+        gecos: {{machine_user}}
+        lock_passwd: false
+        hashed_passwd: {{machine_password_hash}}
+        shell: /bin/bash
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        ssh-authorized-keys:
+          - {{ ssh_key.stdout }}
+        groups: sudo
+
+  late-commands:
+    - |
+      echo '{{machine_user}} ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/sysuser
+      echo "Enabling root SSH login..."
+      sed -i 's/^PermitRootLogin.*/PermitRootLogin yes/g' /target/etc/ssh/sshd_config
+      systemctl restart ssh
+
+

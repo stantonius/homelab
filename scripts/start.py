@@ -1,97 +1,120 @@
+# Home page will just list all tasks and any notes 
+
 from textual.app import App, ComposeResult
-from textual import events
-from textual.containers import Container, Vertical
-from textual.widgets import Button, Header, Footer, Static, Checkbox, ListView, ListItem, Label, Placeholder, Input
-from start.Options import Options
-from start.Tasks import Tasks
-from start.Nodes import Nodes
-# from start.VMImages import VMImages
-# from start.MachineType import MachineType
-from start.MachineConfig import MachineConfig
-from start.MachineSettings import MachineSettings
-from textual import events, log
-import json, os
+from textual.screen import Screen
+from textual.widgets import Button, Static, Input
+from textual.containers import Horizontal, Container
+from textual.reactive import reactive
+from start.CreateVM import CreateVM
+from start.CreateLXC import CreateLXC
+import json, os, datetime, re, sys
+from pathlib import Path
+from contextlib import contextmanager
+import configparser
 
-# initialize the Ansible env vars
-os.environ["ANSIBLE_CONFIG"]="~/Projects/homelab/ansible.cfg"
-os.environ["ANSIBLE_VAULT_PASSWORD_FILE"]="~/ansiblepass.txt"
+# @contextmanager
+# def custom_redirection(fileobj):
+#     old = sys.stdout
+#     sys.stdout = fileobj
+#     try:
+#         yield fileobj
+#     finally:
+#         sys.stdout = old
 
-class Homelab(App):
-    CSS_PATH = "./start/main.css"
+ROOT_DIR = Path('').absolute().parent
 
-    BINDINGS = [
-        ("d", "toggle_dark", "Toggle dark mode"),
-        ("escape", "app.pop_screen", "Pop screen")
-    ]
+config = configparser.ConfigParser(allow_no_value=True)
+config.read(ROOT_DIR/"inventory.ini")
 
-    settings = {}
+class Home(App):
+    CSS_PATH = "./start/start.css"
+
+    state = reactive({
+        "date": datetime.date.today().strftime("%Y-%m-%d"),
+        "task": "",
+        "config_file": "",
+    })
 
     def compose(self) -> ComposeResult:
-        yield Header()
-        yield Footer()
-        yield Button("Complete", id="complete", classes="button")
-        yield Options()
-        yield MachineConfig()
-        yield MachineSettings()
+        yield Static("Choose A Task")
+        yield Horizontal(
+            Button("CreateVM", id="createvm-button-task"),
+            Button("CreateLXC", id="createlxc-button-task"),
+        )
+    
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        if event.button.id == "createvm-button-task":
+            self.state["task"] = re.sub(r'-button-task', '', event.button.id)
+            self.push_screen(CreateVM())
+        elif event.button.id == "createlxc-button-task":
+            self.state["task"] = re.sub(r'-button-task', '', event.button.id)
+            self.push_screen(CreateLXC())
+        elif event.button.id == "submit-button":
+            self.record()
+            self.set_inventory()
+            self.run_ansible()
+
+    def set_inventory(self) -> None:
+        # we need to create the sections for how we will want to manage these
+        # for example, we might want a parent section for all Docker conrainers
+        if 'lxc' not in config.sections():
+            config.add_section('lxc')
+        if 'vm' not in config.sections():
+            config.add_section('vm')
+        if 'lxc:vars' not in config.sections():
+            config.add_section('lxc:vars')
+        if 'vm:vars' not in config.sections():
+            config.add_section('vm:vars')
+
+        if self.state['task'] == 'createlxc':
+            config['lxc:vars']['ansible_user']='stantonius'
+            config['lxc:vars']['ansible_ssh_private_key_file']='~/.ssh/proxmox_rsa'
+            config['lxc:vars']['ansible_become']='yes'
+
+            lxc_config = self.query_one(CreateLXC).config
+            config['lxc'][f"{lxc_config['machine_name']} ansible_host={lxc_config['machine_ip'].split('/')[0]}"]= None
+
+            with open(ROOT_DIR/"inventory.ini", 'w') as configfile:
+                config.write(configfile)
+
+        if self.state['task'] == 'createvm':
+            config['vm:vars']['ansible_user']='stantonius'
+            config['vm:vars']['ansible_ssh_private_key_file']='~/.ssh/proxmox_rsa'
+            config['vm:vars']['ansible_become']='yes'
+
+            lxc_config = self.query_one(CreateVM).config
+            config['vm'][f"{lxc_config['machine_name']} ansible_host={lxc_config['machine_ip'].split('/')[0]}"]= None
+
+            with open(ROOT_DIR/"inventory.ini", 'w') as configfile:
+                config.write(configfile)
         
 
-    def on_button_pressed(self, event: Button.Pressed) -> None:
-        if "-task" in  event.button.id:
-            option_selected = event.button.id.split("-")[0]
-            self.query_one(Tasks).task = option_selected
-            # update the task button to add class selected
-            # self.query_one(Button, )
-            self.query_one("#node_choice_container").styles.display = "block" if option_selected == 'proxmox' else "none"
-        if "-node" in  event.button.id:
-            option_selected = event.button.id.split("-")[0]
-            self.query_one(Nodes).node = option_selected
-        if "-machinetype" in  event.button.id:
-            option_selected = event.button.id.split("-")[0]
-            self.query_one(MachineConfig).machine_type = option_selected
-            self.query_one('#imagelist').clear()
-            for i in self.query_one(MachineConfig).image_options:
-                self.query_one('#imagelist').append(ListItem(Label(i), id=f"image-{i}")) 
-            self.query_one('#hookscript-container').styles.display = "block" if option_selected == 'lxc' else "none"
-        # finally, if the complete button is pressed, write the settings to a json file
-        if event.button.id == "complete":
-            self.action_complete()
-
-    def on_list_view_selected(self, event: ListView.Selected) -> None:
-        if event.sender.id == 'imagelist':
-            self.query_one(MachineConfig).image = event.item.id.replace("image-", "")
-
-    def on_checkbox_changed(self, event: Checkbox.Changed) -> None:
-        if event.input.id == 'hookscript-checkbox':
-            self.query_one(MachineConfig).run_hookscript = event.value
-
-    def on_input_changed(self, event: Input.Changed) -> None:
-        # will need to specify which input changed if we ever add more
-        self.query_one(MachineSettings).settings[event.input.id] = event.value
-
     def record(self) -> None:
-        # write the settings dictioonary to a json file called config.json
-        with open('config.json', 'w') as f:
-            json.dump(self.settings, f)
+        self.state['config_file'] = Path(f'{ROOT_DIR.absolute()}/configs/{self.state["task"]}-config-{self.state["date"]}.json')
+        if self.state['task'] == 'createvm':
+            with self.state['config_file'].open('w+') as f:
+                json.dump(self.query_one(CreateVM).config, f)
+        elif self.state['task'] == 'createlxc':
+            with self.state['config_file'].open('w+') as f:
+                json.dump(self.query_one(CreateLXC).config, f)
         
 
     def run_ansible(self) -> None:
-        if self.settings['type'] == 'lxc':
-            node = self.settings['node']
-            os.system(f'ansible-playbook ansible/playbooks/pm_create_lxc.yaml --extra-vars "node_name={node}"')
-        if self.settings['type'] == 'vm':
-            os.system(f'ansible-playbook ../ansible/playbooks/pm_create_vm.yaml')
-
-    def action_complete(self) -> None:
-        self.settings['task'] = self.query_one(Tasks).task
-        self.settings['node'] = self.query_one(Nodes).node
-        self.settings['type'] = self.query_one(MachineConfig).machine_type
-        self.settings['hookscript'] = self.query_one(MachineConfig).run_hookscript
-        self.settings['machine_image'] = self.query_one(MachineConfig).image
-        self.settings.update(self.query_one(MachineSettings).settings)
-        self.record()
-        self.run_ansible()
+        if self.state['task'] == 'createlxc':
+            node = self.query_one(CreateLXC).config['node_name']
+            os.system(f'ansible-playbook {ROOT_DIR.absolute()}/ansible/playbooks/0_lxc/pm_create_lxc.yaml -e "@{self.state["config_file"]}" -e "node_name={node}"')
+            with open(ROOT_DIR/"configs/ansible_command.txt", 'w+') as f:
+                f.write(f'ansible-playbook {ROOT_DIR.absolute()}/ansible/playbooks/0_lxc/pm_create_lxc.yaml -e "@{self.state["config_file"]}" -e "node_name={node}"')
+        if self.state['task'] == 'createvm':
+            node = self.query_one(CreateVM).config['node_name']
+            os.system(f'ansible-playbook {ROOT_DIR.absolute()}/ansible/playbooks/0_vm/pm_create_vm_cloud_init.yaml -e "@{self.state["config_file"]}" -e "node_name={node}"')
+            with open(ROOT_DIR/"configs/ansible_command.txt", 'w+') as f:
+                f.write(f'ansible-playbook {ROOT_DIR.absolute()}/ansible/playbooks/0_vm/pm_create_vm_cloud_init.yaml -e "@{self.state["config_file"]}" -e "node_name={node}"')
 
 
 if __name__ == "__main__":
-    app = Homelab()
+    app = Home()
     app.run()
+    # with open(ROOT_DIR/"scripts/start.log", 'w+') as out:
+    #     with custom_redirection(out):
+    #         app.run()

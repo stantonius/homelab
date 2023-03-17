@@ -11,6 +11,7 @@
     state: directory
     mode: 0700
   when: hookscript == True
+
 - name: Copy the bash script to snippets directory and make it executable
   ansible.builtin.copy:
     src: enable_lxc_ssh_hook.sh
@@ -32,6 +33,7 @@
     api_password: "{{root_password}}"
     api_host: "{{host_ip}}"
     hostname: "{{machine_name}}"
+    # ip_address: "{{machine_ip}}"
     password: "{{machine_password}}"
     ostemplate: "local:vztmpl/{{machine_image}}"
     storage: local-lvm
@@ -39,13 +41,14 @@
     features:
       - nesting=1
       - keyctl=1
-      - fuse=1
+      # - fuse=1
     netif: "{'net0':'name=enp6s0,gw=192.168.1.1,ip={{machine_ip}},bridge=vmbr0'}"
     pubkey: "{{ssh_key.stdout}}" # needs to be in format "ssh-rsa ..."
     cores: "{{machine_cores}}"
     cpus: "{{machine_cpus}}"
     memory: "{{machine_ram}}"
     disk: "{{machine_disk}}"
+    onboot: "{{onboot}}"
   when: hookscript == False
 
 - name: Create LXC with hookscript
@@ -56,6 +59,7 @@
     api_password: "{{root_password}}"
     api_host: "{{host_ip}}"
     hostname: "{{machine_name}}"
+    # ip_address: "{{machine_ip}}"
     password: "{{machine_password}}"
     ostemplate: "local:vztmpl/{{machine_image}}"
     storage: local-lvm
@@ -71,6 +75,7 @@
     cpus: "{{machine_cpus}}"
     memory: "{{machine_ram}}"
     disk: "{{machine_disk}}"
+    onboot: "{{onboot}}"
   when: hookscript == True
 
 - name: Start container
@@ -94,10 +99,13 @@
     state: started
     sleep: 5
     timeout: 300
+  delegate_to: localhost
 
 - name: Allow release-info to change for APT repositories
   command: apt-get update -y --allow-releaseinfo-change
   delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+  retries: 5
+  delay: 10
 
 - name: Run the equivalent of "apt-get update"
   delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
@@ -131,16 +139,16 @@
 #     name: python3-pip
 #     state: latest
 
-- name: Install required system packages
-  apt:
-    pkg:
-      - apt-transport-https
-      - ca-certificates
-      - curl
-      - software-properties-common
-      - python3-pip
-      - virtualenv
-      - python3-setuptools
-    state: latest
-    update_cache: true
-  delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+# - name: Install required system packages
+#   apt:
+#     pkg:
+#       - apt-transport-https
+#       - ca-certificates
+#       - curl
+#       - software-properties-common
+#       - python3-pip
+#       - virtualenv
+#       - python3-setuptools
+#     state: latest
+#     update_cache: true
+#   delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"

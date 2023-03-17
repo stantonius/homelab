@@ -1,4 +1,8 @@
 #cloud-config
+write_files:
+  - path: /root/.ssh/authorized_keys
+    content: |
+      {{ ssh_key.stdout }}
 autoinstall:
   version: 1
   locale: en_US.UTF-8
@@ -24,6 +28,9 @@ autoinstall:
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
     ssh_authorized_keys:
       - {{ ssh_key.stdout }}
+  storage:
+    layout:
+      name: lvm
   storage:
     config:
     - grub_device: true
@@ -62,3 +69,23 @@ autoinstall:
         addresses:
           - {{ machine_ip.split("/")[0] }}/255.255.255.0
         gateway4: 192.168.1.1
+
+    late-commands:
+    - |
+      echo '{{machine_user}} ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/sysuser
+      cat <<EOF | sudo tee /target/tmp/post-install.sh
+      #!/bin/bash
+      if grep -iq PermitRootLogin /target/etc/ssh/sshd_config; then
+         sed -i -e 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /target/etc/ssh/sshd_config
+      else
+         echo "PermitRootLogin yes" >>  /target/etc/ssh/sshd_config
+      fi
+
+      if grep -qi PasswordAuthentication /target/etc/ssh/sshd_config; then
+         sed -i -e 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /target/etc/ssh/sshd_config
+      else
+         echo "PasswordAuthentication yes" >>  /target/etc/ssh/sshd_config
+      fi
+      EOF
+    - curtin in-target --target /target chmod 755 /tmp/post-install.sh
+    - sudo sh /tmp/post-install.sh

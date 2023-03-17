@@ -1,10 +1,10 @@
 ---
-- name: Create an LXC container in Proxmox
+- name: Automated VM creation
   hosts: "{{node_name}}"
   gather_facts: yes
 
   vars_files:
-    - ../../vault.yaml
+    - '~/Projects/homelab/vault.yaml'
 
   # pre_tasks:
   #   - name: Copy the `user-data` cloud init file to the snippets directory
@@ -25,3 +25,51 @@
 
   roles:
     - pm_create_vm_cloud_init
+ 
+
+- name: Create a user and lock down the container
+  hosts: "{{machine_name}}"
+  become: true
+  vars:
+    - ansible_user: "{{machine_user}}"
+  
+  vars_files:
+    - '~/Projects/homelab/vault.yaml'
+  
+  roles:
+    - create_user
+    - lockdown
+  
+
+  handlers:
+  - name: restart ssh
+    service:
+      name=sshd
+      state=restarted
+
+  - name: reboot machine
+    reboot:
+      reboot_timeout: 600
+
+- name: Install GUI 
+  hosts: "{{machine_name}}"
+  become: true
+  # become_user: root
+  vars:
+    - ansible_user: "{{machine_user}}"
+  
+  vars_files:
+    - '~/Projects/homelab/vault.yaml'
+
+  roles:
+    - lxc_gui
+
+  handlers:
+  - name: restart ssh
+    service:
+      name=sshd
+      state=restarted
+
+  - name: reboot machine
+    reboot:
+      reboot_timeout: 600

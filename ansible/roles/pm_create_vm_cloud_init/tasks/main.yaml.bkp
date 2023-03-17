@@ -1,0 +1,39 @@
+- name: Create VM
+  community.general.proxmox_kvm:
+    node: "{{node_name}}"
+    api_host: "{{host_ip}}"
+    api_user: "{{root_user}}"
+    api_password: "{{root_password}}"
+    vcpus: "{{machine_cpus}}"
+    cores: "{{machine_cores}}"
+    memory: "{{machine_ram}}"
+    name: "{{machine_name}}"
+    state: present
+    onboot: no
+    vmid: "{{machine_id}}"
+    sshkeys: "{{ssh_key.stdout}}"
+    machine: q35
+    bios: ovmf
+    boot: order=scsi0
+    # for block level storage like lvm or zfs, we have no choice but to use raw format
+    efidisk0: 
+      efitype: "2m"
+      storage: local-lvm
+      format: raw
+      pre_enrolled_keys: false
+    # cicustom: "user=local:snippets/user-data,meta=local:snippets/meta-data"
+    # citype: "nocloud"
+    net:
+      net0: "model=virtio,bridge=vmbr0,firewall=1"
+    # for block level storage like lvm or zfs, we have no choice but to use raw format
+    scsi:
+      scsi0: "local-lvm:cloudinit"
+    scsihw: virtio-scsi-pci
+    sata:
+      sata0: "local:iso/test.iso,media=cdrom"
+    # ide:
+      # ide0: "local:iso/{{machine_image}},media=cdrom"
+      # ide0: "local:iso/test.iso,media=cdrom"
+      # ide2: "zfs1ssd-data:cloudinit,format=qcow2"
+    # hostpci: '{"hostpci0": "01:00.0,x-vga=on"}'
+    vga: "std"

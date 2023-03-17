@@ -2,12 +2,61 @@
 - name: Create an LXC container in Proxmox
   hosts: "{{node_name}}"
   gather_facts: true
-  pre_tasks:
-    - ansible.builtin.include_vars:
-        file: "../../config.json"
 
   vars_files:
-    - ../../vault.yaml
+    - '~/Projects/homelab/vault.yaml'
+
+  vars:
+    create_user: true
+    # install_gui: false
 
   roles:
     - pm_create_lxc
+
+- name: Create a user and lock down the container
+  hosts: "{{machine_name}}"
+  gather_facts: true
+  vars:
+    - ansible_user: root
+  
+  vars_files:
+    - '~/Projects/homelab/vault.yaml'
+
+  roles:
+    - role: create_user
+      when: create_user == true
+    - role: lockdown
+      when: create_user == true
+
+  handlers:
+  - name: restart ssh
+    service:
+      name=sshd
+      state=restarted
+
+  - name: reboot machine
+    reboot:
+      reboot_timeout: 600
+
+- name: Install gui 
+  hosts: "{{machine_name}}"
+  gather_facts: true
+  become: true
+  
+  vars_files:
+    - '~/Projects/homelab/vault.yaml'
+
+  roles:
+    - role: lxc_gui
+      when: install_gui == true
+
+  handlers:
+  - name: restart ssh
+    service:
+      name=sshd
+      state=restarted
+
+  - name: reboot machine
+    reboot:
+      reboot_timeout: 600
+

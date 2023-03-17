@@ -1,0 +1,1 @@
+{"task_description": "blahblah", "node_name": "bigprox", "machine_name": "blahblah", "machine_password": "blahblah", "machine_image": "ubuntu-20.04.4-live-server-amd64.iso", "machine_id": "191", "machine_ip": "192.168.1.19/24", "machine_cpus": "2", "machine_cores": "2", "machine_ram": "2048", "machine_disk": "10", "machine_ssh_port": "22", "machine_ssh_key": "~/.ssh/proxmox.pub"}

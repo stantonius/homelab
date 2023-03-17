@@ -1,0 +1,1 @@
+{"task_description": "nah", "node_name": "bigprox", "machine_name": "nahnah", "machine_password": "nahnah", "machine_image": "ubuntu-22.10-live-server-amd64.iso", "machine_id": "191", "machine_ip": "192.168.1.91/24", "machine_cpus": "2", "machine_ram": "2048", "machine_disk": "10", "machine_ssh_port": "22", "machine_ssh_key": "~/.ssh/proxmox.pub"}

@@ -1,0 +1,28 @@
+---
+- name: Ensure the /run/sshd directory exists
+  ansible.builtin.file:
+    path: /run/sshd
+    state: directory
+    mode: 0755
+
+- name: Update SSH configuration to be more secure
+  register: ssh_config
+  ansible.builtin.lineinfile:
+    dest: "/etc/ssh/sshd_config"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+    validate: "sshd -T -f %s"
+    mode: 0644
+  with_items:
+    - regexp: "^#?PasswordAuthentication"
+      line: "PasswordAuthentication no"
+    - regexp: "^#?PermitRootLogin"
+      line: "PermitRootLogin no"
+    - regexp: "^#?Port"
+      line: "Port {{ ssh_port }}"
+    - regexp: "^#?PermitEmptyPasswords"
+      line: "PermitEmptyPasswords no"
+    # - regexp: "^#?X11Forwarding"
+    #   line: "X11Forwarding no"
+  notify: restart ssh

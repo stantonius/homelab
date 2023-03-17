@@ -19,6 +19,11 @@
   ansible.builtin.shell: "cat {{ machine_ssh_key }}"
   register: ssh_key
 
+- name: Register the user password hash
+  delegate_to: localhost
+  ansible.builtin.set_fact:
+    machine_password_hash: "{{machine_password | string | password_hash('sha512')}}"
+
 # user-data needs to come first but after printing ssh key
 - name: Generate and install the user-data file
   template:
@@ -39,7 +44,7 @@
     dest: /tmp/
 
 - name: Run the ubuntu_autoinstall.py python script
-  script: "../../../scripts/ubuntu_autoinstall.py /tmp/{{ machine_image }} /tmp/test.iso"
+  script: "~/Projects/homelab/scripts/ubuntu_autoinstall.py /tmp/{{ machine_image }} /tmp/test.iso"
   args:
     executable: /usr/bin/python3
 
@@ -51,7 +56,7 @@
 
 - name: Create VM
   community.general.proxmox_kvm:
-    node: bigprox
+    node: "{{node_name}}"
     api_host: "{{host_ip}}"
     api_user: "{{root_user}}"
     api_password: "{{root_password}}"
@@ -63,26 +68,47 @@
     onboot: no
     vmid: "{{machine_id}}"
     sshkeys: "{{ssh_key.stdout}}"
+    # machine: q35
+    # bios: ovmf
+    # boot: cdn
+    # efidisk0: 
+    #   efitype: "2m"
+    #   storage: local-lvm
+    #   format: raw
+    #   pre_enrolled_keys: false
     # cicustom: "user=local:snippets/user-data,meta=local:snippets/meta-data"
     # citype: "nocloud"
     net:
       net0: "model=virtio,bridge=vmbr0,firewall=1"
     scsi:
-      scsi0: "local-lvm:{{machine_disk}}"
+      # scsi0: "local-lvm:{{machine_disk}}"
+      scsi0: "local:iso/test.iso,media=cdrom"
+      scsi1: "local-lvm:cloudinit"
     scsihw: virtio-scsi-pci
-    ide:
+    # ide:
       # ide0: "local:iso/{{machine_image}},media=cdrom"
-      ide0: "local:iso/test.iso,media=cdrom"
-      ide2: "zfs1ssd-data:cloudinit,format=qcow2"
-# - name: Sleep for 5 seconds to wait for cluster to recognize VM
-#   ansible.builtin.wait_for:
-#     timeout: 5
+      # ide0: "local:iso/test.iso,media=cdrom"
+      # ide2: "zfs1ssd-data:cloudinit,format=qcow2"
+    # hostpci: '{"hostpci0": "01:00.0,x-vga=on"}'
 
-# - name: Start VM
-#   community.general.proxmox_kvm:
-#     node: bigprox
-#     api_host: "{{host_ip}}"
-#     api_user: "{{root_user}}"
-#     api_password: "{{root_password}}"
-#     name: "{{machine_name}}"
+
+- name: Sleep for 5 seconds to wait for cluster to recognize VM
+  ansible.builtin.wait_for:
+    timeout: 5
+
+- name: Start VM
+  community.general.proxmox_kvm:
+    node: "{{node_name}}"
+    api_host: "{{host_ip}}"
+    api_user: "{{root_user}}"
+    api_password: "{{root_password}}"
+    name: "{{machine_name}}"
+    state: started
+
+# - name: Wait for machine to boot
+#   ansible.builtin.wait_for:
+#     host: "{{machine_name}}"
+#     port: 22
 #     state: started
+#     timeout: 600
+#   delegate_to: localhost

@@ -22,6 +22,18 @@ I spent way too much time trying to create a one-click solution for creating a V
 
 > If a set of tasks (ie. more than 1-2) require two different hosts, then I will use two different playbooks.
 
+#### Proxmox Quorum
+
+PVE Quorum needed to be modified so that I could only run one Proxmox node. Instructions are [here](https://www.apalrd.net/posts/2022/pve_quorum/).
+
+## Security
+
+### Tailscale
+
+Automating this was not worth the effort since in order to run the headless Tailscale install, you need a one-time auth key that expires after a max of 90 days, and you need to manually go get the key from the Tailscale website. Therefore, I created a created a container and followed [these instructions](https://tailscale.com/kb/1019/subnets/) to get Tailscale up and running. 
+
+Running in a container also needed [these commands](https://tailscale.com/kb/1130/lxc-unprivileged/)
+
 
 ## Tests
 

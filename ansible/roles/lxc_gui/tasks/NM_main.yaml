@@ -1,0 +1,81 @@
+- name: Ensure system is up to date
+  ansible.builtin.apt:
+    update_cache: yes
+    upgrade: yes
+
+- name: Install LightDM and Xfce4 desktop
+  apt:
+    update_cache: yes
+    install_recommends: yes
+    name: 
+    - lightdm
+    - xfce4-session
+    - xfce4-goodies
+    # - firefox
+  notify: reboot machine
+
+- name: Download nomachine deb from https://download.nomachine.com/download/8.3/Linux/nomachine_8.3.1_1_amd64.deb
+  get_url:
+    url: https://download.nomachine.com/download/8.3/Linux/nomachine_8.3.1_1_amd64.deb
+    dest: /tmp/nomachine_8.3.1_1_amd64.deb
+    mode: 0755
+
+- name: Install nomachine deb and accept license
+  apt:
+    deb: /tmp/nomachine_8.3.1_1_amd64.deb
+    state: present
+    update_cache: yes
+    install_recommends: yes
+    force: yes
+    force_apt_get: yes
+    dpkg_options: 'force-confdef,force-confold'
+  notify: reboot machine
+
+- name: Allow nx to run on port 4000
+  ufw:
+    rule: allow
+    port: 4000
+    proto: any
+
+- name: Configure nomachine to use key authentication
+  lineinfile:
+    path: /usr/NX/etc/server.cfg
+    regexp: '^#auth=.*'
+    line: 'auth=publickey'
+    state: present
+    backup: yes
+
+- name: Ensure user can connect via nomachine
+  lineinfile:
+    path: /usr/NX/etc/server.cfg
+    regexp: '^#users=.*'
+    line: 'users={{ ansible_user }}'
+    state: present
+    backup: yes
+
+
+# private key auth steps from here: https://kb.nomachine.com/AR02L00785
+- name: Create nx config directory in user home
+  file:
+    path: /home/{{ ansible_user }}/.nx/config
+    state: directory
+    mode: 0755
+
+- name: Create authorized.crt file in user home on remote machine only if it does not exist
+  copy:
+    src: /home/{{ ansible_user }}/.ssh/authorized_keys
+    dest: /home/{{ ansible_user }}/.nx/config/authorized.crt
+    mode: 0644
+    remote_src: yes
+    force: no
+
+# - name: Copy the private keys from user home authorized keys to authorized.crt
+#   shell: cat /home/{{ ansible_user }}/.ssh/authorized_keys >> /home/{{ ansible_user }}/.nx/config/authorized.crt
+
+
+
+- name: restart nomachine service
+  service:
+    name: nxserver
+    state: restarted
+

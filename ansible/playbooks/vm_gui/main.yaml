@@ -1,0 +1,47 @@
+---
+# - name: Create a user and lock down the container
+#   hosts: "{{machine_name}}"
+#   become: true
+#   vars:
+#     - ansible_user: "{{machine_user}}"
+  
+#   vars_files:
+#     - '~/Projects/homelab/vault.yaml'
+  
+#   roles:
+#     - create_user
+#     - lockdown
+  
+
+#   handlers:
+#   - name: restart ssh
+#     service:
+#       name=sshd
+#       state=restarted
+
+#   - name: reboot machine
+#     reboot:
+#       reboot_timeout: 600
+
+- name: Install GUI 
+  hosts: "{{machine_name}}"
+  become: true
+  # become_user: root
+  vars:
+    - ansible_user: "{{machine_user}}"
+  
+  vars_files:
+    - '~/Projects/homelab/vault.yaml'
+
+  roles:
+    - lxc_gui
+
+  handlers:
+  - name: restart ssh
+    service:
+      name=sshd
+      state=restarted
+
+  - name: reboot machine
+    reboot:
+      reboot_timeout: 600

@@ -1,0 +1,35 @@
+- name: Ensure system is up to date
+  ansible.builtin.apt:
+    update_cache: yes
+    upgrade: yes
+
+- name: Install xrdp and Xfce4 desktop and force if needed and install dependencies and recommends
+  apt:
+    name: "{{item}}"
+    state: present
+    force: yes
+    install_recommends: yes
+  with_items:
+    - xfce4
+    - xfce4-session
+    # - xfce4-goodies
+    # - xfce4-terminal
+    # - lightdm
+    - xrdp
+  notify: reboot machine
+
+- name: Make sure xrdp is running
+  service:
+    name: xrdp
+    state: started
+    enabled: yes
+
+- name: Install chrome using wget and apt install
+  apt:
+    deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    state: present
+    force: yes
+    install_recommends: yes
+  notify: reboot machine
+
+

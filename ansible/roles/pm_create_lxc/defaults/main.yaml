@@ -1,4 +1,4 @@
-machine_ssh_key: "~/.ssh/proxmox.pub"
+# machine_ssh_key: "~/.ssh/proxmox.pub"
 machine_cores: 1
 machine_cpus: 1
 machine_ram: 1024

@@ -1,0 +1,1 @@
+ansible-playbook /Users/craig/Projects/homelab/ansible/playbooks/0_lxc/pm_create_lxc.yaml -e "@/Users/craig/Projects/homelab/configs/createlxc-config-2023-02-27.json" -e "node_name=bigprox"
