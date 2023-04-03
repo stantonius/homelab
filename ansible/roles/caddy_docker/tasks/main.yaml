@@ -1,0 +1,41 @@
+---
+- name: Stop and remove Caddy container if it exists
+  ansible.builtin.docker_container:
+    name: caddy
+    state: absent
+  become: true
+
+- name: Create caddy directory
+  file:
+    path: /opt/caddy
+    state: directory
+  become: true
+
+- name: Copy initial Caddyfile even if it exists
+  copy:
+    src: Caddyfile
+    dest: /opt/caddy/Caddyfile
+    force: yes
+  become: true
+
+- name: Copy Dockerfile
+  copy:
+    src: Dockerfile
+    dest: /opt/caddy/Dockerfile
+    force: yes
+  become: true
+
+- name: Copy docker-compose.yml
+  template:
+    src: templates/docker-compose.yml.j2
+    dest: /opt/caddy/docker-compose.yml
+    force: yes
+  become: true
+
+- name: Start Caddy container
+  ansible.builtin.docker_compose:
+    project_src: /opt/caddy
+    state: present
+    build: yes
+    pull: yes
+  become: true

@@ -91,6 +91,9 @@ class Home(App):
 
     def record(self) -> None:
         self.state['config_file'] = Path(f'{ROOT_DIR.absolute()}/configs/{self.state["task"]}-config-{self.state["date"]}.json')
+        # create file if it does not exist
+        if not self.state['config_file'].exists():
+            self.state['config_file'].touch()
         if self.state['task'] == 'createvm':
             with self.state['config_file'].open('w+') as f:
                 json.dump(self.query_one(CreateVM).config, f)

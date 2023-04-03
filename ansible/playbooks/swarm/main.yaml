@@ -1,0 +1,43 @@
+---
+- name: Set up Docker Swarm Manager node
+  hosts: swarm-master
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+    - name: Install required packages
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg
+          - lsb-release
+        state: present
+
+    - name: Add Docker GPG key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker repository
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+        state: present
+
+    - name: Install Docker
+      apt:
+        name: docker-ce
+        state: present
+        update_cache: yes
+
+    - name: Start Docker service
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Initialize Docker Swarm
+      command: docker swarm init --advertise-addr {{ ansible_host }}
+      args:
+        creates: /var/lib/docker/swarm
+      register: swarm_init_output

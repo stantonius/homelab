@@ -1,0 +1,11 @@
+- name: Update Caddyfile in Docker container
+  hosts: caddy
+
+  pre_tasks:
+  - name: Include secrets
+    include_vars: 
+      file: ../../../secrets.yaml
+    no_log: true
+
+  roles:
+    - caddy_docker

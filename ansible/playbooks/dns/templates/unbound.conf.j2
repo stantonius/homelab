@@ -1,0 +1,18 @@
+server:
+  verbosity: 1
+  interface: 0.0.0.0
+  interface: ::0
+  access-control: 0.0.0.0/0 allow
+  access-control: ::0/0 allow
+
+{% for zone in custom_zones %}
+local-zone: "{{ zone.name }}" static
+{% for record in zone.records %}
+local-data: "{{ record }}"
+{% endfor %}
+{% endfor %}
+
+forward-zone:
+  name: "."
+  forward-addr: 8.8.8.8 # Google Public DNS
+  forward-addr: 8.8.4.4 # Google Public DNS

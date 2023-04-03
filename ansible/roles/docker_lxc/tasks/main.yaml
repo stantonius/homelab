@@ -35,3 +35,5 @@
 #     name: docker
 #     state: present
 #   delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+
+

@@ -4,7 +4,7 @@
   gather_facts: true
 
   vars_files:
-    - '~/Projects/homelab/vault.yaml'
+    - '~/Projects/homelab/secrets.yaml'
 
   vars:
     create_user: true
@@ -18,9 +18,10 @@
   gather_facts: true
   vars:
     - ansible_user: root
+    - create_user: true
   
   vars_files:
-    - '~/Projects/homelab/vault.yaml'
+    - '~/Projects/homelab/secrets.yaml'
 
   roles:
     - role: create_user
@@ -44,7 +45,7 @@
   become: true
   
   vars_files:
-    - '~/Projects/homelab/vault.yaml'
+    - '~/Projects/homelab/secrets.yaml'
 
   roles:
     - role: lxc_gui

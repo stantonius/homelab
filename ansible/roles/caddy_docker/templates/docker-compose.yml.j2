@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  caddy:
+    container_name: caddy
+    restart: unless-stopped
+    build: .
+    image: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      - CADDY_DNS_API_KEY={{ cloudflare_api_key }}
+      - CLOUDFLARE_EMAIL={{ cloudflare_email }}
+      - MY_DOMAIN={{ my_domain }}
+      - GOOGLE_DNS_API_KEY={{ google_domains_api_key }}
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+      - /opt/caddy/Caddyfile:/etc/caddy/Caddyfile
+
+volumes:
+  caddy_data:
+  caddy_config:

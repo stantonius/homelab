@@ -1,0 +1,18 @@
+---
+- name: Check if Docker Swarm is already initialized
+  command: docker info -f "{{ '{{.Swarm.LocalNodeState}}' }}"
+  register: docker_swarm_state
+  changed_when: false
+
+- name: Initialize Docker Swarm
+  command: docker swarm init
+  when: docker_swarm_state.stdout != "active"
+  become: true
+  register: swarm_init_result
+
+- name: Join Docker Swarm as a worker
+  command: docker swarm join --token "{{ hostvars[groups['lxc']['swarm-master']].swarm_init_result.stdout_lines[-2].split(' ')[-1] }}" "{{ hostvars[groups['lxc']['swarm-master']].ansible_host }}:2377"
+  when: "'lxc' in group_names"
+  become: true
+  register: swarm_join_result
+  failed_when: "'already part of a swarm' not in swarm_join_result.stderr and swarm_join_result.rc != 0"

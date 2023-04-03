@@ -1,0 +1,20 @@
+- name: Set up Caddy reverse proxy
+  hosts: "{{host}}"
+  gather_facts: yes
+
+  pre_tasks:
+  - name: Test debug
+    debug:
+      msg: "Running Caddy playbook ARGHHH"
+  - name: Include secrets
+    include_vars: 
+      file: ../../../secrets.yaml
+    no_log: true
+
+  roles:
+    # - docker
+    - caddy_docker
+    # - docker_swarm_node
+
+
+# run command: ansible-playbook ansible/playbooks/caddy_build/caddy.yaml --ask-vault-pass -e "host=caddy" 

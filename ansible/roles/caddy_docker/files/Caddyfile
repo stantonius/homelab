@@ -1,0 +1,34 @@
+*.{$MY_DOMAIN} {
+    tls {
+       dns cloudflare {env.CADDY_DNS_API_KEY}
+       resolvers 1.1.1.1
+    }
+  
+	@app0 host test.{$MY_DOMAIN}
+    @app1 host bigprox.{$MY_DOMAIN}
+	@app2 host adguard.{$MY_DOMAIN}
+
+	handle @app0 {
+		respond "Foo!"
+	}
+     
+    handle @app1 {
+       reverse_proxy 192.168.1.99:8006 {
+            transport http {
+               tls_insecure_skip_verify
+            }
+        }
+    }
+
+	handle @app2 {
+	   reverse_proxy 192.168.1.1:8888
+	}
+     
+    log {
+       output file /var/log/caddy/access.log {
+              roll_size 10mb
+              roll_keep 5
+              roll_keep_for 24h
+       }
+    }
+}

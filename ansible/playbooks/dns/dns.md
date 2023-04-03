@@ -1,1 +1,1 @@
-# Running a local DNS 
+# Running a local DNS using dnsmasq

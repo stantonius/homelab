@@ -1,37 +1,64 @@
 ---
-- name: Set up an LXC container with Docker running
+- name: Configure and Deploy Unbound container using Ansible
   hosts: "{{node_name}}"
   gather_facts: yes
-  pre_tasks:
-    - ansible.builtin.include_vars:
-        file: "./config.json"
 
   vars_files:
-    - ../../../vault.yaml
+    - ../../../secrets.yaml
+
+  vars:
+    config_output_dir: /etc/ansible/generated_configs
+    custom_zones:
+      - name: "stanton.ooo"
+        records:
+          # - "example.com. IN A 192.168.1.100"
+          - "bigprox.stanton.ooo. IN A 192.168.1.99:8006"
 
   roles:
-    - pm_create_lxc
-  
+    - docker
+
   tasks:
-    - name: Verify that the target is online/contactable
-      ansible.builtin.ping:
-      become: yes
-      delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
-    - name: Install Docker
-      ansible.builtin.package:
-        name: docker.io
-        state: present
-      become: yes
-      delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
-    - name: Enable Docker
-      ansible.builtin.service:
-        name: docker
-        enabled: yes
-      become: yes
-      delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
-    - name: Start Docker
-      ansible.builtin.service:
-        name: docker
+    - name: Check if systemd-resolved is running
+      ansible.builtin.systemd:
+        name: systemd-resolved
+        state: stopped
+        enabled: no
+      register: systemd_resolved_status
+
+    - name: Stop and disable systemd-resolved if running
+      block:
+        - name: Stop systemd-resolved
+          ansible.builtin.systemd:
+            name: systemd-resolved
+            state: stopped
+
+        - name: Disable systemd-resolved
+          ansible.builtin.systemd:
+            name: systemd-resolved
+            enabled: no
+      when: systemd_resolved_status.status.ActiveState == 'active'
+
+    - name: Create output directory for generated configs
+      ansible.builtin.file:
+        path: "{{ config_output_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Generate unbound.conf from Jinja2 template
+      ansible.builtin.template:
+        src: unbound.conf.j2
+        dest: "{{ config_output_dir }}/unbound.conf"
+
+    - name: Ensure Unbound container is running
+      ansible.builtin.docker_container:
+        name: unbound-dns
+        image: mvance/unbound:latest
         state: started
-      become: yes
-      delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
+        restart_policy: always
+        ports:
+          - "53:53/udp"
+          - "53:53/tcp"
+        volumes:
+          - "{{ config_output_dir }}/unbound.conf:/opt/unbound/etc/unbound/unbound.conf:ro"
+
+
