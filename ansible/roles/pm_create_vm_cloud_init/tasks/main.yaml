@@ -68,14 +68,14 @@
     onboot: no
     vmid: "{{machine_id}}"
     sshkeys: "{{ssh_key.stdout}}"
-    # machine: q35
-    # bios: ovmf
-    # boot: cdn
-    # efidisk0: 
-    #   efitype: "2m"
-    #   storage: local-lvm
-    #   format: raw
-    #   pre_enrolled_keys: false
+    machine: q35
+    bios: ovmf
+    boot: cdn
+    efidisk0: 
+      efitype: "2m"
+      storage: local-lvm
+      format: raw
+      pre_enrolled_keys: false
     # cicustom: "user=local:snippets/user-data,meta=local:snippets/meta-data"
     # citype: "nocloud"
     net:
@@ -84,17 +84,22 @@
       # scsi0: "local-lvm:{{machine_disk}}"
       scsi0: "local:iso/test.iso,media=cdrom"
       scsi1: "local-lvm:cloudinit"
+      scsi2: "local-lvm:{{machine_disk}}"
     scsihw: virtio-scsi-pci
-    # ide:
-      # ide0: "local:iso/{{machine_image}},media=cdrom"
-      # ide0: "local:iso/test.iso,media=cdrom"
-      # ide2: "zfs1ssd-data:cloudinit,format=qcow2"
-    # hostpci: '{"hostpci0": "01:00.0,x-vga=on"}'
+    hostpci: '{"hostpci0": "01:00.0,x-vga=on"}'
+    vga: "std" 
 
 
-- name: Sleep for 5 seconds to wait for cluster to recognize VM
+# - name: Sleep for 5 seconds to wait for cluster to recognize VM
+#   ansible.builtin.wait_for:
+#     timeout: 
+
+- name: Wait for VM to be recognized
   ansible.builtin.wait_for:
-    timeout: 5
+    path: "/etc/pve/nodes/{{ node_name }}/qemu-server/{{ machine_id }}.conf"
+    state: present
+    timeout: 30
+
 
 - name: Start VM
   community.general.proxmox_kvm:

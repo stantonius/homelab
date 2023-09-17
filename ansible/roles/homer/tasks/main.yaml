@@ -1,0 +1,18 @@
+---
+- name: Copy config.yml to the host
+  copy:
+    src: ../files/config.yml
+    dest: /tmp/config.yml
+
+- name: Run Homer container
+  community.docker.docker_container:
+    name: homer
+    image: b4bz/homer:latest
+    state: started
+    restart_policy: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/tmp/config.yml:/www/assets/config.yml"
+    # security_opts:
+    #   - apparmor:unconfined

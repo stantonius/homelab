@@ -1,0 +1,72 @@
+---
+# Not enough of a host config setup to warrant a separate file
+- name: Install proxmoxer on main host
+  ansible.builtin.pip:
+    name: proxmoxer
+
+- name: Set LXC options
+  set_fact:
+    lxc_unprivileged: "{{ hookscript | ternary(0, 1) }}"
+    lxc_hookscript: "{{ hookscript | ternary('local:snippets/enable_lxc_ssh_hook.sh', None) }}"
+    # lxc_features: "{{ hookscript | ternary(['fuse=1'], ['nesting=1', 'keyctl=1', 'fuse=1']) }}"
+    lxc_features: "['nesting=1', 'keyctl=1', 'fuse=1']"
+    ssh_key_content: "{{ lookup('file', machine_ssh_key) }}"
+
+- name: Debug
+  ansible.builtin.debug:
+    var: lxc_hookscript
+
+- name: Debug
+  ansible.builtin.debug:
+    var: hookscript
+
+
+- name: Setup for enabling SSH access
+  block:
+    - name: Create a directory to house the ssh keys to pass to a new LXC
+      ansible.builtin.file:
+        path: /var/lib/vz/snippets/
+        state: directory
+        mode: 0700
+
+    - name: Copy the bash script to snippets directory and make it executable
+      ansible.builtin.copy:
+        src: enable_lxc_ssh_hook.sh
+        dest: /var/lib/vz/snippets
+        mode: 0700
+
+  when: hookscript
+
+
+- name: Create LXC
+  community.general.proxmox:
+    vmid: "{{ machine_id }}"
+    node: bigprox
+    api_user: "{{root_user}}"
+    api_password: "{{root_password}}"
+    api_host: "{{host_ip}}"
+    hostname: "{{machine_name}}"
+    password: "{{machine_password}}"
+    ostemplate: "local:vztmpl/{{machine_image}}"
+    storage: local-lvm
+    unprivileged: "{{ lxc_unprivileged }}"
+    hookscript: "{{ lxc_hookscript }}"
+    netif: "{'net0':'name=enp6s0,gw=192.168.1.1,ip={{machine_ip}},bridge=vmbr0'}"
+    pubkey: "{{ ssh_key_content }}"
+    features: "{{ lxc_features }}"
+    cores: "{{machine_cores}}"
+    cpus: "{{machine_cpus}}"
+    memory: "{{machine_ram}}"
+    disk: "{{machine_disk}}"
+    onboot: "{{onboot}}"
+    state: present
+
+
+- name: Start container
+  community.general.proxmox:
+    vmid: "{{ machine_id }}"
+    api_user: "{{root_user}}"
+    api_password: "{{root_password}}"
+    api_host: "{{host_ip}}"
+    state: started
+    timeout: 90

@@ -1,0 +1,13 @@
+---
+- block:
+    - name: Add new host to the specified group in inventory file
+      ansible.builtin.lineinfile:
+        path: "{{ inventory_file }}"
+        insertafter: "^\\[{{ group_name }}\\]"
+        regexp: "^{{ host_name }} "
+        line: "{{ host_name }} ansible_host={{ host_ip }}{{ host_user is defined | ternary(' ansible_user=' + host_user, '') }}"
+        state: present
+  rescue:
+    - name: Log error message
+      ansible.builtin.debug:
+        msg: "Failed to add the new host to the inventory file."

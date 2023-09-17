@@ -1,9 +1,24 @@
 ---
+- name: Check if Docker Compose file exists
+  ansible.builtin.stat:
+    path: /opt/caddy/docker-compose.yml
+  register: result
+
+
 - name: Stop and remove Caddy container if it exists
-  ansible.builtin.docker_container:
-    name: caddy
+  ansible.builtin.docker_compose:
+    project_src: /opt/caddy
     state: absent
+    remove_images: "all"
+    remove_volumes: true
   become: true
+  when: result.stat.exists
+
+- name: Restart system
+  ansible.builtin.reboot:
+    reboot_timeout: 300
+  become: true
+  when: result.stat.exists
 
 - name: Create caddy directory
   file:
@@ -38,4 +53,5 @@
     state: present
     build: yes
     pull: yes
+    nocache: yes
   become: true

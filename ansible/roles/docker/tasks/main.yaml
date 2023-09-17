@@ -42,6 +42,15 @@
     enabled: yes
   become: true
 
+- name: apt install apparmor and apparmor-utils
+  apt:
+    name:
+      - apparmor
+      - apparmor-utils
+    state: present
+  become: true
+  notify: restart container
+
 - name: Add user to docker group
   ansible.builtin.user:
     name: "{{ ansible_user }}"
@@ -62,6 +71,7 @@
       - docker
       - requests
       - docker-compose
+      - jsondiff
     state: present
   become: yes
 

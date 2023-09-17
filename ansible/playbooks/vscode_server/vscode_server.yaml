@@ -2,51 +2,39 @@
 - name: Install VSCode Server on a fresh ubuntu LXC container
   hosts: "{{node_name}}"
   gather_facts: yes
-  pre_tasks:
-    - ansible.builtin.include_vars:
-        file: "../../config.json"
 
   vars_files:
-    - ../../vault.yaml
-
-  roles:
-    - pm_create_lxc
+    - ../../../secrets.yaml
   
   tasks:
     - name: Verify that the target is online/contactable
       ansible.builtin.ping:
       become: yes
-      delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
     - name: Install VSCode Server from this url 'https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64'
       get_url:
         url: https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64
         dest: /tmp/vscode-server.tar.gz
         mode: 0755
       become: yes
-      delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
     - name: Unpack the VSCode Server
       unarchive:
         src: /tmp/vscode-server.tar.gz
         dest: /tmp/
         remote_src: yes
       become: yes
-      delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
     - name: Move the VSCode Server to the correct location
       command: mv /tmp/code /root/code
       become: yes
-      delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
     - name: Remove the VSCode Server tarball
       file:
         path: /tmp/vscode-server.tar.gz
         state: absent
       become: yes
-      delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
     - name: Remove the VSCode Server directory 
       file:
         path: /tmp/code
         state: absent
       become: yes
-      delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
     - name: Create a script called 'codeserverstart.sh'
       copy:
         content: |
@@ -55,7 +43,6 @@
         dest: /usr/local/bin/codeserverstart.sh
         mode: 0755
       become: yes
-      delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
     - name: Create the VSCode Server systemd service to run './code tunnel' on boot
       copy:
         content: |
@@ -74,17 +61,14 @@
         dest: /etc/systemd/system/vscode-server.service
         mode: 0644
       become: yes
-      delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
     - name: Enable the VSCode Server systemd service
       systemd:
         name: vscode-server
         enabled: yes
       become: yes
-      delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
     - name: Start the VSCode Server systemd service
       systemd:
         name: vscode-server
         state: started
       become: yes
-      delegate_to: "{{machine_ip | regex_replace('/.*', '')}}"
     

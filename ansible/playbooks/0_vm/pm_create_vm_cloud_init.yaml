@@ -1,10 +1,9 @@
 ---
 - name: Automated VM creation
   hosts: "{{node_name}}"
-  gather_facts: yes
 
   vars_files:
-    - '~/Projects/homelab/vault.yaml'
+    - '~/Projects/homelab/secrets.yaml'
 
   # pre_tasks:
   #   - name: Copy the `user-data` cloud init file to the snippets directory
@@ -34,7 +33,7 @@
     - ansible_user: "{{machine_user}}"
   
   vars_files:
-    - '~/Projects/homelab/vault.yaml'
+    - '~/Projects/homelab/secrets.yaml'
   
   roles:
     - create_user
@@ -59,7 +58,7 @@
     - ansible_user: "{{machine_user}}"
   
   vars_files:
-    - '~/Projects/homelab/vault.yaml'
+    - '~/Projects/homelab/secrets.yaml'
 
   roles:
     - lxc_gui

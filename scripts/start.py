@@ -23,7 +23,7 @@ import configparser
 
 ROOT_DIR = Path('').absolute().parent
 
-config = configparser.ConfigParser(allow_no_value=True)
+config = configparser.ConfigParser(allow_no_value=True, )
 config.read(ROOT_DIR/"inventory.ini")
 
 class Home(App):
@@ -75,7 +75,7 @@ class Home(App):
             config['lxc'][f"{lxc_config['machine_name']} ansible_host={lxc_config['machine_ip'].split('/')[0]}"]= None
 
             with open(ROOT_DIR/"inventory.ini", 'w') as configfile:
-                config.write(configfile)
+                config.write(configfile, space_around_delimiters=False)
 
         if self.state['task'] == 'createvm':
             config['vm:vars']['ansible_user']='stantonius'
@@ -86,7 +86,7 @@ class Home(App):
             config['vm'][f"{lxc_config['machine_name']} ansible_host={lxc_config['machine_ip'].split('/')[0]}"]= None
 
             with open(ROOT_DIR/"inventory.ini", 'w') as configfile:
-                config.write(configfile)
+                config.write(configfile, space_around_delimiters=False)
         
 
     def record(self) -> None:

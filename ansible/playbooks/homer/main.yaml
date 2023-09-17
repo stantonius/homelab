@@ -1,0 +1,58 @@
+---
+- name: Retrieve Proxmox Host IP
+  hosts: bigprox
+  gather_facts: true
+  tasks:
+    - name: Set Proxmox Host IP
+      set_fact:
+        proxmox_host_ip: "{{ ansible_host }}"
+        cacheable: yes
+
+- name: Create LXC container in Proxmox
+  hosts: bigprox
+  become: yes
+  gather_facts: no
+  vars_files:
+    - '~/Projects/homelab/secrets.yaml'
+  vars:
+    host_ip: "{{ proxmox_host_ip }}"
+    machine_name: 'homer'
+    machine_password: 'homer'
+    machine_image: "ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
+    machine_cores: 1
+    machine_cpus: 1
+    machine_ram: '512'
+    machine_disk: '8'
+    onboot: true
+    machine_ssh_key: "~/.ssh/proxmox_rsa.pub"
+    hookscript: true
+    machine_id: '113'
+    machine_ip: '192.168.1.13/24'
+    api_user: "{{root_user}}"
+    api_password: "{{root_password}}"
+  roles:
+    - create_lxc
+
+- name: Configure LXC
+  hosts: homer
+  become: yes
+  gather_facts: yes
+  vars_files:
+    - '~/Projects/homelab/secrets.yaml'
+  roles:
+    - configure_lxc
+  
+
+- name: Install Docker in the container
+  hosts: homer
+  become: yes
+  gather_facts: yes
+  roles:
+    - docker
+
+- name: Deploy Homer in the container
+  hosts: homer
+  become: yes
+  gather_facts: yes
+  roles:
+    - homer

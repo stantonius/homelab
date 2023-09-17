@@ -1,0 +1,8 @@
+- hosts: bigprox
+  vars:
+    pve_nvidia_passthrough_driver_version: "525.116.03"
+
+  roles:
+    - simoncaron.pve_nvidia_passthrough
+
+

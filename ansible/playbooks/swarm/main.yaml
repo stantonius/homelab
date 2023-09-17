@@ -1,8 +1,14 @@
 ---
 - name: Set up Docker Swarm Manager node
-  hosts: swarm-master
+  # hosts: portainer-swarm-agent
+  hosts: "{{node_name}}"
+  become: yes
   vars:
     ansible_python_interpreter: /usr/bin/python3
+
+  roles:
+    - docker  # sets up docker python sdk and other required python modules
+
   tasks:
     - name: Install required packages
       apt:
@@ -30,14 +36,75 @@
         state: present
         update_cache: yes
 
+    # LXC specific configuration to allow docker swarm within LXC
+    # solution from here: https://github.com/portainer/portainer/issues/7736
+
+    - name: Add required kernel modules to /etc/modules-load.d/docker.conf
+      ansible.builtin.copy:
+        dest: /etc/modules-load.d/docker.conf
+        content: |
+          # required kernel modules for proper docker swarm
+          # within LXC functionality
+          overlay
+          bonding
+          br_netfilter
+          iptable_mangle
+          iptable_nat
+          ip_vs
+          ip_vs_dh
+          ip_vs_ftp
+          ip_vs_lblc
+          ip_vs_lblcr
+          ip_vs_lc
+          ip_vs_nq
+          ip_vs_rr
+          ip_vs_sed
+          ip_vs_sh
+          ip_vs_wlc
+          ip_vs_wrr
+          nf_nat
+          xfrm_user
+          xt_conntrack
+          xt_MASQUERADE
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Update /etc/sysctl.conf to enable IP forwarding
+      ansible.builtin.lineinfile:
+        path: /etc/sysctl.conf
+        regexp: '^net.ipv4.ip_forward'
+        line: 'net.ipv4.ip_forward=1'
+        state: present
+
+    - name: Apply sysctl changes
+      ansible.builtin.command: sysctl -p
+
+
     - name: Start Docker service
       systemd:
         name: docker
         state: started
         enabled: yes
 
-    - name: Initialize Docker Swarm
-      command: docker swarm init --advertise-addr {{ ansible_host }}
-      args:
-        creates: /var/lib/docker/swarm
-      register: swarm_init_output
+    - name: Start docker swarm
+      community.docker.docker_swarm:
+        advertise_addr: "{{ ansible_host }}"
+        state: present
+
+    - name: Create Portainer stack file from template
+      template:
+        src: portainer-agent.yaml.j2
+        dest: /root/portainer-agent.yaml
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Deploy stack from a compose file
+      community.docker.docker_stack:
+        state: present
+        name: portainer-agent
+        compose:
+          - /root/portainer-agent.yaml
+    
+

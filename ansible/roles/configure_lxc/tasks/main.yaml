@@ -1,0 +1,22 @@
+- name: Wait for port 22 to become open on the host
+  delegate_to: localhost
+  ansible.builtin.wait_for:
+    port: 22
+    state: started
+    sleep: 5
+    timeout: 300
+
+- name: Allow release-info to change for APT repositories
+  command: apt-get update -y --allow-releaseinfo-change
+  retries: 5
+  delay: 10
+
+- name: Run the equivalent of "apt-get update"
+  ansible.builtin.apt:
+    update_cache: yes
+    force_apt_get: yes
+
+- name: Update all packages to their latest version
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
