@@ -1,1 +1,0 @@
-ansible-playbook /Users/craig/Projects/homelab/ansible/playbooks/0_vm/pm_create_vm_cloud_init.yaml -e "@/Users/craig/Projects/homelab/configs/createvm-config-2023-04-27.json" -e "node_name=bigprox"
