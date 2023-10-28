@@ -1,0 +1,61 @@
+---
+- name: Create a Docker container running Caddy in Proxmox LXC
+  hosts: caddy
+  vars_files:
+    - "{{ playbook_dir }}/../../secrets.yaml"
+  tasks:
+    - name: Copy Dockerfile to target host
+      copy:
+        src: ./Dockerfile
+        dest: /opt
+      become: yes
+
+    - name: Build the Caddy image with Cloudflare module
+      docker_image:
+        build:
+          path: /opt
+        name: caddy:cloudflare
+        source: build
+      become: yes
+
+    - name: Create Caddy config directory
+      file:
+        path: /etc/caddy
+        state: directory
+        mode: '0755'
+      become: yes
+
+    - name: Copy Caddyfile to config directory
+      copy:
+        src: "{{ playbook_dir }}/../../Caddyfile"
+        dest: /etc/caddy/Caddyfile
+        mode: '0644'
+      become: yes
+
+    - name: Run Caddy container
+      docker_container:
+        name: caddy_container
+        image: caddy:cloudflare
+        state: started
+        restart_policy: always
+        ports:
+          - "80:80"
+          - "443:443"
+        volumes:
+          - /etc/caddy/Caddyfile:/etc/caddy/Caddyfile
+        env:
+          CADDY_DNS_API_KEY: "{{ cloudflare_api_key }}"
+          CLOUDFLARE_EMAIL: "{{ cloudflare_email  }}"
+          MY_DOMAIN: "{{ my_domain }}"
+          GOOGLE_DNS_API_KEY: "{{ google_domains_api_key }}"
+      become: yes
+
+    - name: Get info on Caddy container
+      community.docker.docker_container_info:
+        name: caddy_container
+      register: caddy_info
+
+    - name: Check if Caddy container is running
+      debug:
+        msg: "Caddy container is running."
+      when: caddy_info.container.State.Running

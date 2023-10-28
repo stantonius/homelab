@@ -1,0 +1,59 @@
+---
+- name: Configure Proxmox LXC
+  hosts: homer
+  remote_user: root
+  gather_facts: false
+  tasks:
+    - name: Install python3
+      raw: apt-get update && apt-get install -y python3
+
+    - name: Install openssh-server
+      raw: apt-get install -y openssh-server
+
+    - name: Install sudo
+      raw: apt-get install -y sudo
+
+    - name: Create a new user called stantonius
+      user:
+        name: stantonius
+        shell: /bin/bash
+        state: present
+
+    - name: Allow stantonius to have sudo privileges
+      lineinfile:
+        dest: /etc/sudoers
+        line: "stantonius ALL=(ALL:ALL) NOPASSWD: ALL"
+        state: present
+        validate: "visudo -cf %s"
+
+    - name: Add SSH directory for stantonius
+      file:
+        path: "/home/stantonius/.ssh"
+        state: directory
+        owner: stantonius
+        group: stantonius
+        mode: 0700
+
+    - name: Add proxmox public key to stantonius
+      authorized_key:
+        user: stantonius
+        key: "{{ lookup('file', '~/.ssh/proxmox.pub') }}"
+        state: present
+
+    - name: Harden SSH settings
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        line: "{{ item.line }}"
+        regexp: "{{ item.regexp }}"
+      with_items:
+        - { regexp: '^#?PermitRootLogin', line: 'PermitRootLogin no' }
+        - { regexp: '^#?PasswordAuthentication', line: 'PasswordAuthentication no' }
+        - { regexp: '^#?PermitEmptyPasswords', line: 'PermitEmptyPasswords no' }
+      notify:
+        - Restart sshd
+
+  handlers:
+    - name: Restart sshd
+      systemd:
+        name: sshd
+        state: restarted

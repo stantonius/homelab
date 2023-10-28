@@ -1,4 +1,4 @@
-export ANSIBLE_CONFIG=~/Projects/homelab/ansible.cfg
+export ANSIBLE_CONFIG=~/repos/homelab/ansible.cfg
 export ANSIBLE_VAULT_PASSWORD_FILE=~/ansiblepass.txt
 
 # if not in script dir, cd to it

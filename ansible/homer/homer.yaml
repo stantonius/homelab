@@ -1,0 +1,26 @@
+---
+- name: Create a Docker container running Homer in Proxmox LXC
+  hosts: homer
+  vars_files:
+    - "{{ playbook_dir }}/../../secrets.yaml"
+  tasks:
+    - name: Copy homer.yaml and rename to config.yml
+      copy:
+        src: "{{ playbook_dir }}/../../homer.yaml"
+        dest: /opt/config.yml
+      become: yes
+
+    - name: Run Homer container
+      docker_container:
+        name: homer
+        image: b4bz/homer
+        state: started
+        restart_policy: always
+        ports:
+          - "80:8080"
+          - "443:8080"
+        volumes:
+          - /opt:/www/assets
+        env:
+          INIT_ASSETS: "1"
+      become: yes
