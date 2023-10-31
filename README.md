@@ -10,3 +10,8 @@ I also got too focused on using ansible roles, which I found confusing to split 
 
 * All variables needed in the Caddyfile for example
 * Will store them in `/etc/environment`
+
+
+## Ansible
+
+In order for Ansible to listen to the `ansible.cfg` file in the root of the project, you need to set the environment variable `ANSIBLE_CONFIG` to the path of the file. We will set this in the `/etc/environment` file.

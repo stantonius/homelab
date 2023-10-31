@@ -9,6 +9,7 @@
 	@app2 host adguard.{env.MY_DOMAIN}
     @app3 host code.{env.MY_DOMAIN}
     @app4 host home.{env.MY_DOMAIN}
+    @app5 host nodered.{env.MY_DOMAIN}
 
 	handle @app0 {
 		respond "Foo!"
@@ -32,6 +33,10 @@
 
     handle @app4 {
         reverse_proxy 192.168.1.13
+    }
+
+    handle @app5 {
+        reverse_proxy 192.168.1.10
     }
     
     log {

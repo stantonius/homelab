@@ -1,0 +1,18 @@
+---
+- name: Create a Docker container running Node-RED in Proxmox LXC
+  hosts: nodered
+  vars_files:
+    - "{{ playbook_dir }}/../../secrets.yaml"
+  tasks:
+    - name: Run Node-RED container
+      docker_container:
+        name: nodered
+        image: nodered/node-red
+        state: started
+        restart_policy: always
+        ports:
+          - "80:1880"
+          - "443:1880"
+        volumes:
+          - node_red_data:/data
+      become: yes

@@ -704,3 +704,485 @@ The offending line appears to be:
 2023-10-27 21:52:36,371 p=3243780 u=root n=ansible | changed: [homer]
 2023-10-27 21:52:36,412 p=3243780 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************
 2023-10-27 21:52:36,412 p=3243780 u=root n=ansible | homer                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-28 21:04:28,537 p=3568481 u=root n=ansible | {
+    "_meta": {
+        "hostvars": {
+            "192.158.1.97": {
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox_rsa",
+                "ansible_user": "root"
+            },
+            "192.168.1.99": {
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox_rsa",
+                "ansible_user": "root"
+            },
+            "arnold": {
+                "ansible_become": "yes",
+                "ansible_host": "192.168.1.67",
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox_rsa",
+                "ansible_user": "stantonius"
+            },
+            "caddy": {
+                "ansible_become": "yes",
+                "ansible_host": "192.168.1.4",
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox",
+                "ansible_user": "stantonius"
+            },
+            "homer": {
+                "ansible_become": "yes",
+                "ansible_host": "192.168.1.13",
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox",
+                "ansible_user": "stantonius"
+            },
+            "portainer-swarm-agent": {
+                "ansible_become": "yes",
+                "ansible_host": "192.168.1.9",
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox",
+                "ansible_user": "stantonius"
+            },
+            "tailscale-homelab": {
+                "ansible_become": "yes",
+                "ansible_host": "192.168.1.88",
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox",
+                "ansible_user": "stantonius"
+            },
+            "unbound-dns": {
+                "ansible_become": "yes",
+                "ansible_host": "192.168.1.8",
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox",
+                "ansible_user": "stantonius"
+            },
+            "vscode": {
+                "ansible_become": "yes",
+                "ansible_host": "192.168.1.112",
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox",
+                "ansible_user": "stantonius"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "proxmox_nodes",
+            "lxc",
+            "vm"
+        ]
+    },
+    "bigprox": {
+        "hosts": [
+            "192.168.1.99"
+        ]
+    },
+    "lxc": {
+        "hosts": [
+            "caddy",
+            "tailscale-homelab",
+            "unbound-dns",
+            "vscode",
+            "portainer-swarm-agent",
+            "homer"
+        ]
+    },
+    "miniprox": {
+        "hosts": [
+            "192.158.1.97"
+        ]
+    },
+    "proxmox_nodes": {
+        "children": [
+            "bigprox",
+            "miniprox"
+        ]
+    },
+    "vm": {
+        "hosts": [
+            "arnold"
+        ]
+    }
+}
+2023-10-28 21:04:40,195 p=3568654 u=root n=ansible | [WARNING]: Could not match supplied host pattern, ignoring: nodered
+
+2023-10-28 21:04:40,195 p=3568654 u=root n=ansible | PLAY [Configure Proxmox LXC] *****************************************************************************************************
+2023-10-28 21:04:40,195 p=3568654 u=root n=ansible | skipping: no hosts matched
+2023-10-28 21:04:40,195 p=3568654 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************
+2023-10-28 21:05:20,779 p=3568914 u=root n=ansible | PLAY [Configure Proxmox LXC] *****************************************************************************************************
+2023-10-28 21:05:20,786 p=3568914 u=root n=ansible | TASK [Install python3 _raw_params=apt-get update && apt-get install -y python3] **************************************************
+2023-10-28 21:05:22,779 p=3568914 u=root n=ansible | fatal: [nodered]: UNREACHABLE! => {"changed": false, "msg": "Invalid/incorrect password: Warning: Permanently added '192.168.1.10' (ED25519) to the list of known hosts.\r\nPermission denied, please try again.", "unreachable": true}
+2023-10-28 21:05:22,780 p=3568914 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************
+2023-10-28 21:05:22,780 p=3568914 u=root n=ansible | nodered                    : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-28 21:06:42,171 p=3569527 u=root n=ansible | PLAY [Configure Proxmox LXC] *****************************************************************************************************
+2023-10-28 21:06:42,178 p=3569527 u=root n=ansible | TASK [Install python3 _raw_params=apt-get update && apt-get install -y python3] **************************************************
+2023-10-28 21:06:43,757 p=3569527 u=root n=ansible | changed: [nodered]
+2023-10-28 21:06:43,759 p=3569527 u=root n=ansible | TASK [Install openssh-server _raw_params=apt-get install -y openssh-server] ******************************************************
+2023-10-28 21:06:43,995 p=3569527 u=root n=ansible | changed: [nodered]
+2023-10-28 21:06:43,997 p=3569527 u=root n=ansible | TASK [Install sudo _raw_params=apt-get install -y sudo] **************************************************************************
+2023-10-28 21:06:44,238 p=3569527 u=root n=ansible | changed: [nodered]
+2023-10-28 21:06:44,240 p=3569527 u=root n=ansible | TASK [Create a new user called stantonius name=stantonius, shell=/bin/bash, state=present] ***************************************
+2023-10-28 21:06:44,596 p=3569527 u=root n=ansible | changed: [nodered]
+2023-10-28 21:06:44,598 p=3569527 u=root n=ansible | TASK [Allow stantonius to have sudo privileges dest=/etc/sudoers, line=stantonius ALL=(ALL:ALL) NOPASSWD: ALL, state=present, validate=visudo -cf %s] ***
+2023-10-28 21:06:44,810 p=3569527 u=root n=ansible | changed: [nodered]
+2023-10-28 21:06:44,812 p=3569527 u=root n=ansible | TASK [Add SSH directory for stantonius path=/home/stantonius/.ssh, state=directory, owner=stantonius, group=stantonius, mode=448] ***
+2023-10-28 21:06:45,023 p=3569527 u=root n=ansible | changed: [nodered]
+2023-10-28 21:06:45,025 p=3569527 u=root n=ansible | TASK [Add proxmox public key to stantonius user=stantonius, key={{ lookup('file', '~/.ssh/proxmox.pub') }}, state=present] *******
+2023-10-28 21:06:45,301 p=3569527 u=root n=ansible | changed: [nodered]
+2023-10-28 21:06:45,304 p=3569527 u=root n=ansible | TASK [Harden SSH settings dest=/etc/ssh/sshd_config, line={{ item.line }}, regexp={{ item.regexp }}] *****************************
+2023-10-28 21:06:45,461 p=3569527 u=root n=ansible | changed: [nodered] => (item={'regexp': '^#?PermitRootLogin', 'line': 'PermitRootLogin no'})
+2023-10-28 21:06:45,599 p=3569527 u=root n=ansible | changed: [nodered] => (item={'regexp': '^#?PasswordAuthentication', 'line': 'PasswordAuthentication no'})
+2023-10-28 21:06:45,734 p=3569527 u=root n=ansible | changed: [nodered] => (item={'regexp': '^#?PermitEmptyPasswords', 'line': 'PermitEmptyPasswords no'})
+2023-10-28 21:06:45,739 p=3569527 u=root n=ansible | RUNNING HANDLER [Restart sshd name=sshd, state=restarted] ************************************************************************
+2023-10-28 21:06:46,127 p=3569527 u=root n=ansible | changed: [nodered]
+2023-10-28 21:06:46,131 p=3569527 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************
+2023-10-28 21:06:46,131 p=3569527 u=root n=ansible | nodered                    : ok=9    changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-28 21:07:28,265 p=3570531 u=root n=ansible | PLAY [Install Docker] ************************************************************************************************************
+2023-10-28 21:07:28,277 p=3570531 u=root n=ansible | TASK [Gathering Facts ] **********************************************************************************************************
+2023-10-28 21:07:29,231 p=3570531 u=root n=ansible | ok: [nodered]
+2023-10-28 21:07:29,260 p=3570531 u=root n=ansible | TASK [Install aptitude name=aptitude, state=latest, update_cache=True] ***********************************************************
+2023-10-28 21:07:33,343 p=3570531 u=root n=ansible | changed: [nodered]
+2023-10-28 21:07:33,354 p=3570531 u=root n=ansible | TASK [Install required system packages pkg=['apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools'], state=latest, update_cache=True] ***
+2023-10-28 21:08:08,304 p=3570531 u=root n=ansible | changed: [nodered]
+2023-10-28 21:08:08,315 p=3570531 u=root n=ansible | TASK [Ensure requests < 2.29 is installed name=requests<2.29.0] ******************************************************************
+2023-10-28 21:08:09,774 p=3570531 u=root n=ansible | changed: [nodered]
+2023-10-28 21:08:09,785 p=3570531 u=root n=ansible | TASK [Add Docker GPG apt Key url=https://download.docker.com/linux/ubuntu/gpg, state=present] ************************************
+2023-10-28 21:08:10,494 p=3570531 u=root n=ansible | changed: [nodered]
+2023-10-28 21:08:10,505 p=3570531 u=root n=ansible | TASK [Add Docker Repository repo=deb https://download.docker.com/linux/ubuntu focal stable, state=present] ***********************
+2023-10-28 21:08:12,141 p=3570531 u=root n=ansible | changed: [nodered]
+2023-10-28 21:08:12,152 p=3570531 u=root n=ansible | TASK [Update apt and install docker-ce name=docker-ce, state=latest, update_cache=True] ******************************************
+2023-10-28 21:08:26,047 p=3570531 u=root n=ansible | changed: [nodered]
+2023-10-28 21:08:26,058 p=3570531 u=root n=ansible | TASK [Install Docker Module for Python name=docker] ******************************************************************************
+2023-10-28 21:08:27,220 p=3570531 u=root n=ansible | changed: [nodered]
+2023-10-28 21:08:27,232 p=3570531 u=root n=ansible | TASK [Ensure Docker is running name=docker, state=started, enabled=True] *********************************************************
+2023-10-28 21:08:27,598 p=3570531 u=root n=ansible | ok: [nodered]
+2023-10-28 21:08:27,638 p=3570531 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************
+2023-10-28 21:08:27,638 p=3570531 u=root n=ansible | nodered                    : ok=9    changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-28 21:12:42,816 p=3577530 u=root n=ansible | PLAY [Create a Docker container running Node-RED in Proxmox LXC] *****************************************************************
+2023-10-28 21:12:42,828 p=3577530 u=root n=ansible | TASK [Gathering Facts ] **********************************************************************************************************
+2023-10-28 21:12:43,851 p=3577530 u=root n=ansible | ok: [nodered]
+2023-10-28 21:12:43,881 p=3577530 u=root n=ansible | TASK [Run Node-RED container name=nodered, image=nodered/node-red, state=started, restart_policy=always, ports=['80:1880', '443:1880'], volumes=['node_red_data:/data']] ***
+2023-10-28 21:13:09,198 p=3577530 u=root n=ansible | changed: [nodered]
+2023-10-28 21:13:09,238 p=3577530 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************
+2023-10-28 21:13:09,238 p=3577530 u=root n=ansible | nodered                    : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-28 21:14:02,864 p=3578506 u=root n=ansible | PLAY [Create a Docker container running Caddy in Proxmox LXC] ********************************************************************
+2023-10-28 21:14:02,876 p=3578506 u=root n=ansible | TASK [Gathering Facts ] **********************************************************************************************************
+2023-10-28 21:14:03,884 p=3578506 u=root n=ansible | ok: [caddy]
+2023-10-28 21:14:03,914 p=3578506 u=root n=ansible | TASK [Copy Dockerfile to target host src=./Dockerfile, dest=/opt] ****************************************************************
+2023-10-28 21:14:04,423 p=3578506 u=root n=ansible | ok: [caddy]
+2023-10-28 21:14:04,434 p=3578506 u=root n=ansible | TASK [Build the Caddy image with Cloudflare module build={'path': '/opt'}, name=caddy:cloudflare, source=build] ******************
+2023-10-28 21:14:04,779 p=3578506 u=root n=ansible | ok: [caddy]
+2023-10-28 21:14:04,790 p=3578506 u=root n=ansible | TASK [Create Caddy config directory path=/etc/caddy, state=directory, mode=0755] *************************************************
+2023-10-28 21:14:04,939 p=3578506 u=root n=ansible | ok: [caddy]
+2023-10-28 21:14:04,950 p=3578506 u=root n=ansible | TASK [Copy Caddyfile to config directory src={{ playbook_dir }}/../../Caddyfile, dest=/etc/caddy/Caddyfile, mode=0644] ***********
+2023-10-28 21:14:05,319 p=3578506 u=root n=ansible | changed: [caddy]
+2023-10-28 21:14:05,330 p=3578506 u=root n=ansible | TASK [Run Caddy container name=caddy_container, image=caddy:cloudflare, state=started, restart_policy=always, ports=['80:80', '443:443'], volumes=['/etc/caddy/Caddyfile:/etc/caddy/Caddyfile'], env={'CADDY_DNS_API_KEY': '{{ cloudflare_api_key }}', 'CLOUDFLARE_EMAIL': '{{ cloudflare_email  }}', 'MY_DOMAIN': '{{ my_domain }}', 'GOOGLE_DNS_API_KEY': '{{ google_domains_api_key }}'}] ***
+2023-10-28 21:14:05,713 p=3578506 u=root n=ansible | ok: [caddy]
+2023-10-28 21:14:05,724 p=3578506 u=root n=ansible | TASK [Get info on Caddy container name=caddy_container] **************************************************************************
+2023-10-28 21:14:06,039 p=3578506 u=root n=ansible | ok: [caddy]
+2023-10-28 21:14:06,049 p=3578506 u=root n=ansible | TASK [Check if Caddy container is running msg=Caddy container is running.] *******************************************************
+2023-10-28 21:14:06,059 p=3578506 u=root n=ansible | ok: [caddy] => {
+    "msg": "Caddy container is running."
+}
+2023-10-28 21:14:06,099 p=3578506 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************
+2023-10-28 21:14:06,099 p=3578506 u=root n=ansible | caddy                      : ok=8    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-29 07:40:28,481 p=3783154 u=root n=ansible | PLAY [Create a Docker container running Caddy in Proxmox LXC] ********************************************************************
+2023-10-29 07:40:28,492 p=3783154 u=root n=ansible | TASK [Gathering Facts ] **********************************************************************************************************
+2023-10-29 07:40:29,516 p=3783154 u=root n=ansible | ok: [caddy]
+2023-10-29 07:40:29,546 p=3783154 u=root n=ansible | TASK [Copy Dockerfile to target host src=./Dockerfile, dest=/opt] ****************************************************************
+2023-10-29 07:40:30,083 p=3783154 u=root n=ansible | ok: [caddy]
+2023-10-29 07:40:30,094 p=3783154 u=root n=ansible | TASK [Build the Caddy image with Cloudflare module build={'path': '/opt'}, name=caddy:cloudflare, source=build] ******************
+2023-10-29 07:40:30,436 p=3783154 u=root n=ansible | ok: [caddy]
+2023-10-29 07:40:30,447 p=3783154 u=root n=ansible | TASK [Create Caddy config directory path=/etc/caddy, state=directory, mode=0755] *************************************************
+2023-10-29 07:40:30,598 p=3783154 u=root n=ansible | ok: [caddy]
+2023-10-29 07:40:30,609 p=3783154 u=root n=ansible | TASK [Copy Caddyfile to config directory src={{ playbook_dir }}/../../Caddyfile, dest=/etc/caddy/Caddyfile, mode=0644] ***********
+2023-10-29 07:40:30,969 p=3783154 u=root n=ansible | changed: [caddy]
+2023-10-29 07:40:30,980 p=3783154 u=root n=ansible | TASK [Run Caddy container name=caddy_container, image=caddy:cloudflare, state=started, restart_policy=always, ports=['80:80', '443:443'], volumes=['/etc/caddy/Caddyfile:/etc/caddy/Caddyfile'], env={'CADDY_DNS_API_KEY': '{{ cloudflare_api_key }}', 'CLOUDFLARE_EMAIL': '{{ cloudflare_email  }}', 'MY_DOMAIN': '{{ my_domain }}', 'GOOGLE_DNS_API_KEY': '{{ google_domains_api_key }}'}] ***
+2023-10-29 07:40:31,361 p=3783154 u=root n=ansible | ok: [caddy]
+2023-10-29 07:40:31,372 p=3783154 u=root n=ansible | TASK [Get info on Caddy container name=caddy_container] **************************************************************************
+2023-10-29 07:40:31,685 p=3783154 u=root n=ansible | ok: [caddy]
+2023-10-29 07:40:31,695 p=3783154 u=root n=ansible | TASK [Check if Caddy container is running msg=Caddy container is running.] *******************************************************
+2023-10-29 07:40:31,706 p=3783154 u=root n=ansible | ok: [caddy] => {
+    "msg": "Caddy container is running."
+}
+2023-10-29 07:40:31,746 p=3783154 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************
+2023-10-29 07:40:31,746 p=3783154 u=root n=ansible | caddy                      : ok=8    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-29 07:50:15,419 p=3799582 u=root n=ansible | {
+    "_meta": {
+        "hostvars": {
+            "192.158.1.97": {
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox_rsa",
+                "ansible_user": "root"
+            },
+            "192.168.1.99": {
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox_rsa",
+                "ansible_user": "root"
+            },
+            "arnold": {
+                "ansible_become": "yes",
+                "ansible_host": "192.168.1.67",
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox_rsa",
+                "ansible_user": "stantonius"
+            },
+            "caddy": {
+                "ansible_become": "yes",
+                "ansible_host": "192.168.1.4",
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox",
+                "ansible_user": "root"
+            },
+            "homer": {
+                "ansible_become": "yes",
+                "ansible_host": "192.168.1.13",
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox",
+                "ansible_user": "stantonius"
+            },
+            "nodered": {
+                "ansible_become": "yes",
+                "ansible_host": "192.168.1.10",
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox",
+                "ansible_user": "stantonius"
+            },
+            "portainer-swarm-agent": {
+                "ansible_become": "yes",
+                "ansible_host": "192.168.1.9",
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox",
+                "ansible_user": "stantonius"
+            },
+            "tailscale-homelab": {
+                "ansible_become": "yes",
+                "ansible_host": "192.168.1.88",
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox",
+                "ansible_user": "stantonius"
+            },
+            "unbound-dns": {
+                "ansible_become": "yes",
+                "ansible_host": "192.168.1.8",
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox",
+                "ansible_user": "stantonius"
+            },
+            "vscode": {
+                "ansible_become": "yes",
+                "ansible_host": "192.168.1.112",
+                "ansible_ssh_pass": "password",
+                "ansible_ssh_private_key_file": "~/.ssh/proxmox",
+                "ansible_user": "stantonius"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "proxmox_nodes",
+            "lxc",
+            "vm"
+        ]
+    },
+    "bigprox": {
+        "hosts": [
+            "192.168.1.99"
+        ]
+    },
+    "lxc": {
+        "hosts": [
+            "caddy",
+            "tailscale-homelab",
+            "unbound-dns",
+            "vscode",
+            "portainer-swarm-agent",
+            "homer",
+            "nodered"
+        ]
+    },
+    "miniprox": {
+        "hosts": [
+            "192.158.1.97"
+        ]
+    },
+    "proxmox_nodes": {
+        "children": [
+            "bigprox",
+            "miniprox"
+        ]
+    },
+    "vm": {
+        "hosts": [
+            "arnold"
+        ]
+    }
+}
+2023-10-29 07:50:43,445 p=3799848 u=root n=ansible | PLAY [Configure Proxmox LXC] *****************************************************************************************************
+2023-10-29 07:50:43,452 p=3799848 u=root n=ansible | TASK [Install python3 _raw_params=apt-get update && apt-get install -y python3] **************************************************
+2023-10-29 07:50:43,590 p=3799848 u=root n=ansible | fatal: [caddy]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\r\n@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @\r\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\r\nIT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!\r\nSomeone could be eavesdropping on you right now (man-in-the-middle attack)!\r\nIt is also possible that a host key has just been changed.\r\nThe fingerprint for the ED25519 key sent by the remote host is\nSHA256:BE19g43BG8l/55Iw57BmNUlnW1YrSF8Mdgw14CxZgtg.\r\nPlease contact your system administrator.\r\nAdd correct host key in /root/.ssh/known_hosts to get rid of this message.\r\nOffending ECDSA key in /root/.ssh/known_hosts:7\r\n  remove with:\r\n  ssh-keygen -f \"/root/.ssh/known_hosts\" -R \"192.168.1.4\"\r\nPassword authentication is disabled to avoid man-in-the-middle attacks.\r\nKeyboard-interactive authentication is disabled to avoid man-in-the-middle attacks.\r\nUpdateHostkeys is disabled because the host key is not trusted.\r\nroot@192.168.1.4: Permission denied (publickey,password).", "unreachable": true}
+2023-10-29 07:50:43,591 p=3799848 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************
+2023-10-29 07:50:43,591 p=3799848 u=root n=ansible | caddy                      : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-29 07:57:59,782 p=3802919 u=root n=ansible | PLAY [Configure Proxmox LXC] *****************************************************************************************************
+2023-10-29 07:57:59,789 p=3802919 u=root n=ansible | TASK [Install python3 _raw_params=apt-get update && apt-get install -y python3] **************************************************
+2023-10-29 07:57:59,926 p=3802919 u=root n=ansible | fatal: [caddy]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\r\n@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @\r\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\r\nIT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!\r\nSomeone could be eavesdropping on you right now (man-in-the-middle attack)!\r\nIt is also possible that a host key has just been changed.\r\nThe fingerprint for the ED25519 key sent by the remote host is\nSHA256:BE19g43BG8l/55Iw57BmNUlnW1YrSF8Mdgw14CxZgtg.\r\nPlease contact your system administrator.\r\nAdd correct host key in /root/.ssh/known_hosts to get rid of this message.\r\nOffending ECDSA key in /root/.ssh/known_hosts:7\r\n  remove with:\r\n  ssh-keygen -f \"/root/.ssh/known_hosts\" -R \"192.168.1.4\"\r\nPassword authentication is disabled to avoid man-in-the-middle attacks.\r\nKeyboard-interactive authentication is disabled to avoid man-in-the-middle attacks.\r\nUpdateHostkeys is disabled because the host key is not trusted.\r\nroot@192.168.1.4: Permission denied (publickey,password).", "unreachable": true}
+2023-10-29 07:57:59,927 p=3802919 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************
+2023-10-29 07:57:59,927 p=3802919 u=root n=ansible | caddy                      : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-29 07:58:44,894 p=3803394 u=root n=ansible | PLAY [Configure Proxmox LXC] *****************************************************************************************************
+2023-10-29 07:58:44,901 p=3803394 u=root n=ansible | TASK [Install python3 _raw_params=apt-get update && apt-get install -y python3] **************************************************
+2023-10-29 07:58:45,038 p=3803394 u=root n=ansible | fatal: [caddy]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\r\n@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @\r\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\r\nIT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!\r\nSomeone could be eavesdropping on you right now (man-in-the-middle attack)!\r\nIt is also possible that a host key has just been changed.\r\nThe fingerprint for the ED25519 key sent by the remote host is\nSHA256:BE19g43BG8l/55Iw57BmNUlnW1YrSF8Mdgw14CxZgtg.\r\nPlease contact your system administrator.\r\nAdd correct host key in /root/.ssh/known_hosts to get rid of this message.\r\nOffending ECDSA key in /root/.ssh/known_hosts:7\r\n  remove with:\r\n  ssh-keygen -f \"/root/.ssh/known_hosts\" -R \"192.168.1.4\"\r\nPassword authentication is disabled to avoid man-in-the-middle attacks.\r\nKeyboard-interactive authentication is disabled to avoid man-in-the-middle attacks.\r\nUpdateHostkeys is disabled because the host key is not trusted.\r\nroot@192.168.1.4: Permission denied (publickey,password).", "unreachable": true}
+2023-10-29 07:58:45,039 p=3803394 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************
+2023-10-29 07:58:45,039 p=3803394 u=root n=ansible | caddy                      : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-29 08:00:42,705 p=3804205 u=root n=ansible | PLAY [Configure Proxmox LXC] *****************************************************************************************************
+2023-10-29 08:00:42,712 p=3804205 u=root n=ansible | TASK [Install python3 _raw_params=apt-get update && apt-get install -y python3] **************************************************
+2023-10-29 08:00:42,850 p=3804205 u=root n=ansible | fatal: [caddy]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\r\n@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @\r\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\r\nIT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!\r\nSomeone could be eavesdropping on you right now (man-in-the-middle attack)!\r\nIt is also possible that a host key has just been changed.\r\nThe fingerprint for the ED25519 key sent by the remote host is\nSHA256:BE19g43BG8l/55Iw57BmNUlnW1YrSF8Mdgw14CxZgtg.\r\nPlease contact your system administrator.\r\nAdd correct host key in /root/.ssh/known_hosts to get rid of this message.\r\nOffending ECDSA key in /root/.ssh/known_hosts:7\r\n  remove with:\r\n  ssh-keygen -f \"/root/.ssh/known_hosts\" -R \"192.168.1.4\"\r\nPassword authentication is disabled to avoid man-in-the-middle attacks.\r\nKeyboard-interactive authentication is disabled to avoid man-in-the-middle attacks.\r\nUpdateHostkeys is disabled because the host key is not trusted.\r\nroot@192.168.1.4: Permission denied (publickey,password).", "unreachable": true}
+2023-10-29 08:00:42,851 p=3804205 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************
+2023-10-29 08:00:42,851 p=3804205 u=root n=ansible | caddy                      : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-29 08:02:26,480 p=3804952 u=root n=ansible | PLAY [Configure Proxmox LXC] *****************************************************************************************************
+2023-10-29 08:02:26,487 p=3804952 u=root n=ansible | TASK [Install python3 _raw_params=apt-get update && apt-get install -y python3] **************************************************
+2023-10-29 08:02:28,094 p=3804952 u=root n=ansible | changed: [caddy]
+2023-10-29 08:02:28,096 p=3804952 u=root n=ansible | TASK [Install openssh-server _raw_params=apt-get install -y openssh-server] ******************************************************
+2023-10-29 08:02:28,379 p=3804952 u=root n=ansible | changed: [caddy]
+2023-10-29 08:02:28,381 p=3804952 u=root n=ansible | TASK [Install sudo _raw_params=apt-get install -y sudo] **************************************************************************
+2023-10-29 08:02:28,595 p=3804952 u=root n=ansible | changed: [caddy]
+2023-10-29 08:02:28,597 p=3804952 u=root n=ansible | TASK [Create a new user called stantonius name=stantonius, shell=/bin/bash, state=present] ***************************************
+2023-10-29 08:02:28,949 p=3804952 u=root n=ansible | changed: [caddy]
+2023-10-29 08:02:28,951 p=3804952 u=root n=ansible | TASK [Allow stantonius to have sudo privileges dest=/etc/sudoers, line=stantonius ALL=(ALL:ALL) NOPASSWD: ALL, state=present, validate=visudo -cf %s] ***
+2023-10-29 08:02:29,162 p=3804952 u=root n=ansible | changed: [caddy]
+2023-10-29 08:02:29,164 p=3804952 u=root n=ansible | TASK [Add SSH directory for stantonius path=/home/stantonius/.ssh, state=directory, owner=stantonius, group=stantonius, mode=448] ***
+2023-10-29 08:02:29,374 p=3804952 u=root n=ansible | changed: [caddy]
+2023-10-29 08:02:29,376 p=3804952 u=root n=ansible | TASK [Add proxmox public key to stantonius user=stantonius, key={{ lookup('file', '~/.ssh/proxmox.pub') }}, state=present] *******
+2023-10-29 08:02:29,628 p=3804952 u=root n=ansible | changed: [caddy]
+2023-10-29 08:02:29,630 p=3804952 u=root n=ansible | TASK [Harden SSH settings dest=/etc/ssh/sshd_config, line={{ item.line }}, regexp={{ item.regexp }}] *****************************
+2023-10-29 08:02:29,782 p=3804952 u=root n=ansible | changed: [caddy] => (item={'regexp': '^#?PermitRootLogin', 'line': 'PermitRootLogin no'})
+2023-10-29 08:02:29,919 p=3804952 u=root n=ansible | changed: [caddy] => (item={'regexp': '^#?PasswordAuthentication', 'line': 'PasswordAuthentication no'})
+2023-10-29 08:02:30,056 p=3804952 u=root n=ansible | changed: [caddy] => (item={'regexp': '^#?PermitEmptyPasswords', 'line': 'PermitEmptyPasswords no'})
+2023-10-29 08:02:30,190 p=3804952 u=root n=ansible | changed: [caddy] => (item={'regexp': '^#?ChallengeResponseAuthentication', 'line': 'ChallengeResponseAuthentication no'})
+2023-10-29 08:02:30,195 p=3804952 u=root n=ansible | RUNNING HANDLER [Restart sshd name=sshd, state=restarted] ************************************************************************
+2023-10-29 08:02:30,583 p=3804952 u=root n=ansible | changed: [caddy]
+2023-10-29 08:02:30,587 p=3804952 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************
+2023-10-29 08:02:30,587 p=3804952 u=root n=ansible | caddy                      : ok=9    changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-29 08:03:12,552 p=3805987 u=root n=ansible | PLAY [Install Docker] ************************************************************************************************************
+2023-10-29 08:03:12,564 p=3805987 u=root n=ansible | TASK [Gathering Facts ] **********************************************************************************************************
+2023-10-29 08:03:13,543 p=3805987 u=root n=ansible | ok: [caddy]
+2023-10-29 08:03:13,574 p=3805987 u=root n=ansible | TASK [Install aptitude name=aptitude, state=latest, update_cache=True] ***********************************************************
+2023-10-29 08:03:18,129 p=3805987 u=root n=ansible | changed: [caddy]
+2023-10-29 08:03:18,140 p=3805987 u=root n=ansible | TASK [Install required system packages pkg=['apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools'], state=latest, update_cache=True] ***
+2023-10-29 08:03:41,037 p=3805987 u=root n=ansible | changed: [caddy]
+2023-10-29 08:03:41,048 p=3805987 u=root n=ansible | TASK [Ensure requests < 2.29 is installed name=requests<2.29.0] ******************************************************************
+2023-10-29 08:03:42,566 p=3805987 u=root n=ansible | changed: [caddy]
+2023-10-29 08:03:42,577 p=3805987 u=root n=ansible | TASK [Add Docker GPG apt Key url=https://download.docker.com/linux/ubuntu/gpg, state=present] ************************************
+2023-10-29 08:03:43,271 p=3805987 u=root n=ansible | changed: [caddy]
+2023-10-29 08:03:43,282 p=3805987 u=root n=ansible | TASK [Add Docker Repository repo=deb https://download.docker.com/linux/ubuntu focal stable, state=present] ***********************
+2023-10-29 08:03:45,087 p=3805987 u=root n=ansible | changed: [caddy]
+2023-10-29 08:03:45,099 p=3805987 u=root n=ansible | TASK [Update apt and install docker-ce name=docker-ce, state=latest, update_cache=True] ******************************************
+2023-10-29 08:03:58,758 p=3805987 u=root n=ansible | changed: [caddy]
+2023-10-29 08:03:58,770 p=3805987 u=root n=ansible | TASK [Install Docker Module for Python name=docker] ******************************************************************************
+2023-10-29 08:03:59,917 p=3805987 u=root n=ansible | changed: [caddy]
+2023-10-29 08:03:59,929 p=3805987 u=root n=ansible | TASK [Ensure Docker is running name=docker, state=started, enabled=True] *********************************************************
+2023-10-29 08:04:00,298 p=3805987 u=root n=ansible | ok: [caddy]
+2023-10-29 08:04:00,339 p=3805987 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************
+2023-10-29 08:04:00,339 p=3805987 u=root n=ansible | caddy                      : ok=9    changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-29 08:04:11,255 p=3811224 u=root n=ansible | PLAY [Create a Docker container running Caddy in Proxmox LXC] ********************************************************************
+2023-10-29 08:04:11,266 p=3811224 u=root n=ansible | TASK [Gathering Facts ] **********************************************************************************************************
+2023-10-29 08:04:11,977 p=3811224 u=root n=ansible | ok: [caddy]
+2023-10-29 08:04:12,007 p=3811224 u=root n=ansible | TASK [Copy Dockerfile to target host src=./Dockerfile, dest=/opt] ****************************************************************
+2023-10-29 08:04:12,531 p=3811224 u=root n=ansible | changed: [caddy]
+2023-10-29 08:04:12,542 p=3811224 u=root n=ansible | TASK [Build the Caddy image with Cloudflare module build={'path': '/opt'}, name=caddy:cloudflare, source=build] ******************
+2023-10-29 08:08:41,358 p=3811224 u=root n=ansible | changed: [caddy]
+2023-10-29 08:08:41,369 p=3811224 u=root n=ansible | TASK [Create Caddy config directory path=/etc/caddy, state=directory, mode=0755] *************************************************
+2023-10-29 08:08:41,626 p=3811224 u=root n=ansible | changed: [caddy]
+2023-10-29 08:08:41,637 p=3811224 u=root n=ansible | TASK [Copy Caddyfile to config directory src={{ playbook_dir }}/../../Caddyfile, dest=/etc/caddy/Caddyfile, mode=0644] ***********
+2023-10-29 08:08:41,921 p=3811224 u=root n=ansible | changed: [caddy]
+2023-10-29 08:08:41,932 p=3811224 u=root n=ansible | TASK [Run Caddy container name=caddy_container, image=caddy:cloudflare, state=started, restart_policy=always, ports=['80:80', '443:443'], volumes=['/etc/caddy/Caddyfile:/etc/caddy/Caddyfile'], env={'CADDY_DNS_API_KEY': '{{ cloudflare_api_key }}', 'CLOUDFLARE_EMAIL': '{{ cloudflare_email  }}', 'MY_DOMAIN': '{{ my_domain }}', 'GOOGLE_DNS_API_KEY': '{{ google_domains_api_key }}'}] ***
+2023-10-29 08:08:43,016 p=3811224 u=root n=ansible | changed: [caddy]
+2023-10-29 08:08:43,027 p=3811224 u=root n=ansible | TASK [Get info on Caddy container name=caddy_container] **************************************************************************
+2023-10-29 08:08:43,390 p=3811224 u=root n=ansible | ok: [caddy]
+2023-10-29 08:08:43,401 p=3811224 u=root n=ansible | TASK [Check if Caddy container is running msg=Caddy container is running.] *******************************************************
+2023-10-29 08:08:43,411 p=3811224 u=root n=ansible | ok: [caddy] => {
+    "msg": "Caddy container is running."
+}
+2023-10-29 08:08:43,451 p=3811224 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************
+2023-10-29 08:08:43,451 p=3811224 u=root n=ansible | caddy                      : ok=8    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-29 08:14:52,861 p=3819661 u=root n=ansible | PLAY [Create a Docker container running Caddy in Proxmox LXC] ********************************************************************
+2023-10-29 08:14:52,873 p=3819661 u=root n=ansible | TASK [Gathering Facts ] **********************************************************************************************************
+2023-10-29 08:14:53,905 p=3819661 u=root n=ansible | ok: [caddy]
+2023-10-29 08:14:53,936 p=3819661 u=root n=ansible | TASK [Copy Dockerfile to target host src=./Dockerfile, dest=/opt] ****************************************************************
+2023-10-29 08:14:54,455 p=3819661 u=root n=ansible | ok: [caddy]
+2023-10-29 08:14:54,467 p=3819661 u=root n=ansible | TASK [Build the Caddy image with Cloudflare module build={'path': '/opt'}, name=caddy:cloudflare, source=build] ******************
+2023-10-29 08:14:54,824 p=3819661 u=root n=ansible | ok: [caddy]
+2023-10-29 08:14:54,835 p=3819661 u=root n=ansible | TASK [Create Caddy config directory path=/etc/caddy, state=directory, mode=0755] *************************************************
+2023-10-29 08:14:54,988 p=3819661 u=root n=ansible | ok: [caddy]
+2023-10-29 08:14:54,999 p=3819661 u=root n=ansible | TASK [Copy Caddyfile to config directory src={{ playbook_dir }}/../../Caddyfile, dest=/etc/caddy/Caddyfile, mode=0644] ***********
+2023-10-29 08:14:55,279 p=3819661 u=root n=ansible | ok: [caddy]
+2023-10-29 08:14:55,290 p=3819661 u=root n=ansible | TASK [Run Caddy container name=caddy_container, image=caddy:cloudflare, state=started, restart_policy=always, ports=['80:80', '443:443'], volumes=['/etc/caddy/Caddyfile:/etc/caddy/Caddyfile'], env={'CADDY_DNS_API_KEY': '{{ cloudflare_api_key }}', 'CLOUDFLARE_EMAIL': '{{ cloudflare_email  }}', 'MY_DOMAIN': '{{ my_domain }}', 'GOOGLE_DNS_API_KEY': '{{ google_domains_api_key }}'}] ***
+2023-10-29 08:14:55,675 p=3819661 u=root n=ansible | ok: [caddy]
+2023-10-29 08:14:55,686 p=3819661 u=root n=ansible | TASK [Get info on Caddy container name=caddy_container] **************************************************************************
+2023-10-29 08:14:55,998 p=3819661 u=root n=ansible | ok: [caddy]
+2023-10-29 08:14:56,008 p=3819661 u=root n=ansible | TASK [Check if Caddy container is running msg=Caddy container is running.] *******************************************************
+2023-10-29 08:14:56,018 p=3819661 u=root n=ansible | ok: [caddy] => {
+    "msg": "Caddy container is running."
+}
+2023-10-29 08:14:56,057 p=3819661 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************
+2023-10-29 08:14:56,057 p=3819661 u=root n=ansible | caddy                      : ok=8    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-30 22:26:16,458 p=340588 u=root n=ansible | PLAY [Configure Proxmox LXC] *****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:26:16,465 p=340588 u=root n=ansible | TASK [Install python3 _raw_params=apt-get update && apt-get install -y python3] **************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:26:18,678 p=340588 u=root n=ansible | fatal: [caddy]: UNREACHABLE! => {"changed": false, "msg": "Invalid/incorrect password: Warning: Permanently added '192.168.1.4' (ED25519) to the list of known hosts.\r\nPermission denied, please try again.", "unreachable": true}
+2023-10-30 22:26:18,679 p=340588 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:26:18,679 p=340588 u=root n=ansible | caddy                      : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-30 22:26:37,760 p=340797 u=root n=ansible | PLAY [Configure Proxmox LXC] *****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:26:37,768 p=340797 u=root n=ansible | TASK [Install python3 _raw_params=apt-get update && apt-get install -y python3] **************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:26:39,415 p=340797 u=root n=ansible | changed: [caddy]
+2023-10-30 22:26:39,417 p=340797 u=root n=ansible | TASK [Install openssh-server _raw_params=apt-get install -y openssh-server] ******************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:26:39,631 p=340797 u=root n=ansible | changed: [caddy]
+2023-10-30 22:26:39,633 p=340797 u=root n=ansible | TASK [Install sudo _raw_params=apt-get install -y sudo] **************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:26:39,830 p=340797 u=root n=ansible | changed: [caddy]
+2023-10-30 22:26:39,831 p=340797 u=root n=ansible | TASK [Create a new user called stantonius name=stantonius, shell=/bin/bash, state=present] ***************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:26:40,199 p=340797 u=root n=ansible | changed: [caddy]
+2023-10-30 22:26:40,201 p=340797 u=root n=ansible | TASK [Allow stantonius to have sudo privileges dest=/etc/sudoers, line=stantonius ALL=(ALL:ALL) NOPASSWD: ALL, state=present, validate=visudo -cf %s] ****************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:26:40,424 p=340797 u=root n=ansible | changed: [caddy]
+2023-10-30 22:26:40,426 p=340797 u=root n=ansible | TASK [Add SSH directory for stantonius path=/home/stantonius/.ssh, state=directory, owner=stantonius, group=stantonius, mode=448] ************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:26:40,642 p=340797 u=root n=ansible | changed: [caddy]
+2023-10-30 22:26:40,644 p=340797 u=root n=ansible | TASK [Add proxmox public key to stantonius user=stantonius, key={{ lookup('file', '~/.ssh/proxmox.pub') }}, state=present] *******************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:26:40,895 p=340797 u=root n=ansible | changed: [caddy]
+2023-10-30 22:26:40,897 p=340797 u=root n=ansible | TASK [Harden SSH settings dest=/etc/ssh/sshd_config, line={{ item.line }}, regexp={{ item.regexp }}] *****************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:26:41,049 p=340797 u=root n=ansible | changed: [caddy] => (item={'regexp': '^#?PermitRootLogin', 'line': 'PermitRootLogin no'})
+2023-10-30 22:26:41,185 p=340797 u=root n=ansible | changed: [caddy] => (item={'regexp': '^#?PasswordAuthentication', 'line': 'PasswordAuthentication no'})
+2023-10-30 22:26:41,322 p=340797 u=root n=ansible | changed: [caddy] => (item={'regexp': '^#?PermitEmptyPasswords', 'line': 'PermitEmptyPasswords no'})
+2023-10-30 22:26:41,455 p=340797 u=root n=ansible | changed: [caddy] => (item={'regexp': '^#?ChallengeResponseAuthentication', 'line': 'ChallengeResponseAuthentication no'})
+2023-10-30 22:26:41,461 p=340797 u=root n=ansible | RUNNING HANDLER [Restart sshd name=sshd, state=restarted] ************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:26:41,856 p=340797 u=root n=ansible | changed: [caddy]
+2023-10-30 22:26:41,859 p=340797 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:26:41,859 p=340797 u=root n=ansible | caddy                      : ok=9    changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-30 22:27:14,530 p=341789 u=root n=ansible | PLAY [Install Docker] ************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:27:14,541 p=341789 u=root n=ansible | TASK [Gathering Facts ] **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:27:15,504 p=341789 u=root n=ansible | ok: [caddy]
+2023-10-30 22:27:15,533 p=341789 u=root n=ansible | TASK [Install aptitude name=aptitude, state=latest, update_cache=True] ***********************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:27:23,059 p=341789 u=root n=ansible | changed: [caddy]
+2023-10-30 22:27:23,071 p=341789 u=root n=ansible | TASK [Install required system packages pkg=['apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools'], state=latest, update_cache=True] *****************************************************************************************************************************************************************************
+2023-10-30 22:27:50,431 p=341789 u=root n=ansible | changed: [caddy]
+2023-10-30 22:27:50,442 p=341789 u=root n=ansible | TASK [Ensure requests < 2.29 is installed name=requests<2.29.0] ******************************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:27:52,429 p=341789 u=root n=ansible | changed: [caddy]
+2023-10-30 22:27:52,440 p=341789 u=root n=ansible | TASK [Add Docker GPG apt Key url=https://download.docker.com/linux/ubuntu/gpg, state=present] ************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:27:53,131 p=341789 u=root n=ansible | changed: [caddy]
+2023-10-30 22:27:53,142 p=341789 u=root n=ansible | TASK [Add Docker Repository repo=deb https://download.docker.com/linux/ubuntu focal stable, state=present] ***********************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:27:54,843 p=341789 u=root n=ansible | changed: [caddy]
+2023-10-30 22:27:54,854 p=341789 u=root n=ansible | TASK [Update apt and install docker-ce name=docker-ce, state=latest, update_cache=True] ******************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:28:08,591 p=341789 u=root n=ansible | changed: [caddy]
+2023-10-30 22:28:08,602 p=341789 u=root n=ansible | TASK [Install Docker Module for Python name=docker] ******************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:28:09,828 p=341789 u=root n=ansible | changed: [caddy]
+2023-10-30 22:28:09,839 p=341789 u=root n=ansible | TASK [Ensure Docker is running name=docker, state=started, enabled=True] *********************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:28:10,214 p=341789 u=root n=ansible | ok: [caddy]
+2023-10-30 22:28:10,253 p=341789 u=root n=ansible | PLAY RECAP ***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:28:10,253 p=341789 u=root n=ansible | caddy                      : ok=9    changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2023-10-30 22:28:37,779 p=347223 u=root n=ansible | PLAY [Create a Docker container running Caddy in Proxmox LXC] ********************************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:28:37,790 p=347223 u=root n=ansible | TASK [Gathering Facts ] **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:28:38,523 p=347223 u=root n=ansible | ok: [caddy]
+2023-10-30 22:28:38,554 p=347223 u=root n=ansible | TASK [Copy Dockerfile to target host src=./Dockerfile, dest=/opt] ****************************************************************************************************************************************************************************************************************************************************************************************************************************
+2023-10-30 22:28:39,071 p=347223 u=root n=ansible | changed: [caddy]
+2023-10-30 22:28:39,082 p=347223 u=root n=ansible | TASK [Build the Caddy image with Cloudflare module build={'path': '/opt'}, name=caddy:cloudflare, source=build] ******************************************************************************************************************************************************************************************************************************************************************************

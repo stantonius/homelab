@@ -1,6 +1,6 @@
 ---
 - name: Install Docker
-  hosts: homer
+  hosts: caddy
   vars_files:
     - "{{ playbook_dir }}/../../secrets.yaml"
   tasks:

@@ -1,8 +1,10 @@
 ---
 - name: Configure Proxmox LXC
-  hosts: homer
+  hosts: caddy
   remote_user: root
   gather_facts: false
+  vars:
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
   tasks:
     - name: Install python3
       raw: apt-get update && apt-get install -y python3
@@ -49,6 +51,7 @@
         - { regexp: '^#?PermitRootLogin', line: 'PermitRootLogin no' }
         - { regexp: '^#?PasswordAuthentication', line: 'PasswordAuthentication no' }
         - { regexp: '^#?PermitEmptyPasswords', line: 'PermitEmptyPasswords no' }
+        - { regexp: '^#?ChallengeResponseAuthentication', line: 'ChallengeResponseAuthentication no' }
       notify:
         - Restart sshd
 
