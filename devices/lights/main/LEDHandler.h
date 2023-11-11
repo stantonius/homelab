@@ -56,6 +56,8 @@ void pride() {
     }
 }
 
+
+
 void runLights(bool show) {
   if (show) {
     pride();  // Call the pride function here
